@@ -29,9 +29,11 @@ transform = Transform3D(1, 0, 0, 0, 0.722207, 0.691677, 0, -0.691677, 0.722207, 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_xwhxr")
 
-[node name="Enemy" parent="NavigationRegion3D" instance=ExtResource("2_epgdy")]
+[node name="Enemies" type="Node" parent="NavigationRegion3D"]
+
+[node name="Enemy" parent="NavigationRegion3D/Enemies" instance=ExtResource("2_epgdy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.39334, 1.79496, -8.15852)
-player_path = NodePath("../../Player")
+player_path = NodePath("../../../Player")
 
 [node name="Walls" type="Node" parent="NavigationRegion3D"]
 

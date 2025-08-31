@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bx1wsswr0kbbn"]
+[gd_scene load_steps=7 format=3 uid="uid://bx1wsswr0kbbn"]
 
 [ext_resource type="Script" uid="uid://cjg3b8kwtspd1" path="res://Source/Scenes/enemy.gd" id="1_ldp51"]
 [ext_resource type="Texture2D" uid="uid://bpkbislh3nqo8" path="res://Assets/2d/house.png" id="2_27rp6"]
+[ext_resource type="AudioStream" uid="uid://b0qxuhk1ltk6m" path="res://Assets/SFX/vicodin.ogg" id="3_7kuha"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dacir"]
 
@@ -18,8 +19,12 @@ script = ExtResource("1_ldp51")
 shape = SubResource("CapsuleShape3D_dacir")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.995878, 0, -0.0907021, 0, 1, 0, 0.0907021, 0, -0.995878, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_dacir")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_dacir")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="sfx_kill" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_7kuha")
