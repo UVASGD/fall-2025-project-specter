@@ -21,7 +21,7 @@ size = Vector3(100, 1, 100)
 [node name="Gameplay" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("1_5lwbh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.19813, 2, -12.3574)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.41142, 2, 24.5834)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.722207, 0.691677, 0, -0.691677, 0.722207, 0, 15.1148, 24.9866)
@@ -30,7 +30,7 @@ transform = Transform3D(1, 0, 0, 0, 0.722207, 0.691677, 0, -0.691677, 0.722207, 
 navigation_mesh = SubResource("NavigationMesh_xwhxr")
 
 [node name="Enemy" parent="NavigationRegion3D" instance=ExtResource("2_epgdy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.13647, 1.49496, 18.177)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.39334, 1.79496, -8.15852)
 player_path = NodePath("../../Player")
 
 [node name="Walls" type="Node" parent="NavigationRegion3D"]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bx1wsswr0kbbn"]
+[gd_scene load_steps=6 format=3 uid="uid://bx1wsswr0kbbn"]
 
 [ext_resource type="Script" uid="uid://cjg3b8kwtspd1" path="res://Source/Scenes/enemy.gd" id="1_ldp51"]
+[ext_resource type="Texture2D" uid="uid://bpkbislh3nqo8" path="res://Assets/2d/house.png" id="2_27rp6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dacir"]
 
@@ -8,6 +9,7 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dacir"]
 albedo_color = Color(1, 0, 0, 1)
+albedo_texture = ExtResource("2_27rp6")
 
 [node name="Enemy" type="CharacterBody3D"]
 script = ExtResource("1_ldp51")
