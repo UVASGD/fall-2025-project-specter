@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://ccfenqa3suyht"]
+[gd_scene load_steps=6 format=3 uid="uid://ccfenqa3suyht"]
 
 [ext_resource type="PackedScene" uid="uid://dmdiskq1g67" path="res://Source/Scenes/player.tscn" id="1_5lwbh"]
+[ext_resource type="PackedScene" uid="uid://bx1wsswr0kbbn" path="res://Source/Scenes/enemy.tscn" id="2_epgdy"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_5lwbh"]
 
@@ -24,6 +25,9 @@ surface_material_override/0 = SubResource("StandardMaterial3D_epgdy")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_5lwbh")
+
+[node name="Enemy" parent="StaticBody3D" instance=ExtResource("2_epgdy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.13654, 1.5, 6.42245)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.722207, 0.691677, 0, -0.691677, 0.722207, 0, 15.1148, 24.9866)

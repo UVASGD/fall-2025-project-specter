@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://bx1wsswr0kbbn"]
+
+[ext_resource type="Script" uid="uid://cjg3b8kwtspd1" path="res://Source/Scenes/enemy.gd" id="1_ldp51"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dacir"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_dacir"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dacir"]
+albedo_color = Color(1, 0, 0, 1)
+
+[node name="Enemy" type="CharacterBody3D"]
+script = ExtResource("1_ldp51")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_dacir")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_dacir")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_dacir")
