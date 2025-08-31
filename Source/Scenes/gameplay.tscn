@@ -4,6 +4,12 @@
 [ext_resource type="PackedScene" uid="uid://bx1wsswr0kbbn" path="res://Source/Scenes/enemy.tscn" id="2_epgdy"]
 [ext_resource type="PackedScene" uid="uid://bwws6q5qywcko" path="res://Source/Scenes/wall.tscn" id="3_xwhxr"]
 
+[sub_resource type="NavigationMesh" id="NavigationMesh_xwhxr"]
+vertices = PackedVector3Array(-5.25, 0.7, -5.75, -3.75, 0.7, -6.25, -3.75, 0.7, -49.25, -49.25, 0.7, -49.25, -49.25, 0.7, -3.75, -5.25, 0.7, -3.75, -2.25, 0.7, 1.25, 2.75, 0.7, 1.25, 2.75, 0.7, -0.75, 3.25, 0.7, -1.25, -2.25, 0.7, -5.75, 5, 0.7, -1.25, 49.25, 0.7, 0.5, 49.25, 0.7, -49.25, 5.5, 0.7, -0.75, 5.5, 0.7, 0.75, -11, 0.7, 9.5, -10, 0.7, 9.5, -5.25, 0.7, 7, -12, 0.7, 11, -49.25, 0.7, 11, 5.5, 0.7, 8.75, 49.25, 0.7, 9, -4.75, 0.7, 7.75, -2.75, 0.7, 7.75, -2.25, 0.7, 17.25, 3.5, 0.7, 10.75, 2.75, 0.7, 10.25, -2.25, 0.7, 7.25, -2.25, 0.7, 17.75, 5, 0.7, 10.75, -3.75, 0.7, 49.25, -3.75, 0.7, 19, 5.5, 0.7, 10.25, 49.25, 0.7, 49.25, -5.75, 0.7, 17.75, -12, 0.7, 11.5, -49.25, 0.7, 49.25)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(3, 0, 4), PackedInt32Array(0, 5, 4), PackedInt32Array(8, 7, 6), PackedInt32Array(8, 6, 9), PackedInt32Array(9, 6, 10), PackedInt32Array(10, 2, 11), PackedInt32Array(11, 2, 12), PackedInt32Array(12, 2, 13), PackedInt32Array(11, 9, 10), PackedInt32Array(10, 1, 2), PackedInt32Array(12, 15, 14), PackedInt32Array(12, 14, 11), PackedInt32Array(17, 16, 18), PackedInt32Array(18, 16, 5), PackedInt32Array(16, 19, 5), PackedInt32Array(5, 19, 20), PackedInt32Array(5, 20, 4), PackedInt32Array(15, 12, 21), PackedInt32Array(21, 12, 22), PackedInt32Array(23, 17, 18), PackedInt32Array(27, 26, 24), PackedInt32Array(24, 26, 23), PackedInt32Array(23, 26, 25), PackedInt32Array(23, 25, 17), PackedInt32Array(6, 7, 28), PackedInt32Array(28, 7, 27), PackedInt32Array(24, 28, 27), PackedInt32Array(29, 25, 26), PackedInt32Array(26, 30, 29), PackedInt32Array(29, 30, 31), PackedInt32Array(31, 32, 29), PackedInt32Array(33, 21, 22), PackedInt32Array(30, 33, 31), PackedInt32Array(31, 33, 22), PackedInt32Array(31, 22, 34), PackedInt32Array(35, 32, 31), PackedInt32Array(20, 19, 36), PackedInt32Array(35, 31, 36), PackedInt32Array(36, 31, 20), PackedInt32Array(20, 31, 37)]
+cell_height = 0.1
+agent_radius = 0.75
+
 [sub_resource type="BoxMesh" id="BoxMesh_5lwbh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_epgdy"]
@@ -12,39 +18,38 @@ albedo_color = Color(0.269774, 0.227425, 0.160087, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_5lwbh"]
 size = Vector3(100, 1, 100)
 
-[sub_resource type="NavigationMesh" id="NavigationMesh_xwhxr"]
-
 [node name="Gameplay" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("1_5lwbh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.5, -12)
-
-[node name="Floor" type="StaticBody3D" parent="."]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
-transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0, 0)
-mesh = SubResource("BoxMesh_5lwbh")
-surface_material_override/0 = SubResource("StandardMaterial3D_epgdy")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
-shape = SubResource("BoxShape3D_5lwbh")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.19813, 2, -12.3574)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.722207, 0.691677, 0, -0.691677, 0.722207, 0, 15.1148, 24.9866)
 
-[node name="Walls" type="Node" parent="."]
-
-[node name="Wall" parent="Walls" instance=ExtResource("3_xwhxr")]
-transform = Transform3D(1.06868, 0, 0, 0, 2.69837, 0, 0, 0, 12.2966, -3.75625, 1.8098, 0.658163)
-
-[node name="Wall2" parent="Walls" instance=ExtResource("3_xwhxr")]
-transform = Transform3D(1, 0, 0, 0, 3.3128, 0, 0, 0, 10.1096, 4.01829, 2, 4.77648)
-
-[node name="Wall3" parent="Walls" instance=ExtResource("3_xwhxr")]
-transform = Transform3D(0.698802, 0, 7.23155, 0, 3.3128, 0, -0.715315, 0, 7.06461, -7.12817, 2, 14.2213)
-
-[node name="Enemy" parent="." instance=ExtResource("2_epgdy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.13647, 1.49496, 18.177)
-
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_xwhxr")
+
+[node name="Enemy" parent="NavigationRegion3D" instance=ExtResource("2_epgdy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.13647, 1.49496, 18.177)
+player_path = NodePath("../../Player")
+
+[node name="Walls" type="Node" parent="NavigationRegion3D"]
+
+[node name="Wall" parent="NavigationRegion3D/Walls" instance=ExtResource("3_xwhxr")]
+transform = Transform3D(1.06868, 0, 0, 0, 2.69837, 0, 0, 0, 12.2966, -3.75625, 1.8098, 0.658163)
+
+[node name="Wall2" parent="NavigationRegion3D/Walls" instance=ExtResource("3_xwhxr")]
+transform = Transform3D(1, 0, 0, 0, 3.3128, 0, 0, 0, 10.1096, 4.01829, 2, 4.77648)
+
+[node name="Wall3" parent="NavigationRegion3D/Walls" instance=ExtResource("3_xwhxr")]
+transform = Transform3D(0.698802, 0, 7.23155, 0, 3.3128, 0, -0.715315, 0, 7.06461, -7.12817, 2, 14.2213)
+
+[node name="Floor" type="StaticBody3D" parent="NavigationRegion3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Floor"]
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0, 0)
+mesh = SubResource("BoxMesh_5lwbh")
+surface_material_override/0 = SubResource("StandardMaterial3D_epgdy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Floor"]
+shape = SubResource("BoxShape3D_5lwbh")

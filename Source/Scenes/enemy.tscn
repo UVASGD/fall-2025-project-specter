@@ -19,3 +19,5 @@ shape = SubResource("CapsuleShape3D_dacir")
 mesh = SubResource("CapsuleMesh_dacir")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_dacir")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
