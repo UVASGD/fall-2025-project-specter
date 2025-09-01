@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://ccfenqa3suyht"]
+[gd_scene load_steps=9 format=3 uid="uid://ccfenqa3suyht"]
 
 [ext_resource type="PackedScene" uid="uid://dmdiskq1g67" path="res://Source/Scenes/player.tscn" id="1_5lwbh"]
+[ext_resource type="Script" uid="uid://qg2u4m1spvd1" path="res://Source/Scripts/hud.gd" id="1_sss6l"]
 [ext_resource type="PackedScene" uid="uid://bx1wsswr0kbbn" path="res://Source/Scenes/enemy.tscn" id="2_epgdy"]
 [ext_resource type="PackedScene" uid="uid://bwws6q5qywcko" path="res://Source/Scenes/wall.tscn" id="3_xwhxr"]
 
@@ -19,6 +20,32 @@ albedo_color = Color(0.269774, 0.227425, 0.160087, 1)
 size = Vector3(100, 1, 100)
 
 [node name="Gameplay" type="Node3D"]
+
+[node name="HUD" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+script = ExtResource("1_sss6l")
+
+[node name="ProgressBar" type="ProgressBar" parent="HUD"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 275.0
+offset_bottom = 50.0
+value = 100.0
+show_percentage = false
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HUD/ProgressBar"]
+layout_mode = 0
+offset_right = 250.0
+offset_bottom = 25.0
+text = "Oxygen: 100"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Player" parent="." instance=ExtResource("1_5lwbh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.41142, 2, 24.5834)
