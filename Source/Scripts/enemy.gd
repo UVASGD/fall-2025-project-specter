@@ -15,7 +15,7 @@ func _ready() -> void:
 	player = get_node(player_path)
 	current_state = HUNTING
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	match current_state:
 		IDLE:
 			# does nothing

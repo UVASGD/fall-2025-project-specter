@@ -43,10 +43,15 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor() and stamina:
+	if Input.is_action_just_pressed("jump") and is_on_floor() and stamina > 0:
 		velocity.y = JUMP_VELOCITY
-		stamina -= 5
 		used_stamina = true
+		#BALANCE VALUES
+		if holding_breath:
+			stamina -= 5
+		else:
+			noise_level += 2
+			stamina -= 3
 
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir = Input.get_vector("left", "right", "up", "down")
@@ -89,7 +94,9 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 	
-	#handle noise
+	#BALANCE VALUES
+	if not holding_breath:
+		noise_level += (movement_state + 1)
 	
 	#BALANCE VALUES
 	match movement_state:
@@ -121,6 +128,10 @@ func _physics_process(delta: float) -> void:
 		stamina_timer.start()
 		
 	hud.vars = [stamina, noise_level]
+	
+	if stamina < 0:
+		stamina = 0
+		holding_breath = false
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:

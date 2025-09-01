@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://ccfenqa3suyht"]
+[gd_scene load_steps=10 format=3 uid="uid://ccfenqa3suyht"]
 
 [ext_resource type="PackedScene" uid="uid://dmdiskq1g67" path="res://Source/Scenes/player.tscn" id="1_5lwbh"]
 [ext_resource type="Script" uid="uid://qg2u4m1spvd1" path="res://Source/Scripts/hud.gd" id="1_sss6l"]
 [ext_resource type="PackedScene" uid="uid://bx1wsswr0kbbn" path="res://Source/Scenes/enemy.tscn" id="2_epgdy"]
+[ext_resource type="FontFile" uid="uid://calxibu6hi8wt" path="res://Assets/2d/OpenSans-Regular.ttf" id="2_yatk6"]
 [ext_resource type="PackedScene" uid="uid://bwws6q5qywcko" path="res://Source/Scenes/wall.tscn" id="3_xwhxr"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_xwhxr"]
@@ -30,22 +31,35 @@ offset_bottom = 648.0
 mouse_filter = 2
 script = ExtResource("1_sss6l")
 
-[node name="ProgressBar" type="ProgressBar" parent="HUD"]
+[node name="Oxygen" type="ProgressBar" parent="HUD"]
 layout_mode = 0
 offset_left = 25.0
 offset_top = 25.0
 offset_right = 275.0
 offset_bottom = 50.0
+step = 0.0
 value = 100.0
 show_percentage = false
 
-[node name="RichTextLabel" type="RichTextLabel" parent="HUD/ProgressBar"]
+[node name="RichTextLabel" type="RichTextLabel" parent="HUD/Oxygen"]
 layout_mode = 0
 offset_right = 250.0
 offset_bottom = 25.0
+theme_override_fonts/normal_font = ExtResource("2_yatk6")
 text = "Oxygen: 100"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Noise" type="ProgressBar" parent="HUD"]
+layout_mode = 0
+offset_left = 1092.0
+offset_top = 523.0
+offset_right = 1127.0
+offset_bottom = 623.0
+max_value = 7.0
+step = 0.0
+fill_mode = 3
+show_percentage = false
 
 [node name="Player" parent="." instance=ExtResource("1_5lwbh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.41142, 2, 24.5834)
