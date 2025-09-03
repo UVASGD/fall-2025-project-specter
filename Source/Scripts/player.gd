@@ -98,7 +98,7 @@ func _physics_process(delta: float) -> void:
 	#BALANCE VALUES
 	if not holding_breath:
 		noise_level += (movement_state + 1)
-	noise_area.radius = noise_level * 2
+	noise_area.radius = noise_level * 5
 	
 	#BALANCE VALUES
 	match movement_state:

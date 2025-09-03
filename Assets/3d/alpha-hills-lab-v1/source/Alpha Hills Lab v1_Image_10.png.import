@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://drpwtencl1p7f"
+path.s3tc="res://.godot/imported/Alpha Hills Lab v1_Image_10.png-e06a2d185a5adeb8173aedd6f10d71b8.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "1d3adc68e9dd68b9784faeeb073544f6"
+}
+
+[deps]
+
+source_file="res://Assets/3d/alpha-hills-lab-v1/source/Alpha Hills Lab v1_Image_10.png"
+dest_files=["res://.godot/imported/Alpha Hills Lab v1_Image_10.png-e06a2d185a5adeb8173aedd6f10d71b8.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=1
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=1
+roughness/src_normal="res://Assets/3d/alpha-hills-lab-v1/source/Alpha Hills Lab v1_Image_10.png"
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0
