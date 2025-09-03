@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cjg3b8kwtspd1" path="res://Source/Scripts/enemy.gd" id="1_ldp51"]
 [ext_resource type="Texture2D" uid="uid://bpkbislh3nqo8" path="res://Assets/2d/house.png" id="2_27rp6"]
-[ext_resource type="AudioStream" uid="uid://b0qxuhk1ltk6m" path="res://Assets/SFX/vicodin.ogg" id="3_7kuha"]
+[ext_resource type="AudioStream" uid="uid://b0qxuhk1ltk6m" path="res://Assets/Sound/SFX/vicodin.ogg" id="3_7kuha"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dacir"]
 
@@ -28,3 +28,9 @@ surface_material_override/0 = SubResource("StandardMaterial3D_dacir")
 
 [node name="sfx_kill" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_7kuha")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -3,13 +3,13 @@ extends Control
 @onready var stamina_bar = $Oxygen
 @onready var stamina_text = $Oxygen/RichTextLabel
 @onready var noise_bar = $Noise
-@onready var vars = []
+@onready var vars = [100.0, 0.0]
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+#TODO make dynamic
 func _process(_delta: float) -> void:
 	var stamina = vars[0]
 	var noise = vars[1]
 	
 	stamina_bar.value = stamina
 	stamina_text.text = "Oxygen: %.0f" % stamina
-	noise_bar.value = noise #ADD TWEEN
+	noise_bar.value = noise #TODO add tween

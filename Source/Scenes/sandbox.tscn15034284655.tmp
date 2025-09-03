@@ -1,12 +1,13 @@
-[gd_scene load_steps=24 format=4 uid="uid://ccfenqa3suyht"]
+[gd_scene load_steps=23 format=4 uid="uid://dcmjrcofckfle"]
 
-[ext_resource type="PackedScene" uid="uid://dmdiskq1g67" path="res://Source/Scenes/player.tscn" id="1_5lwbh"]
-[ext_resource type="Script" uid="uid://qg2u4m1spvd1" path="res://Source/Scripts/hud.gd" id="1_sss6l"]
-[ext_resource type="PackedScene" uid="uid://bx1wsswr0kbbn" path="res://Source/Scenes/enemy.tscn" id="2_epgdy"]
-[ext_resource type="FontFile" uid="uid://calxibu6hi8wt" path="res://Assets/2d/OpenSans-Regular.ttf" id="2_yatk6"]
-[ext_resource type="PackedScene" uid="uid://dkyyu2ypnygdd" path="res://Assets/3d/alpha-hills-lab-v1/source/Alpha Hills Lab v1.glb" id="6_lkflj"]
-[ext_resource type="Texture2D" uid="uid://dr3nrvi3oo833" path="res://Assets/3d/alpha-hills-lab-v1/source/Alpha Hills Lab v1_Image_6.png" id="7_fby5i"]
-[ext_resource type="Texture2D" uid="uid://cy3okwnxxgboo" path="res://Assets/3d/alpha-hills-lab-v1/source/Alpha Hills Lab v1_Image_7.png" id="8_xbvjf"]
+[ext_resource type="Script" uid="uid://qg2u4m1spvd1" path="res://Source/Scripts/hud.gd" id="1_6igpk"]
+[ext_resource type="Script" uid="uid://q3p1lhq0sw7b" path="res://Source/Scenes/mock_player.gd" id="1_xm2i2"]
+[ext_resource type="FontFile" uid="uid://calxibu6hi8wt" path="res://Assets/2d/OpenSans-Regular.ttf" id="2_pllj8"]
+[ext_resource type="PackedScene" uid="uid://dmdiskq1g67" path="res://Source/Scenes/player.tscn" id="3_v3xg2"]
+[ext_resource type="PackedScene" uid="uid://bx1wsswr0kbbn" path="res://Source/Scenes/enemy.tscn" id="4_8mqq0"]
+[ext_resource type="PackedScene" uid="uid://dkyyu2ypnygdd" path="res://Assets/3d/alpha-hills-lab-v1/source/Alpha Hills Lab v1.glb" id="5_5cw3o"]
+[ext_resource type="Texture2D" uid="uid://dr3nrvi3oo833" path="res://Assets/3d/alpha-hills-lab-v1/source/Alpha Hills Lab v1_Image_6.png" id="6_8wvy0"]
+[ext_resource type="Texture2D" uid="uid://cy3okwnxxgboo" path="res://Assets/3d/alpha-hills-lab-v1/source/Alpha Hills Lab v1_Image_7.png" id="7_3waju"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_d6ru0"]
 vertices = PackedVector3Array(-49.5, 0.850342, -38.75, -40.25, 0.850342, -38.5, -40.25, 0.850342, -40, -38.5, 0.850342, -40.25, -38.75, 0.850342, -49.5, -49.5, 0.850342, -49.5, -31.25, 0.850342, -44.5, -30.25, 0.850342, -44.75, -30.25, 0.850342, -49.5, -31.25, 0.850342, -40.25, -29.5, 0.850342, -44.5, -15.25, 0.850342, -33, -9, 0.850342, -33, -8.75, 0.850342, -33.5, -6.75, 0.850342, -49.5, -23.75, 0.850342, -40, -29.5, 0.850342, -40.25, -23.75, 0.850342, -30.5, -15.5, 0.850342, -30.5, -6.75, 0.850342, -33.5, 12, 0.850342, -33.5, 12, 0.850342, -49.5, 14, 0.850342, -33.5, 14.25, 0.850342, -32.75, 15, 0.850342, -32.5, 15, 0.850342, -25.25, 17.25, 0.850342, -25.25, 17.5, 0.850342, -23, 49.5, 0.850342, -23, 49.5, 0.850342, -49.5, -36.5, 7.35034, 9.25, -36.5, 7.35034, 16.5, -36, 7.35034, 9, -39.25, 7.10034, 9, -24.75, 7.10034, -28.75, -24.75, 7.10034, -29.75, -39.25, 7.10034, -39.25, -19.75, 7.10034, -29, -19.75, 7.10034, -29.5, -24.75, 7.10034, 9, -24.75, 7.10034, -39.25, -25, 0.850342, -39, -29.5, 0.850342, -39, -29.75, 0.850342, -38, -25.5, 0.850342, -30.25, -25, 0.850342, -30.5, -31, 0.850342, -38, -31.25, 0.850342, -39, -39, 0.850342, -39, -25, 0.850342, 8.75, -25, 0.850342, -28, -25.5, 0.850342, -28.25, -39, 0.850342, 8.75, -49.5, 0.850342, 8.5, -40.25, 0.850342, 8.25, -14.75, 7.10034, -29.5, -14.5, 7.10034, -28.75, -14.5, 7.10034, -12, -8.25, 7.10034, -12, -8.25, 7.10034, -32, -14.5, 7.10034, -32, -8.5, 0.850342, -31.25, -9, 0.850342, -31.75, -14.25, 0.850342, -31.75, -14.25, 0.850342, -12.25, -8.5, 0.850342, -12.25, 14, 7.35034, -24.5, 14, 7.35034, -31.75, 13.5, 7.10034, -24.25, 16.5, 7.10034, -24.25, 16.5, 7.10034, 24, 2.25, 7.10034, 24, 2.25, 7.10034, -24.25, -7.25, 3.60034, -31.25, -7.25, 3.60034, -29.25, -1.25, 3.60034, -29.25, -1.25, 3.60034, -31.25, -7, 0.850342, -31.25, -7, 0.850342, -29.5, -1.5, 0.850342, -29.5, -1.5, 0.850342, -31.25, 9, 0.850342, -25.25, 9, 0.850342, -26.5, 8, 0.850342, -26.75, 1.5, 0.850342, -25.25, 8, 0.850342, -28.25, 9, 0.850342, -28.75, 9, 0.850342, -31.25, -0.25, 0.850342, -31.25, -0.25, 0.850342, -28.5, -0.75, 0.850342, -28.25, 1.25, 0.850342, -24.75, 10.25, 0.850342, -27, 12.75, 0.850342, -25.25, 10.25, 0.850342, -28.25, 12.75, 0.850342, -31.25, -7.25, 0.850342, -28.25, -7.25, 0.850342, -13.25, 1.25, 0.850342, -13.25, -15.5, 0.850342, -12.75, -15.5, 0.850342, -28, -23.75, 0.850342, -28, -23.75, 0.850342, -12.5, 2.5, 0.850342, 23.75, 7, 0.850342, 23.75, 7.25, 0.850342, 22.75, 2.5, 0.850342, -24, 8.5, 0.850342, 22.75, 8.75, 0.850342, 23.75, 16.25, 0.850342, 23.75, 16.25, 0.850342, -24, 17.5, 0.850342, 22.75, 49.5, 0.850342, 22.75, -7.5, 0.850342, -11, -9.5, 0.850342, -11, -9.5, 0.850342, -4, -7.25, 0.850342, -4, -7, 0.850342, -2.25, 1.25, 0.850342, -2.5, -15.25, 0.850342, -4, -13.25, 0.850342, -4, -13.25, 0.850342, -11, -15.25, 0.850342, -11, -23.75, 0.850342, -2.5, -15.5, 0.850342, -2.25, -14.75, 7.10034, 17, -35.75, 7.35034, 17, -14.75, 7.10034, 17.25, -14.5, 7.10034, 27.75, -8.5, 7.10034, 27.75, -8.25, 7.10034, 29, -8, 7.10034, 28.25, 7.75, 7.10034, 29, 7.75, 7.10034, 28.5, -8, 7.10034, -3, -14.5, 7.10034, -3, -13.75, 0.850342, 18, -14.25, 0.850342, 18.25, -14.25, 0.850342, 27.5, -8.25, 0.850342, 27.5, -13.75, 0.850342, 16.25, -8.25, 0.850342, -2.75, -14.25, 0.850342, -2.75, -14.25, 0.850342, 16, -23.75, 0.850342, 9.5, -22, 0.850342, 13, -15.5, 0.850342, 13, 7, 0.850342, 27.5, 7, 0.850342, 25, 1.25, 0.850342, 24.75, -7, 0.850342, 27.5, -37.5, 0.850342, 15.25, -37.5, 0.850342, 10, -40, 0.850342, 10, -49.5, 0.850342, 15.25, -24, 0.850342, 10, -22.5, 0.850342, 13.25, -22.5, 0.850342, 16, -35.25, 0.850342, 10, -35.25, 0.850342, 16, -21.5, 3.60034, 14, -21.5, 3.60034, 16, -15.5, 3.60034, 16, -15.5, 3.60034, 14, -21.25, 0.850342, 14.25, -21.25, 0.850342, 16, -15.5, 0.850342, 16, -15.5, 0.850342, 14.25, -36.5, 0.850342, 18.25, -36.75, 0.850342, 17.5, -37.5, 0.850342, 17.25, -49.5, 0.850342, 49.5, -14, 0.850342, 49.5, -15.5, 0.850342, 28.5, -13.75, 0.850342, 28.75, -15.5, 0.850342, 18.25, 17.25, 0.850342, 25, 8.75, 0.850342, 25, 8.75, 0.850342, 29.75, 6.5, 0.850342, 30, 6.5, 0.850342, 49.5, 49.5, 0.850342, 49.5, -9, 0.850342, 30, -9.25, 0.850342, 28.75, -7, 0.850342, 49.5, -7, 0.850342, 30)
@@ -46,12 +47,12 @@ size = Vector3(100, 1, 100)
 resource_name = "Worldgeometrymapsblalabceramicfloor00011Mtl"
 transparency = 4
 cull_mode = 2
-albedo_texture = ExtResource("7_fby5i")
+albedo_texture = ExtResource("6_8wvy0")
 roughness = 0.495025
 normal_enabled = true
-normal_texture = ExtResource("8_xbvjf")
+normal_texture = ExtResource("7_3waju")
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_d6ru0"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_k6yac"]
 _surfaces = [{
 "aabb": AABB(-43.2671, -165.025, -135.755, 117.956, 309.725, 0.00100708),
 "format": 34896613377,
@@ -65,7 +66,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_ud6v1"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_pllj8"]
 resource_name = "Alpha Hills Lab v1_Object_4_008"
 _surfaces = [{
 "aabb": AABB(-43.2671, -165.025, -135.755, 117.956, 309.725, 0.00100708),
@@ -81,39 +82,7 @@ _surfaces = [{
 "vertex_data": PackedByteArray("AADt3AAA//8AAB6/AAD//3mA7dwAAP//eYAevwAA//8AAI+fAAD//3mAj58AAP//AAD/fwAA//95gP9/AAD//wAApEkAAP//eYCkSQAA//8AAOBAAAD//3mA4EAAAP//AACPHwAA//95gI8fAAD//wAAAAAAAP//v3+PHwAA//86fwAAAAD//wAA//8AAP//u3///wAA//85gO3c/////4V/7dwAAP//hX8evwAA/////+3cAAD/////Hr8AAP//hX+PnwAA/////4+fAAD//4V//38AAP//////fwAA//+Ff6RJAAD/////pEkAAP//hX/gQAAA/////+BAAAD//4V/jx8AAP////+PHwAA//+FfwAAAAD//0X/jx8AAP//wP4AAAAA//+Ff///AAD//0H///8AAP//v//t3P//////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f///")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_d6ru0")
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_i1r7e"]
-_surfaces = [{
-"aabb": AABB(-43.2671, -165.025, -135.755, 117.956, 309.725, 0.00100708),
-"format": 34896613377,
-"index_count": 96,
-"index_data": PackedByteArray("AAABAAIAAgABAAMAAQAEAAMAAwAEAAUABAAGAAUABQAGAAcABgAIAAcABwAIAAkACAAKAAkACQAKAAsACgAMAAsACwAMAA0ADAAOAA8ADwAOABAAEQAAABIAEgAAABMAFAAVABYAFgAVABcAFQAYABcAFwAYABkAGAAaABkAGQAaABsAGgAcABsAGwAcAB0AHAAeAB0AHQAeAB8AHgAgAB8AHwAgACEAIAAiACMAIwAiACQAJQAUACYAJgAUACcA"),
-"name": "Worldgeometrymapsblalabceramicfloor00011Mtl",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 40,
-"vertex_data": PackedByteArray("AADt3AAAAAAAAB6/AAAAAHmA7dwAAAAAeYAevwAAAAAAAI+fAAAAAHmAj58AAAAAAAD/fwAAAAB5gP9/AAAAAAAApEkAAAAAeYCkSQAAAAAAAOBAAAAAAHmA4EAAAAAAAACPHwAAAAB5gI8fAAAAAAAAAAAAAAAAv3+PHwAAAAA6fwAAAAAAAAAA//8AAAAAu3///wAAAAA5gO3c//8AAIV/7dwAAAAAhX8evwAAAAD//+3cAAAAAP//Hr8AAAAAhX+PnwAAAAD//4+fAAAAAIV//38AAAAA////fwAAAACFf6RJAAAAAP//pEkAAAAAhX/gQAAAAAD//+BAAAAAAIV/jx8AAAAA//+PHwAAAACFfwAAAAAAAEX/jx8AAAAAwP4AAAAAAACFf///AAAAAEH///8AAAAAv//t3P//AAA=")
-}]
-blend_shape_mode = 0
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_i2qpu"]
-resource_name = "Alpha Hills Lab v1_Object_4_009"
-_surfaces = [{
-"aabb": AABB(-43.2671, -165.025, -135.755, 117.956, 309.725, 0.00100708),
-"attribute_data": PackedByteArray("//8OC///Dgv//3UU//91FIjyDguI8g4LiPJ1FIjydRT//2ge//9oHojyaB6I8mge//9cKP//XCiI8lwoiPJcKP//gDn//4A5iPKAOYjygDn//0Q8//9EPIjyRDyI8kQ8///FRv//xUaI8sVGiPLFRv//uVD//7lQ9/LFRvfyxUb38rlQ9/K5UP//AAD//wAA9/IAAPfyAAD38g4L9/IOC///Dgv//w4L//91FP//dRSI8g4LiPIOC4jydRSI8nUU//9oHv//aB6I8mgeiPJoHv//XCj//1woiPJcKIjyXCj//4A5//+AOYjygDmI8oA5//9EPP//RDyI8kQ8iPJEPP//xUb//8VGiPLFRojyxUb//7lQ//+5UPfyxUb38sVG9/K5UPfyuVD//wAA//8AAPfyAAD38gAA9/IOC/fyDgs="),
-"format": 34896613431,
-"index_count": 96,
-"index_data": PackedByteArray("AAABAAIAAgABAAMAAQAEAAMAAwAEAAUABAAGAAUABQAGAAcABgAIAAcABwAIAAkACAAKAAkACQAKAAsACgAMAAsACwAMAA0ADAAOAA8ADwAOABAAEQAAABIAEgAAABMAFAAVABYAFgAVABcAFQAYABcAFwAYABkAGAAaABkAGQAaABsAGgAcABsAGwAcAB0AHAAeAB0AHQAeAB8AHgAgAB8AHwAgACEAIAAiACMAIwAiACQAJQAUACYAJgAUACcA"),
-"material": SubResource("StandardMaterial3D_jvjuw"),
-"name": "Worldgeometrymapsblalabceramicfloor00011Mtl",
-"primitive": 3,
-"uv_scale": Vector4(73.6874, 57.875, 73.6874, 57.875),
-"vertex_count": 40,
-"vertex_data": PackedByteArray("AADt3AAA//8AAB6/AAD//3mA7dwAAP//eYAevwAA//8AAI+fAAD//3mAj58AAP//AAD/fwAA//95gP9/AAD//wAApEkAAP//eYCkSQAA//8AAOBAAAD//3mA4EAAAP//AACPHwAA//95gI8fAAD//wAAAAAAAP//v3+PHwAA//86fwAAAAD//wAA//8AAP//u3///wAA//85gO3c/////4V/7dwAAP//hX8evwAA/////+3cAAD/////Hr8AAP//hX+PnwAA/////4+fAAD//4V//38AAP//////fwAA//+Ff6RJAAD/////pEkAAP//hX/gQAAA/////+BAAAD//4V/jx8AAP////+PHwAA//+FfwAAAAD//0X/jx8AAP//wP4AAAAA//+Ff///AAD//0H///8AAP//v//t3P//////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f///")
-}]
-blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_i1r7e")
+shadow_mesh = SubResource("ArrayMesh_k6yac")
 
 [node name="Gameplay" type="Node3D"]
 
@@ -124,7 +93,7 @@ anchors_preset = 0
 offset_right = 1152.0
 offset_bottom = 648.0
 mouse_filter = 2
-script = ExtResource("1_sss6l")
+script = ExtResource("1_6igpk")
 
 [node name="Oxygen" type="ProgressBar" parent="HUD"]
 layout_mode = 0
@@ -140,7 +109,7 @@ show_percentage = false
 layout_mode = 0
 offset_right = 250.0
 offset_bottom = 25.0
-theme_override_fonts/normal_font = ExtResource("2_yatk6")
+theme_override_fonts/normal_font = ExtResource("2_pllj8")
 text = "Oxygen: 100"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -156,9 +125,10 @@ step = 0.0
 fill_mode = 3
 show_percentage = false
 
-[node name="Player" parent="." instance=ExtResource("1_5lwbh")]
+[node name="Player" parent="." instance=ExtResource("3_v3xg2")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.66095, 2, 24.5834)
+script = ExtResource("1_xm2i2")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.722207, 0.691677, 0, -0.691677, 0.722207, 0, 15.1148, 24.9866)
@@ -168,8 +138,12 @@ navigation_mesh = SubResource("NavigationMesh_d6ru0")
 
 [node name="Enemies" type="Node" parent="NavigationRegion3D"]
 
-[node name="Enemy" parent="NavigationRegion3D/Enemies" groups=["Enemy"] instance=ExtResource("2_epgdy")]
+[node name="Enemy" parent="NavigationRegion3D/Enemies" groups=["Enemy"] instance=ExtResource("4_8mqq0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.111, 1.795, -27)
+
+[node name="NavigationAgent3D" parent="NavigationRegion3D/Enemies/Enemy" index="2"]
+debug_enabled = true
+debug_path_custom_color = Color(0.925643, 0.107206, 1.92523e-07, 1)
 
 [node name="Walls" type="Node" parent="NavigationRegion3D"]
 
@@ -242,17 +216,10 @@ shape = SubResource("BoxShape3D_5lwbh")
 [node name="Node" type="Node3D" parent="."]
 transform = Transform3D(0.075, 0, 0, 0, 0.075, 0, 0, 0, 0.075, 0, 0, 0)
 
-[node name="Alpha Hills Lab v1" parent="Node" instance=ExtResource("6_lkflj")]
+[node name="Alpha Hills Lab v1" parent="Node" instance=ExtResource("5_5cw3o")]
 
-[node name="Object_14" type="MeshInstance3D" parent="Node/Alpha Hills Lab v1/Sketchfab_model/root/GLTF_SceneRootNode/sddasf_0" index="11"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.84, 0, 0.001)
-mesh = SubResource("ArrayMesh_ud6v1")
-skeleton = NodePath("")
-
-[node name="Object_8_004" type="MeshInstance3D" parent="Node/Alpha Hills Lab v1/Sketchfab_model/root/GLTF_SceneRootNode/sddasf_0" index="12"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.84, 0, -33.662)
-mesh = SubResource("ArrayMesh_i2qpu")
-skeleton = NodePath("")
+[node name="Object_8_003" parent="Node/Alpha Hills Lab v1/Sketchfab_model/root/GLTF_SceneRootNode/sddasf_0" index="9"]
+visible = false
 
 [node name="Sketchfab_model_001" parent="Node/Alpha Hills Lab v1" index="1"]
 transform = Transform3D(29.5142, 0, 0, 0, -1.05551e-05, 29.5143, 0, -29.5143, -1.05551e-05, -157.04, 44.0346, 201.618)
@@ -263,8 +230,23 @@ transform = Transform3D(1, 0, 2.91038e-11, 0, 1, 0, 0, 0, 1, 0.000491142, 0, 1.2
 [node name="GLTF_created_0_001" parent="Node/Alpha Hills Lab v1/Sketchfab_model_001/root_001/GLTF_SceneRootNode_001/c3a2e_blastdoors_ARM_18" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03382, 4.19183, 0)
 
-[node name="Alpha Hills Lab v2" parent="Node" instance=ExtResource("6_lkflj")]
+[node name="Alpha Hills Lab v2" parent="Node" instance=ExtResource("5_5cw3o")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -300, 0, -203.4)
 
+[node name="Object_8_003" parent="Node/Alpha Hills Lab v2/Sketchfab_model/root/GLTF_SceneRootNode/sddasf_0" index="9"]
+visible = false
+
+[node name="Object_14" type="MeshInstance3D" parent="Node/Alpha Hills Lab v2/Sketchfab_model/root/GLTF_SceneRootNode/sddasf_0" index="11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.84, 0, 0.001)
+mesh = SubResource("ArrayMesh_pllj8")
+skeleton = NodePath("")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -10.671, 31.1931, -7.50214)
+current = true
+fov = 100.0
+
+[editable path="Player"]
+[editable path="NavigationRegion3D/Enemies/Enemy"]
 [editable path="Node/Alpha Hills Lab v1"]
 [editable path="Node/Alpha Hills Lab v2"]
