@@ -1,19 +1,14 @@
 # https://www.youtube.com/watch?v=egedSO9vWH4
 extends CharacterBody3D
 
-enum {IDLE, SEARCHING, HUNTING}
-var current_state
+enum {IDLE, ROAMING, SEARCHING, HUNTING}
+@onready var current_state = IDLE
 
-var player : CharacterBody3D
 @export var SPEED = 5
-@export var player_path : NodePath
+@onready var player = %Player
 @onready var nav_agent = $NavigationAgent3D
 @onready var sfx_kill = $sfx_kill
 var target_pos : Vector3
-
-func _ready() -> void:
-	player = get_node(player_path)
-	current_state = IDLE
 
 func _physics_process(_delta: float) -> void:
 	if current_state == IDLE:
@@ -41,3 +36,5 @@ func _physics_process(_delta: float) -> void:
 			sfx_kill.play()
 			await get_tree().create_timer(0.98).timeout
 			get_tree().reload_current_scene()
+			
+	print(current_state)

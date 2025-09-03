@@ -11,10 +11,10 @@ extends CharacterBody3D
 @onready var stamina_timer = $StaminaTimer
 @onready var hud = %HUD
 @onready var noise_area = $Area3D/CollisionShape3D.shape
-@onready var crouch = false
-@onready var recovering = false
-@onready var holding_breath = false
-@onready var stamina = 100.0
+var crouch = false
+var recovering = false
+var holding_breath = false
+var stamina = 10000.0
 
 enum {IDLE, CROUCH, CROUCH_SPRINT, WALK, SPRINT}
 
