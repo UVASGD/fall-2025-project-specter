@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://dcmjrcofckfle"]
+[gd_scene load_steps=23 format=4 uid="uid://dcmjrcofckfle"]
 
 [ext_resource type="Script" uid="uid://qg2u4m1spvd1" path="res://Source/Scripts/hud.gd" id="1_6igpk"]
 [ext_resource type="Script" uid="uid://q3p1lhq0sw7b" path="res://Source/Scenes/mock_player.gd" id="1_xm2i2"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://bx1wsswr0kbbn" path="res://Source/Scenes/enemy.tscn" id="4_8mqq0"]
 [ext_resource type="PackedScene" uid="uid://dkyyu2ypnygdd" path="res://Assets/3d/alpha-hills-lab-v1/source/Alpha Hills Lab v1.glb" id="5_5cw3o"]
 [ext_resource type="Texture2D" uid="uid://dr3nrvi3oo833" path="res://Assets/3d/alpha-hills-lab-v1/source/Alpha Hills Lab v1_Image_6.png" id="6_8wvy0"]
-[ext_resource type="AudioStream" uid="uid://duvwt0abswphu" path="res://Assets/Sound/SFX/047571_glitchy-robot-scream-64943.mp3" id="6_v3xg2"]
 [ext_resource type="Texture2D" uid="uid://cy3okwnxxgboo" path="res://Assets/3d/alpha-hills-lab-v1/source/Alpha Hills Lab v1_Image_7.png" id="7_3waju"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_d6ru0"]
@@ -145,9 +144,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.111, 1.795, -27)
 [node name="NavigationAgent3D" parent="NavigationRegion3D/Enemies/Enemy" index="2"]
 debug_enabled = true
 debug_path_custom_color = Color(0.925643, 0.107206, 1.92523e-07, 1)
-
-[node name="sfx_echo" type="AudioStreamPlayer3D" parent="NavigationRegion3D/Enemies/Enemy"]
-stream = ExtResource("6_v3xg2")
 
 [node name="Walls" type="Node" parent="NavigationRegion3D"]
 
