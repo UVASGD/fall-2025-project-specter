@@ -1,25 +1,33 @@
 extends CharacterBody3D
 
+
+enum {IDLE, CROUCH, CROUCH_SPRINT, WALK, SPRINT}
+
+
 @export var SPEED = 5.0
 @export var SPRINT_SPEED = 1.5
 @export var CROUCH_SPEED = 0.5
 @export var JUMP_VELOCITY = 4.5
 @export var SENSITIVITY = 0.005
 
+
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
+@onready var ray_cast = $Head/Camera3D/RayCast3D
 @onready var stamina_timer = $StaminaTimer
 @onready var hud = %HUD
 @onready var noise_area = $Area3D/CollisionShape3D.shape
+
+
 var crouch = false
 var recovering = false
 var holding_breath = false
 var stamina = 10000.0
 
-enum {IDLE, CROUCH, CROUCH_SPRINT, WALK, SPRINT}
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
 
 func _physics_process(delta: float) -> void:
 	var used_stamina = false
@@ -135,11 +143,18 @@ func _physics_process(delta: float) -> void:
 		stamina = 0
 		holding_breath = false
 
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
+	
+	if event.is_action_pressed("interact"):
+		var collider: Object = ray_cast.get_collider()
+		
+		if collider is Interactable:
+			collider.interact(self)
 
 
 func _on_stamina_timer_timeout() -> void:
@@ -149,6 +164,7 @@ func _on_stamina_timer_timeout() -> void:
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body.is_in_group("Enemy"):
 		body.current_state = body.HUNTING
+
 
 func _on_area_3d_body_exited(body: Node3D) -> void:
 	if body.is_in_group("Enemy"):

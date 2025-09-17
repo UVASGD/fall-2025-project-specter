@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://bl3otduhbdahq"]
+
+[ext_resource type="Texture2D" uid="uid://bpkbislh3nqo8" path="res://Assets/2d/house.png" id="1_a11vs"]
+
+[sub_resource type="GDScript" id="GDScript_j2fr5"]
+script/source = "extends Interactable
+
+
+@export var house_texture: CompressedTexture2D
+
+
+func interact(player: CharacterBody3D) -> void:
+	var house_sprite: Sprite2D = Sprite2D.new()
+	house_sprite.texture = house_texture
+	house_sprite.position = get_viewport().size / 2
+	
+	player.add_child(house_sprite)
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a11vs"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_4ywmy"]
+
+[node name="InteractableHouseBox" type="StaticBody3D"]
+script = SubResource("GDScript_j2fr5")
+house_texture = ExtResource("1_a11vs")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_a11vs")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_4ywmy")
