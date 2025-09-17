@@ -4,6 +4,8 @@ extends Control
 @onready var stamina_text = $Oxygen/RichTextLabel
 @onready var noise_bar = $Noise
 @onready var vars = []
+@onready var interactable_display: TextureRect = $InteractableDisplay
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
