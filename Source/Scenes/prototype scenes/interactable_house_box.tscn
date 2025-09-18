@@ -10,8 +10,7 @@ script/source = "extends Interactable
 
 
 func interact(player: Player) -> void:
-	player.hud.interactable_display.texture = house_texture
-	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+	player.start_reading(house_texture)
 "
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_a11vs"]

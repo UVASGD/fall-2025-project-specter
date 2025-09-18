@@ -2,7 +2,7 @@ class_name Player
 extends CharacterBody3D
 
 
-enum {IDLE, CROUCH, CROUCH_SPRINT, WALK, SPRINT}
+enum {IDLE, CROUCH, CROUCH_SPRINT, WALK, SPRINT, READING}
 
 
 @export var SPEED = 5.0
@@ -20,6 +20,7 @@ enum {IDLE, CROUCH, CROUCH_SPRINT, WALK, SPRINT}
 @onready var noise_area = $Area3D/CollisionShape3D.shape
 
 
+var movement_state
 var crouch = false
 var recovering = false
 var holding_breath = false
@@ -31,8 +32,10 @@ func _ready():
 
 
 func _physics_process(delta: float) -> void:
-	if hud.interactable_display.texture:
+	if movement_state == READING:
 		return
+	
+	movement_state = IDLE
 	
 	var used_stamina = false
 	var noise_level = 0
@@ -76,7 +79,6 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 		
-	var movement_state = IDLE
 	if velocity.x != 0 or velocity.z != 0:
 		movement_state = WALK
 		if Input.is_action_pressed("sprint"): movement_state = SPRINT
@@ -149,7 +151,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion and not hud.interactable_display.texture:
+	if event is InputEventMouseMotion and not movement_state == READING:
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
@@ -160,9 +162,20 @@ func _unhandled_input(event: InputEvent) -> void:
 		if collider is Interactable:
 			collider.interact(self)
 	
-	if event.is_action_pressed("ui_cancel") and hud.interactable_display.texture:
-		hud.interactable_display.texture = null
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	if event.is_action_pressed("ui_cancel") and movement_state == READING:
+		stop_reading()
+
+
+func start_reading(reading: CompressedTexture2D) -> void:
+	hud.interactable_display.texture = reading
+	movement_state = READING
+	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+
+
+func stop_reading() -> void:
+	hud.interactable_display.texture = null
+	movement_state = IDLE
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
 func _on_stamina_timer_timeout() -> void:
