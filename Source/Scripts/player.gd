@@ -11,11 +11,13 @@ extends CharacterBody3D
 @onready var stamina_timer = $StaminaTimer
 @onready var hud = %HUD
 @onready var noise_area = $Area3D/CollisionShape3D.shape
+@onready var enemy = %Enemy
 var crouch = false
 var recovering = false
 var holding_breath = false
 var stamina = 100.0
 var noise_level : float
+var noise_hud : float
 
 enum {IDLE, CROUCH, CROUCH_SPRINT, WALK, SPRINT}
 
@@ -25,6 +27,7 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	var used_stamina = false
 	noise_level = 0.0
+	noise_hud = 0.0
 	
 	if Input.is_action_just_pressed("crouch"):
 		if crouch:
@@ -52,7 +55,7 @@ func _physics_process(delta: float) -> void:
 		if holding_breath:
 			stamina -= 5
 		else:
-			noise_level += 2
+			make_noise(2)
 			stamina -= 3
 
 	# Get the input direction and handle the movement/deceleration.
@@ -98,7 +101,7 @@ func _physics_process(delta: float) -> void:
 	
 	#TODO balance values
 	if not holding_breath:
-		noise_level += (movement_state + 1)
+		make_noise( (movement_state + 1) )
 	noise_area.radius = noise_level * 5
 	
 	#TODO balance values
@@ -130,11 +133,18 @@ func _physics_process(delta: float) -> void:
 	elif stamina_timer.is_stopped() and stamina < 100:
 		stamina_timer.start()
 		
-	hud.vars = [stamina, noise_level]
+	hud.vars = [stamina, noise_hud]
 	
 	if stamina < 0:
 		stamina = 0
 		holding_breath = false
+
+func make_noise(base_noise_val):
+	var dist = global_position.distance_to(enemy.global_position)
+	var noise_val = base_noise_val*(20/dist)
+	print("increasing noise by " + str(noise_val))
+	noise_hud += base_noise_val
+	noise_level += noise_val
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
