@@ -1,21 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dq7kjkns7j1w0"]
 
-[ext_resource type="AudioStream" uid="uid://b0qxuhk1ltk6m" path="res://Assets/Sound/SFX/vicodin.ogg" id="1_7xxtp"]
-
-[sub_resource type="GDScript" id="GDScript_oklq4"]
-script/source = "extends Interactable
-
-
-@onready var audio_player: AudioStreamPlayer3D = $AudioStreamPlayer3D
-
-
-func interact(_player: Player) -> void:
-	if audio_player.playing:
-		audio_player.stop()
-		return
-	
-	audio_player.play()
-"
+[ext_resource type="Script" uid="uid://dlmmauev3ip75" path="res://Source/Scripts/interactable_audio_recorder.gd" id="1_7xxtp"]
+[ext_resource type="AudioStream" uid="uid://b0qxuhk1ltk6m" path="res://Assets/Sound/SFX/vicodin.ogg" id="2_b1cn5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7xxtp"]
 
@@ -25,7 +11,9 @@ func interact(_player: Player) -> void:
 albedo_color = Color(1, 0.333333, 1, 1)
 
 [node name="interactable_house_recorder" type="StaticBody3D"]
-script = SubResource("GDScript_oklq4")
+script = ExtResource("1_7xxtp")
+stream = ExtResource("2_b1cn5")
+metadata/_custom_type_script = "uid://dlmmauev3ip75"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_7xxtp")
@@ -33,6 +21,3 @@ shape = SubResource("BoxShape3D_7xxtp")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_b1cn5")
 surface_material_override/0 = SubResource("StandardMaterial3D_ydqor")
-
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("1_7xxtp")

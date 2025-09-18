@@ -23,7 +23,7 @@ enum {IDLE, CROUCH, CROUCH_SPRINT, WALK, SPRINT}
 var crouch = false
 var recovering = false
 var holding_breath = false
-var stamina = 10000.0
+var stamina = 100.0
 
 
 func _ready():
