@@ -10,6 +10,7 @@ enum {IDLE, ROAMING, SEARCHING, HUNTING}
 @onready var sfx_echo = $sfx_echo
 @onready var timer = $Timer
 @onready var rc = $RayCast3D
+
 var target_pos : Vector3
 var search_pos : Vector3
 var SPEED = 5
@@ -76,6 +77,7 @@ func _physics_process(_delta: float) -> void:
 				await get_tree().create_timer(0.98).timeout
 				get_tree().reload_current_scene()
 
+
 func change_state(state):
 	current_state = state
 	match state:
@@ -117,3 +119,10 @@ func echolocate():
 			set_search_point()
 			target_pos = player.global_position
 		rc.set_enabled(false)
+		
+func handle_noise(noise_level, noise_pos):
+	# distance to sound -- sound level emitted to the point -- enemy calculates the sound level it hears
+	var dist = global_position.distance_to(noise_pos)
+	#player_noise.radius = noise_level * 5
+	#var noise_val = noise_level*(20/global_position.distance_to(pos))
+	

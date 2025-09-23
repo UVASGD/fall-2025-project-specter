@@ -17,7 +17,6 @@ var recovering = false
 var holding_breath = false
 var stamina = 100.0
 var noise_level : float
-var noise_hud : float
 
 enum {IDLE, CROUCH, CROUCH_SPRINT, WALK, SPRINT}
 
@@ -27,7 +26,6 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	var used_stamina = false
 	noise_level = 0.0
-	noise_hud = 0.0
 	
 	if Input.is_action_just_pressed("crouch"):
 		if crouch:
@@ -133,18 +131,17 @@ func _physics_process(delta: float) -> void:
 	elif stamina_timer.is_stopped() and stamina < 100:
 		stamina_timer.start()
 		
-	hud.vars = [stamina, noise_hud]
+	hud.vars = [stamina, noise_level]
 	
 	if stamina < 0:
 		stamina = 0
 		holding_breath = false
 
-func make_noise(base_noise_val):
+func make_noise(noise_val):
 	var dist = global_position.distance_to(enemy.global_position)
-	var noise_val = base_noise_val*(20/dist)
-	print("increasing noise by " + str(noise_val))
-	noise_hud += base_noise_val
 	noise_level += noise_val
+	enemy.handle_noise(noise_level, global_position)
+	#print("increasing noise by " + str(noise_val))
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
