@@ -9,7 +9,8 @@ extends CharacterBody3D
 @onready var head = $Head
 @onready var stamina_timer = $StaminaTimer
 @onready var hud = %HUD
-@onready var noise_area = $Area3D/CollisionShape3D.shape
+#@onready var noise_area = $Area3D/CollisionShape3D.shape
+@onready var noise_area = $Noise
 var crouch = false
 var recovering = false
 var holding_breath = false
@@ -98,7 +99,8 @@ func _physics_process(delta: float) -> void:
 	#TODO balance values
 	if not holding_breath:
 		noise_level += (movement_state + 1)
-	noise_area.radius = noise_level * 5
+	#noise_area.radius = noise_level * 5
+	noise_area.update_noise_level(noise_level*5)
 	
 	#TODO balance values
 	match movement_state:
