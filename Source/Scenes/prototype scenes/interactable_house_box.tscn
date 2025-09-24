@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bl3otduhbdahq"]
 
 [ext_resource type="Script" uid="uid://cop0w657yppxu" path="res://Source/Scripts/interactable_reading.gd" id="1_a11vs"]
-[ext_resource type="Texture2D" uid="uid://bpkbislh3nqo8" path="res://Assets/2d/house.png" id="2_4ywmy"]
+[ext_resource type="PackedScene" uid="uid://c07hpb36l381a" path="res://Source/Scenes/prototype scenes/house_reading.tscn" id="2_4ywmy"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_a11vs"]
 

@@ -2,7 +2,7 @@ class_name InteractableReading
 extends Interactable
 
 
-@export var reading: CompressedTexture2D
+@export var reading: PackedScene
 
 
 func interact(player: Player) -> void:

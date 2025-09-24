@@ -16,7 +16,7 @@ enum {IDLE, CROUCH, CROUCH_SPRINT, WALK, SPRINT, READING}
 @onready var camera = $Head/Camera3D
 @onready var ray_cast: RayCast3D = $Head/Camera3D/RayCast3D
 @onready var stamina_timer = $StaminaTimer
-@onready var hud = %HUD
+@onready var hud: Hud = %HUD
 @onready var noise_area = $Area3D/CollisionShape3D.shape
 
 
@@ -166,14 +166,16 @@ func _unhandled_input(event: InputEvent) -> void:
 		stop_reading()
 
 
-func start_reading(reading: CompressedTexture2D) -> void:
-	hud.interactable_display.texture = reading
+func start_reading(reading: PackedScene) -> void:
+	hud.interactable_display = reading.instantiate()
+	hud.add_child(hud.interactable_display)
 	movement_state = READING
 	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 
 
 func stop_reading() -> void:
-	hud.interactable_display.texture = null
+	hud.remove_child(hud.interactable_display)
+	hud.interactable_display.queue_free()
 	movement_state = IDLE
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
