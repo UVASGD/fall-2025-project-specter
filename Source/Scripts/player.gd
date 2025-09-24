@@ -1,4 +1,9 @@
+class_name Player
 extends CharacterBody3D
+
+
+enum {IDLE, CROUCH, CROUCH_SPRINT, WALK, SPRINT, READING}
+
 
 @export var SPEED = 5.0
 @export var SPRINT_SPEED = 1.5
@@ -6,26 +11,37 @@ extends CharacterBody3D
 @export var JUMP_VELOCITY = 4.5
 @export var SENSITIVITY = 0.005
 
+
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
+@onready var ray_cast: RayCast3D = $Head/Camera3D/RayCast3D
 @onready var stamina_timer = $StaminaTimer
 @onready var hud = %HUD
 #@onready var noise_area = $Area3D/CollisionShape3D.shape
 @onready var noise_area: Area3D = $Noise
 
 @onready var enemy = %Enemy
+@onready var noise_area = $Area3D/CollisionShape3D.shape
+
+
+var movement_state
 var crouch = false
 var recovering = false
 var holding_breath = false
 var stamina = 100.0
 var noise_level : float
 
-enum {IDLE, CROUCH, CROUCH_SPRINT, WALK, SPRINT}
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
+
 func _physics_process(delta: float) -> void:
+	if movement_state == READING:
+		return
+	
+	movement_state = IDLE
+	
 	var used_stamina = false
 	noise_level = 0.0
 	
@@ -68,7 +84,6 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 		
-	var movement_state = IDLE
 	if velocity.x != 0 or velocity.z != 0:
 		movement_state = WALK
 		if Input.is_action_pressed("sprint"): movement_state = SPRINT
@@ -147,7 +162,7 @@ func make_noise(noise_val):
 	#print("increasing noise by " + str(noise_val))
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and not movement_state == READING:
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
@@ -157,6 +172,27 @@ func _unhandled_input(event: InputEvent) -> void:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	if event.is_action_pressed("interact"):
+		var collider: Object = ray_cast.get_collider()
+		
+		if collider is Interactable:
+			collider.interact(self)
+	
+	if event.is_action_pressed("ui_cancel") and movement_state == READING:
+		stop_reading()
+
+
+func start_reading(reading: CompressedTexture2D) -> void:
+	hud.interactable_display.texture = reading
+	movement_state = READING
+	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+
+
+func stop_reading() -> void:
+	hud.interactable_display.texture = null
+	movement_state = IDLE
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
 func _on_stamina_timer_timeout() -> void:
@@ -165,6 +201,7 @@ func _on_stamina_timer_timeout() -> void:
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body.is_in_group("Enemy"):
 		body.change_state(body.HUNTING)
+
 
 func _on_area_3d_body_exited(body: Node3D) -> void:
 	if body.is_in_group("Enemy"):

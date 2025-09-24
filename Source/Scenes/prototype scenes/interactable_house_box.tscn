@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://bl3otduhbdahq"]
+
+[ext_resource type="Script" uid="uid://cop0w657yppxu" path="res://Source/Scripts/interactable_reading.gd" id="1_a11vs"]
+[ext_resource type="Texture2D" uid="uid://bpkbislh3nqo8" path="res://Assets/2d/house.png" id="2_4ywmy"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a11vs"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_4ywmy"]
+
+[node name="InteractableHouseBox" type="StaticBody3D"]
+script = ExtResource("1_a11vs")
+reading = ExtResource("2_4ywmy")
+metadata/_custom_type_script = "uid://cop0w657yppxu"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_a11vs")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_4ywmy")
