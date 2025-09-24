@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://bytktogjwkr76"]
+
+[ext_resource type="Script" uid="uid://cop0w657yppxu" path="res://Source/Scripts/interactable_reading.gd" id="1_huuvr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_huuvr"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_knjfd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_huuvr"]
+albedo_color = Color(1, 1, 0, 1)
+
+[node name="InteractableKeypad" type="StaticBody3D"]
+script = ExtResource("1_huuvr")
+metadata/_custom_type_script = "uid://cop0w657yppxu"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_huuvr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_knjfd")
+surface_material_override/0 = SubResource("StandardMaterial3D_huuvr")
