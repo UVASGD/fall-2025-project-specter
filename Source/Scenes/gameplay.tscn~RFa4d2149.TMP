@@ -233,15 +233,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.22929, 1.69808, -30.5806)
 shape = SubResource("BoxShape3D_pi87v")
 
 [node name="Floor" type="StaticBody3D" parent="NavigationRegion3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.189426, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Floor"]
-shape = SubResource("BoxShape3D_5lwbh")
-
-[node name="Ceiling" type="StaticBody3D" parent="NavigationRegion3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.53633, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Ceiling"]
 shape = SubResource("BoxShape3D_5lwbh")
 
 [node name="Node" type="Node3D" parent="."]
