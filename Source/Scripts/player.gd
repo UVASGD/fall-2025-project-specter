@@ -26,7 +26,7 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _physics_process(delta: float) -> void:
-	if soundTimer == 50:
+	if soundTimer == 40:
 		soundTimer=0
 		causeSound()
 	else:
@@ -153,15 +153,15 @@ func causeSound():
 		#var endingpoint = startingpoint + -global_transform.basis.z * 1000
 		#fire_ray(startingpoint, endingpoint, 25, [self])
 		var visuals = false
-		var duration = 10000
+		var duration = 1000
 		
-		var num_rays=32
-		var num_levels = 3
+		var num_rays=16
+		var num_levels = 5
 		var startingpoint = global_transform.origin + Vector3(0, .25, 0)
 		for j in range(num_levels):
 			for i in range (num_rays):
-				var angle = deg_to_rad((360/num_rays)*i)
-				var pitchAngle = deg_to_rad(135+45*j)
+				var angle = deg_to_rad(((360/num_rays)*i)+((360/num_rays)/5)*j)
+				var pitchAngle = deg_to_rad(120+30*j)
 				var rayDirection = Vector3(sin(angle)*cos(pitchAngle), sin(pitchAngle), cos(angle))
 				var endingpoint = startingpoint + rayDirection.normalized() * 100
 				fire_ray(startingpoint, endingpoint, 100, [self], visuals, false, duration)
@@ -175,9 +175,9 @@ func fire_ray(start, end, power, exclude, visuals, throughWall, duration):
 	if rayResult:
 		if visuals:
 			if throughWall==false:
-				DebugDraw3D.draw_line(start, rayResult.position, Color(1, 1, 0), duration)
+				DebugDraw3D.draw_line(start, rayResult.position, Color(0, 0, power/100.0), duration)
 			else:
-				DebugDraw3D.draw_line(start,  rayResult.position, Color(0, 1, 0), duration)
+				DebugDraw3D.draw_line(start,  rayResult.position, Color(0, 0,  power/100.0), duration)
 		#print("Ray hit: ", rayResult.collider.name, " at ", rayResult["rid"])
 		
 		var currentParentNode = rayResult.collider
@@ -202,9 +202,9 @@ func fire_ray(start, end, power, exclude, visuals, throughWall, duration):
 		#print("Ray hit nothing")
 		if visuals:
 			if throughWall==false:
-				DebugDraw3D.draw_line(start, end, Color(1, 0, 0), duration)
+				DebugDraw3D.draw_line(start, end, Color(power/100.0, 0, 0), duration)
 			else:
-				DebugDraw3D.draw_line(start, end, Color(0, 0, 1), duration)
+				DebugDraw3D.draw_line(start, end, Color(power/100.0, 0, 0), duration)
 
 
 	

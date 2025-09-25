@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bx1wsswr0kbbn"]
 
-[ext_resource type="Script" uid="uid://cjg3b8kwtspd1" path="res://Source/Scripts/enemy.gd" id="1_ldp51"]
+[ext_resource type="Script" path="res://Source/Scripts/enemy.gd" id="1_ldp51"]
 [ext_resource type="Texture2D" uid="uid://bpkbislh3nqo8" path="res://Assets/2d/house.png" id="2_27rp6"]
 [ext_resource type="AudioStream" uid="uid://b0qxuhk1ltk6m" path="res://Assets/Sound/SFX/vicodin.ogg" id="3_7kuha"]
 [ext_resource type="AudioStream" uid="uid://c0ob5aa8cuill" path="res://Assets/Sound/SFX/robot_scream.wav" id="4_sf4d7"]

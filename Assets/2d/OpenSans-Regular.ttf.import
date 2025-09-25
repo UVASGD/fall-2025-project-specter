@@ -3,11 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://calxibu6hi8wt"
-valid=false
+path="res://.godot/imported/OpenSans-Regular.ttf-64b92c8eda94fc25cc0df77bc944343e.fontdata"
 
 [deps]
 
 source_file="res://Assets/2d/OpenSans-Regular.ttf"
+dest_files=["res://.godot/imported/OpenSans-Regular.ttf-64b92c8eda94fc25cc0df77bc944343e.fontdata"]
 
 [params]
 
@@ -22,7 +23,6 @@ allow_system_fallback=true
 force_autohinter=false
 hinting=1
 subpixel_positioning=4
-keep_rounding_remainders=true
 oversampling=0.0
 Fallbacks=null
 fallbacks=[]
