@@ -1,10 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://caqnb7xdpxfer"]
+[gd_scene load_steps=6 format=3 uid="uid://caqnb7xdpxfer"]
+
+[ext_resource type="PackedScene" uid="uid://c0vvjii3sarvw" path="res://Source/Scenes/noise.tscn" id="1_tffth"]
 
 [sub_resource type="GDScript" id="GDScript_0xpna"]
 script/source = "extends InteractableLever
 
 
 @onready var mesh: MeshInstance3D = $MeshInstance3D
+@onready var noise: Area3D = $Noise
 
 var up_color: Color = Color.RED
 var down_color: Color = Color.GREEN
@@ -17,10 +20,11 @@ func _ready() -> void:
 
 func _on_lever_down() -> void:
 	mesh.get_surface_override_material(0).albedo_color = down_color
-
+	noise.update_noise_level(20)
 
 func _on_lever_up() -> void:
 	mesh.get_surface_override_material(0).albedo_color = up_color
+	noise.update_noise_level(20)
 "
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tffth"]
@@ -40,3 +44,5 @@ shape = SubResource("BoxShape3D_tffth")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_f4l4l")
 surface_material_override/0 = SubResource("StandardMaterial3D_7v68x")
+
+[node name="Noise" parent="." instance=ExtResource("1_tffth")]

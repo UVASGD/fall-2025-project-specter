@@ -17,12 +17,9 @@ enum {IDLE, CROUCH, CROUCH_SPRINT, WALK, SPRINT, READING}
 @onready var ray_cast: RayCast3D = $Head/Camera3D/RayCast3D
 @onready var stamina_timer = $StaminaTimer
 @onready var hud = %HUD
-#@onready var noise_area = $Area3D/CollisionShape3D.shape
 @onready var noise_area: Area3D = $Noise
 
 @onready var enemy = %Enemy
-@onready var noise_area = $Area3D/CollisionShape3D.shape
-
 
 var movement_state
 var crouch = false
@@ -31,10 +28,8 @@ var holding_breath = false
 var stamina = 100.0
 var noise_level : float
 
-
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
 
 func _physics_process(delta: float) -> void:
 	if movement_state == READING:
