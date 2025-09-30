@@ -112,8 +112,6 @@ func _physics_process(delta: float) -> void:
 	#TODO balance values
 	if not holding_breath:
 		make_noise( (movement_state + 1) )
-	#noise_area.radius = noise_level * 5
-	noise_area.update_noise_level(noise_level*5)
 	
 	#TODO balance values
 	match movement_state:
@@ -155,6 +153,8 @@ func make_noise(noise_val):
 	noise_level += noise_val
 	enemy.handle_noise(noise_level, global_position)
 	#print("increasing noise by " + str(noise_val))
+	noise_area.set_enabled(true)
+	noise_area.update_noise_level(noise_level*5)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and not movement_state == READING:
@@ -176,7 +176,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("ui_cancel") and movement_state == READING:
 		stop_reading()
-
 
 func start_reading(reading: CompressedTexture2D) -> void:
 	hud.interactable_display.texture = reading

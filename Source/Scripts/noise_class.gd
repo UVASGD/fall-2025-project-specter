@@ -1,4 +1,4 @@
-extends Area3D
+class_name NoiseComponent extends Area3D
 
 @onready var shape = $CollisionShape3D.shape
 @onready var enabled = false
