@@ -10,16 +10,11 @@ var up_color: Color = Color.RED
 var down_color: Color = Color.GREEN
 
 
-func _ready() -> void:
-	self.lever_down.connect(_on_lever_down)
-	self.lever_up.connect(_on_lever_up)
-
-
-func _on_lever_down() -> void:
+func lever_pulled_down() -> void:
 	mesh.get_surface_override_material(0).albedo_color = down_color
 
 
-func _on_lever_up() -> void:
+func lever_pulled_up() -> void:
 	mesh.get_surface_override_material(0).albedo_color = up_color
 "
 
