@@ -2,7 +2,7 @@ class_name Player
 extends CharacterBody3D
 
 
-enum {IDLE, CROUCH, CROUCH_SPRINT, WALK, SPRINT, READING}
+enum {IDLE, CROUCH, CROUCH_SPRINT, WALK, SPRINT, LOOKING_AT_DISPLAY}
 
 
 @export var SPEED = 5.0
@@ -33,7 +33,7 @@ func _ready():
 
 
 func _physics_process(delta: float) -> void:
-	if movement_state == READING:
+	if movement_state == LOOKING_AT_DISPLAY:
 		return
 	
 	movement_state = IDLE
@@ -152,7 +152,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion and not movement_state == READING:
+	if event is InputEventMouseMotion and not movement_state == LOOKING_AT_DISPLAY:
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
@@ -162,26 +162,28 @@ func _unhandled_input(event: InputEvent) -> void:
 		if collider is Interactable:
 			collider.interact(self)
 	
-	if event.is_action_pressed("ui_cancel") and movement_state == READING:
-		stop_reading()
+	if event.is_action_pressed("ui_cancel") and movement_state == LOOKING_AT_DISPLAY:
+		stop_looking_at_display()
 	###DEBUGGING ONLY
-	else if event is InputEventKey and event.is_pressed() and event.keycode == KEY_ESCAPE:
+	elif event is InputEventKey and event.is_pressed() and event.keycode == KEY_ESCAPE:
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
-func start_reading(reading: PackedScene) -> void:
-	hud.interactable_display = reading.instantiate()
-	hud.add_child(hud.interactable_display)
-	movement_state = READING
+func start_looking_at_display(display: TextureRect) -> void:
+	if not display:
+		return
+	
+	hud.interactable_display = display
+	hud.interactable_display.visible = true
+	movement_state = LOOKING_AT_DISPLAY
 	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 
 
-func stop_reading() -> void:
-	hud.remove_child(hud.interactable_display)
-	hud.interactable_display.queue_free()
+func stop_looking_at_display() -> void:
+	hud.interactable_display.visible = false
 	movement_state = IDLE
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
