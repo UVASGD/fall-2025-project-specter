@@ -1,6 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://caqnb7xdpxfer"]
-
-[ext_resource type="PackedScene" uid="uid://c0vvjii3sarvw" path="res://Source/Scenes/noise.tscn" id="1_tffth"]
+[gd_scene load_steps=5 format=3 uid="uid://caqnb7xdpxfer"]
 
 [sub_resource type="GDScript" id="GDScript_0xpna"]
 script/source = "extends InteractableLever
@@ -44,5 +42,3 @@ shape = SubResource("BoxShape3D_tffth")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_f4l4l")
 surface_material_override/0 = SubResource("StandardMaterial3D_7v68x")
-
-[node name="Noise" parent="." instance=ExtResource("1_tffth")]

@@ -4,12 +4,17 @@ extends CharacterBody3D
 
 enum {IDLE, CROUCH, CROUCH_SPRINT, WALK, SPRINT, READING}
 
+# for debug
+func _enter_tree():
+	add_to_group("Player")
+
 
 @export var SPEED = 5.0
 @export var SPRINT_SPEED = 1.5
 @export var CROUCH_SPEED = 0.5
 @export var JUMP_VELOCITY = 4.5
 @export var SENSITIVITY = 0.005
+@export var debug_topdown_mode = false
 
 
 @onready var head = $Head
@@ -17,9 +22,6 @@ enum {IDLE, CROUCH, CROUCH_SPRINT, WALK, SPRINT, READING}
 @onready var ray_cast: RayCast3D = $Head/Camera3D/RayCast3D
 @onready var stamina_timer = $StaminaTimer
 @onready var hud = %HUD
-@onready var noise_area: Area3D = $Noise
-
-@onready var enemy = %Enemy
 
 var movement_state
 var crouch = false
@@ -29,7 +31,8 @@ var stamina = 100.0
 var noise_level : float
 
 func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	if not debug_topdown_mode:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _physics_process(delta: float) -> void:
 	if movement_state == READING:
@@ -71,7 +74,13 @@ func _physics_process(delta: float) -> void:
 
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir = Input.get_vector("left", "right", "up", "down")
-	var direction = (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var direction: Vector3
+	
+	if debug_topdown_mode:
+		direction = Vector3(input_dir.x, 0, input_dir.y).normalized()
+	else:
+		direction = (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
@@ -149,15 +158,12 @@ func _physics_process(delta: float) -> void:
 		holding_breath = false
 
 func make_noise(noise_val):
-	var dist = global_position.distance_to(enemy.global_position)
 	noise_level += noise_val
-	enemy.handle_noise(noise_level, global_position)
-	#print("increasing noise by " + str(noise_val))
-	noise_area.set_enabled(true)
-	noise_area.update_noise_level(noise_level*5)
+	# Use new sound system
+	SoundManager.emit_sound(global_position, noise_val, self)
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion and not movement_state == READING:
+	if event is InputEventMouseMotion and not movement_state == READING and not debug_topdown_mode:
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
@@ -191,12 +197,3 @@ func stop_reading() -> void:
 
 func _on_stamina_timer_timeout() -> void:
 	recovering = true
-
-func _on_area_3d_body_entered(body: Node3D) -> void:
-	if body.is_in_group("Enemy"):
-		body.change_state(body.HUNTING)
-
-
-func _on_area_3d_body_exited(body: Node3D) -> void:
-	if body.is_in_group("Enemy"):
-		body.change_state(body.SEARCHING)

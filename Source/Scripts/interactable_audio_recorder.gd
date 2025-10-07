@@ -20,3 +20,5 @@ func interact(_player: Player) -> void:
 		return
 	
 	_audio_stream_player.play()
+	# Emit sound w new system
+	SoundManager.emit_sound(global_position, 30.0, self)

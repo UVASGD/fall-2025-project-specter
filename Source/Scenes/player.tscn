@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dmdiskq1g67"]
+[gd_scene load_steps=4 format=3 uid="uid://dmdiskq1g67"]
 
 [ext_resource type="Script" uid="uid://c7cr8y15ys81h" path="res://Source/Scripts/player.gd" id="1_2prat"]
-[ext_resource type="PackedScene" uid="uid://c0vvjii3sarvw" path="res://Source/Scenes/noise.tscn" id="2_3fero"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_62qvu"]
 
@@ -27,7 +26,5 @@ target_position = Vector3(0, 0, -2)
 [node name="StaminaTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
-
-[node name="Noise" parent="." instance=ExtResource("2_3fero")]
 
 [connection signal="timeout" from="StaminaTimer" to="." method="_on_stamina_timer_timeout"]

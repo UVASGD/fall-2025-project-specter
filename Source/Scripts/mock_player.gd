@@ -9,8 +9,7 @@ extends CharacterBody3D
 @onready var head = $Head
 @onready var stamina_timer = $StaminaTimer
 @onready var hud = %HUD
-#@onready var noise_area = $Area3D/CollisionShape3D.shape
-@onready var noise_area = $Noise
+
 var crouch = false
 var recovering = false
 var holding_breath = false
@@ -52,6 +51,7 @@ func _physics_process(delta: float) -> void:
 		if holding_breath:
 			stamina -= 5
 		else:
+			SoundManager.emit_sound(global_position, 2.0, self)
 			noise_level += 2
 			stamina -= 3
 
@@ -98,9 +98,9 @@ func _physics_process(delta: float) -> void:
 	
 	#TODO balance values
 	if not holding_breath:
-		noise_level += (movement_state + 1)
-	#noise_area.radius = noise_level * 5
-	noise_area.update_noise_level(noise_level*5)
+		var movement_noise = float(movement_state + 1)
+		noise_level += movement_noise
+		SoundManager.emit_sound(global_position, movement_noise, self)
 	
 	#TODO balance values
 	match movement_state:
@@ -139,12 +139,3 @@ func _physics_process(delta: float) -> void:
 
 func _on_stamina_timer_timeout() -> void:
 	recovering = true
-
-
-func _on_area_3d_body_entered(body: Node3D) -> void:
-	if body.is_in_group("Enemy"):
-		body.change_state(body.HUNTING)
-
-func _on_area_3d_body_exited(body: Node3D) -> void:
-	if body.is_in_group("Enemy"):
-		body.change_state(body.SEARCHING)
