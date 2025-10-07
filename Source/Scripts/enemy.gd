@@ -28,7 +28,6 @@ var ls_strength : float = 0.0
 var memory : float = 5.0
 var ls_time : float = 999.0
 
-
 const ECHOLOCATION_RANGE = 15.0
 const ECHOLOCATION_ANGLE = PI / 4
 const ECHOLOCATION_COOLDOWN = 3.0
