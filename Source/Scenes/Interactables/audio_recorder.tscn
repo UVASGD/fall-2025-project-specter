@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8hwk4r2cd0bn"]
+
+[ext_resource type="Script" uid="uid://dlmmauev3ip75" path="res://Source/Scripts/audio_recorder.gd" id="1_21gee"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_50w6k"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_hhdia"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mw1yu"]
+albedo_color = Color(1, 0.333333, 1, 1)
+
+[node name="AudioRecorder" type="StaticBody3D"]
+script = ExtResource("1_21gee")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_50w6k")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_hhdia")
+surface_material_override/0 = SubResource("StandardMaterial3D_mw1yu")
