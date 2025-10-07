@@ -52,7 +52,7 @@ func _draw_sound_paths():
 		return
 	
 	var enemies = get_tree().get_nodes_in_group("Enemy")
-    #thank you sam altman
+	#thank you sam altman
 	immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
 	
 	for event in events:
@@ -81,7 +81,7 @@ func _draw_sound_paths():
 			#if event.lifetime < 0.1:
 				#print("strength %.2f, walls %d, heard: %s" % [result.strength, result.wall_count, result.can_hear])
 			
-            #update all this stuff to use actual enemy vars because you have to change this whenever you change the enemy vars
+			#update all this stuff to use actual enemy vars because you have to change this whenever you change the enemy vars
 			var would_trigger = result.strength >= 0.5
 			
 			if would_trigger:
@@ -98,7 +98,7 @@ func _draw_sound_paths():
 
 			immediate_mesh.surface_set_color(line_color)
 			immediate_mesh.surface_add_vertex(source_pos)
-			immediate_mesh.surface_add_vertex(listener_pos)
+			immediate_mesh.surface_add_vertex(enemy_pos)
 	
 	immediate_mesh.surface_end()
 

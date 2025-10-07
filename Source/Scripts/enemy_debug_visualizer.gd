@@ -3,7 +3,7 @@ extends Node3D
 #NEEDTHAT
 var enemy: Node3D
 var state_label: Label3D
-var detection_indicator: MeshInstance3D
+var det_ball: MeshInstance3D
 
 var enabled: bool = true
 
@@ -47,14 +47,14 @@ func _process(_delta):
 	state_label.modulate = state_color
 	state_label.text = state_name
 	
-	var can_hear = enemy.last_sound_strength > 0.5 and enemy.time_since_last_sound < 1.0 #TODO: link this to actual enemy vars because you have to change this whenever you change the enemy vars
-	var mat = detection_indicator.material_override as StandardMaterial3D
+	var can_hear = enemy.ls_strength > 0.5 and enemy.ls_time < 1.0 #TODO: link this to actual enemy vars because you have to change this whenever you change the enemy vars
+	var mat = det_ball.material_override as StandardMaterial3D
 	if can_hear:
 		mat.albedo_color = Color(1, 0, 0, 0.7)
-		detection_indicator.scale = Vector3.ONE * (1.0 + enemy.last_sound_strength * 0.1)
+		det_ball.scale = Vector3.ONE * (1.0 + enemy.ls_strength * 0.1)
 	else:
 		mat.albedo_color = Color(0, 1, 0, 0.3)
-		detection_indicator.scale = Vector3.ONE
+		det_ball.scale = Vector3.ONE
 
 func _get_state_name(state: int) -> String:
 	match state:

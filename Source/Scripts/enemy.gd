@@ -53,7 +53,7 @@ func _physics_process(delta: float) -> void:
 	ls_time += delta
 	echolocation_timer -= delta
 	roam_wait_time -= delta
-	if global_position.distance_to(player.global_position) < 1.2:
+	if global_position.distance_to(player.global_position) < 2:
 		kill_player()
 		return
 	
@@ -231,7 +231,8 @@ func kill_player():
 	current_state = IDLE
 	velocity = Vector3.ZERO
 	await get_tree().create_timer(0.98).timeout
-	get_tree().reload_current_scene()
+	if get_tree():
+		get_tree().reload_current_scene()
 
 func handle_noise(noise_level, noise_pos):
 

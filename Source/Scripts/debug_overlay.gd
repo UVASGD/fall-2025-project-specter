@@ -18,32 +18,34 @@ func _input(event):
 		debug_panel.visible = enabled
 
 func _process(_delta):
-	if not enabled or not player or not enemy:
-		return
-	
 	var debug_text = ""
-	
+	await get_tree().process_frame
+	if not enabled or not is_instance_valid(player) or not is_instance_valid(enemy):
+		return
+	await get_tree().process_frame
 	# Player shit
-	debug_text += "[b]PLAYER[/b]\n"
-	debug_text += "pos: %s\n" % _vec3_str(player.global_position)
-	debug_text += "noise: %.2f\n" % player.noise_level
-	debug_text += "movement type: %s\n" % _get_movement_state_name(player.movement_state)
-	debug_text += "stamina: %.1f\n" % player.stamina
-	debug_text += "holdign breath: %s\n" % ("YES" if player.holding_breath else "NO")
-	debug_text += "\n"
+	if is_instance_valid(player):
+		debug_text += "[b]PLAYER[/b]\n"
+		debug_text += "pos: %s\n" % _vec3_str(player.global_position)
+		debug_text += "noise: %.2f\n" % player.noise_level
+		debug_text += "movement type: %s\n" % _get_movement_state_name(player.movement_state)
+		debug_text += "stamina: %.1f\n" % player.stamina
+		debug_text += "holdign breath: %s\n" % ("YES" if player.holding_breath else "NO")
+		debug_text += "\n"
 	
 	# Enemy shit
-	debug_text += "[b]SPIBER[/b]\n"
-	debug_text += "pos: %s\n" % _vec3_str(enemy.global_position)
-	debug_text += "state: [color=yellow]%s[/color]\n" % _get_enemy_state_name(enemy.current_state)
-	debug_text += "speed: %.2f\n" % enemy.SPEED
-	debug_text += "dist: %.2f m\n" % enemy.global_position.distance_to(player.global_position)
-	debug_text += "\n"
+	if is_instance_valid(enemy):
+		debug_text += "[b]SPIBER[/b]\n"
+		debug_text += "pos: %s\n" % _vec3_str(enemy.global_position)
+		debug_text += "state: [color=yellow]%s[/color]\n" % _get_enemy_state_name(enemy.current_state)
+		debug_text += "speed: %.2f\n" % enemy.SPEED
+		debug_text += "dist: %.2f m\n" % enemy.global_position.distance_to(player.global_position)
+		debug_text += "\n"
 	
-	# sound
-	debug_text += "[b]SOUND[/b]\n"
-	debug_text += "last sound strength: %.2f\n" % enemy.last_sound_strength
-	debug_text += "time since sound: %.2f s\n" % enemy.time_since_last_sound
+		# sound
+		debug_text += "[b]SOUND[/b]\n"
+		debug_text += "last sound strength: %.2f\n" % enemy.ls_strength
+		debug_text += "time since sound: %.2f s\n" % enemy.ls_time
 	
 	if player.noise_level > 0:
 		var world = player.get_world_3d()

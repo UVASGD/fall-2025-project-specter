@@ -77,7 +77,7 @@ func _physics_process(delta: float) -> void:
 	var direction: Vector3
 	
 	if debug_topdown_mode:
-		direction = Vector3(input_dir.x, 0, input_dir.y).normalized()
+		direction = Vector3(input_dir.y, 0, -input_dir.x).normalized()
 	else:
 		direction = (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
