@@ -11,7 +11,7 @@
 albedo_color = Color(1, 1, 0, 1)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_jbbp3"]
-size = Vector2(500, 625)
+size = Vector2(525, 625)
 
 [node name="Keypad" type="StaticBody3D" node_paths=PackedStringArray("display")]
 script = ExtResource("1_0fgas")
@@ -101,7 +101,7 @@ icon = ExtResource("2_0fgas")
 
 [node name="ButtonAsterik" type="Button" parent="KeypadDisplay/GridContainer"]
 layout_mode = 2
-text = "*"
+text = "Enter"
 icon = ExtResource("2_0fgas")
 
 [node name="ButtonZero" type="Button" parent="KeypadDisplay/GridContainer"]
@@ -111,7 +111,7 @@ icon = ExtResource("2_0fgas")
 
 [node name="ButtonPound" type="Button" parent="KeypadDisplay/GridContainer"]
 layout_mode = 2
-text = "#"
+text = "Clear"
 icon = ExtResource("2_0fgas")
 
 [connection signal="pressed" from="KeypadDisplay/GridContainer/ButtonOne" to="." method="_on_button_one_pressed"]

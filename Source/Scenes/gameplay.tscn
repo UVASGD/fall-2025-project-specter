@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://ccfenqa3suyht"]
+[gd_scene load_steps=29 format=4 uid="uid://ccfenqa3suyht"]
 
 [ext_resource type="PackedScene" uid="uid://dmdiskq1g67" path="res://Source/Scenes/player.tscn" id="1_5lwbh"]
 [ext_resource type="Script" uid="uid://qg2u4m1spvd1" path="res://Source/Scripts/hud.gd" id="1_sss6l"]
@@ -8,9 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://dq7kjkns7j1w0" path="res://Source/Scenes/prototype scenes/interactable_house_recorder.tscn" id="6_fby5i"]
 [ext_resource type="PackedScene" uid="uid://dkyyu2ypnygdd" path="res://Assets/3d/alpha-hills-lab-v1/source/Alpha Hills Lab v1.glb" id="6_lkflj"]
 [ext_resource type="Texture2D" uid="uid://dr3nrvi3oo833" path="res://Assets/3d/alpha-hills-lab-v1/source/Alpha Hills Lab v1_Image_6.png" id="7_fby5i"]
-[ext_resource type="PackedScene" uid="uid://caqnb7xdpxfer" path="res://Source/Scenes/prototype scenes/interactable_house_lever.tscn" id="7_xbvjf"]
+[ext_resource type="PackedScene" uid="uid://vm114svtrag8" path="res://Source/Scenes/lever.tscn" id="8_lvf04"]
 [ext_resource type="Texture2D" uid="uid://cy3okwnxxgboo" path="res://Assets/3d/alpha-hills-lab-v1/source/Alpha Hills Lab v1_Image_7.png" id="8_xbvjf"]
-[ext_resource type="PackedScene" uid="uid://cnvjni0ymngf0" path="res://Source/Scenes/keypad/keypad.tscn" id="11_pi87v"]
+[ext_resource type="PackedScene" uid="uid://cnvjni0ymngf0" path="res://Source/Scenes/keypad.tscn" id="11_pi87v"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_d6ru0"]
 vertices = PackedVector3Array(-49.5, 0.850342, -38.75, -40.25, 0.850342, -38.5, -40.25, 0.850342, -40, -38.5, 0.850342, -40.25, -38.75, 0.850342, -49.5, -49.5, 0.850342, -49.5, -31.25, 0.850342, -44.5, -30.25, 0.850342, -44.75, -30.25, 0.850342, -49.5, -31.25, 0.850342, -40.25, -29.5, 0.850342, -44.5, -15.25, 0.850342, -33, -9, 0.850342, -33, -8.75, 0.850342, -33.5, -6.75, 0.850342, -49.5, -23.75, 0.850342, -40, -29.5, 0.850342, -40.25, -23.75, 0.850342, -30.5, -15.5, 0.850342, -30.5, -6.75, 0.850342, -33.5, 12, 0.850342, -33.5, 12, 0.850342, -49.5, 14, 0.850342, -33.5, 14.25, 0.850342, -32.75, 15, 0.850342, -32.5, 15, 0.850342, -25.25, 17.25, 0.850342, -25.25, 17.5, 0.850342, -23, 49.5, 0.850342, -23, 49.5, 0.850342, -49.5, -36.5, 7.35034, 9.25, -36.5, 7.35034, 16.5, -36, 7.35034, 9, -39.25, 7.10034, 9, -24.75, 7.10034, -28.75, -24.75, 7.10034, -29.75, -39.25, 7.10034, -39.25, -19.75, 7.10034, -29, -19.75, 7.10034, -29.5, -24.75, 7.10034, 9, -24.75, 7.10034, -39.25, -25, 0.850342, -39, -29.5, 0.850342, -39, -29.75, 0.850342, -38, -25.5, 0.850342, -30.25, -25, 0.850342, -30.5, -31, 0.850342, -38, -31.25, 0.850342, -39, -39, 0.850342, -39, -25, 0.850342, 8.75, -25, 0.850342, -28, -25.5, 0.850342, -28.25, -39, 0.850342, 8.75, -49.5, 0.850342, 8.5, -40.25, 0.850342, 8.25, -14.75, 7.10034, -29.5, -14.5, 7.10034, -28.75, -14.5, 7.10034, -12, -8.25, 7.10034, -12, -8.25, 7.10034, -32, -14.5, 7.10034, -32, -8.5, 0.850342, -31.25, -9, 0.850342, -31.75, -14.25, 0.850342, -31.75, -14.25, 0.850342, -12.25, -8.5, 0.850342, -12.25, 14, 7.35034, -24.5, 14, 7.35034, -31.75, 13.5, 7.10034, -24.25, 16.5, 7.10034, -24.25, 16.5, 7.10034, 24, 2.25, 7.10034, 24, 2.25, 7.10034, -24.25, -7.25, 3.60034, -31.25, -7.25, 3.60034, -29.25, -1.25, 3.60034, -29.25, -1.25, 3.60034, -31.25, -7, 0.850342, -31.25, -7, 0.850342, -29.5, -1.5, 0.850342, -29.5, -1.5, 0.850342, -31.25, 9, 0.850342, -25.25, 9, 0.850342, -26.5, 8, 0.850342, -26.75, 1.5, 0.850342, -25.25, 8, 0.850342, -28.25, 9, 0.850342, -28.75, 9, 0.850342, -31.25, -0.25, 0.850342, -31.25, -0.25, 0.850342, -28.5, -0.75, 0.850342, -28.25, 1.25, 0.850342, -24.75, 10.25, 0.850342, -27, 12.75, 0.850342, -25.25, 10.25, 0.850342, -28.25, 12.75, 0.850342, -31.25, -7.25, 0.850342, -28.25, -7.25, 0.850342, -13.25, 1.25, 0.850342, -13.25, -15.5, 0.850342, -12.75, -15.5, 0.850342, -28, -23.75, 0.850342, -28, -23.75, 0.850342, -12.5, 2.5, 0.850342, 23.75, 7, 0.850342, 23.75, 7.25, 0.850342, 22.75, 2.5, 0.850342, -24, 8.5, 0.850342, 22.75, 8.75, 0.850342, 23.75, 16.25, 0.850342, 23.75, 16.25, 0.850342, -24, 17.5, 0.850342, 22.75, 49.5, 0.850342, 22.75, -7.5, 0.850342, -11, -9.5, 0.850342, -11, -9.5, 0.850342, -4, -7.25, 0.850342, -4, -7, 0.850342, -2.25, 1.25, 0.850342, -2.5, -15.25, 0.850342, -4, -13.25, 0.850342, -4, -13.25, 0.850342, -11, -15.25, 0.850342, -11, -23.75, 0.850342, -2.5, -15.5, 0.850342, -2.25, -14.75, 7.10034, 17, -35.75, 7.35034, 17, -14.75, 7.10034, 17.25, -14.5, 7.10034, 27.75, -8.5, 7.10034, 27.75, -8.25, 7.10034, 29, -8, 7.10034, 28.25, 7.75, 7.10034, 29, 7.75, 7.10034, 28.5, -8, 7.10034, -3, -14.5, 7.10034, -3, -13.75, 0.850342, 18, -14.25, 0.850342, 18.25, -14.25, 0.850342, 27.5, -8.25, 0.850342, 27.5, -13.75, 0.850342, 16.25, -8.25, 0.850342, -2.75, -14.25, 0.850342, -2.75, -14.25, 0.850342, 16, -23.75, 0.850342, 9.5, -22, 0.850342, 13, -15.5, 0.850342, 13, 7, 0.850342, 27.5, 7, 0.850342, 25, 1.25, 0.850342, 24.75, -7, 0.850342, 27.5, -37.5, 0.850342, 15.25, -37.5, 0.850342, 10, -40, 0.850342, 10, -49.5, 0.850342, 15.25, -24, 0.850342, 10, -22.5, 0.850342, 13.25, -22.5, 0.850342, 16, -35.25, 0.850342, 10, -35.25, 0.850342, 16, -21.5, 3.60034, 14, -21.5, 3.60034, 16, -15.5, 3.60034, 16, -15.5, 3.60034, 14, -21.25, 0.850342, 14.25, -21.25, 0.850342, 16, -15.5, 0.850342, 16, -15.5, 0.850342, 14.25, -36.5, 0.850342, 18.25, -36.75, 0.850342, 17.5, -37.5, 0.850342, 17.25, -49.5, 0.850342, 49.5, -14, 0.850342, 49.5, -15.5, 0.850342, 28.5, -13.75, 0.850342, 28.75, -15.5, 0.850342, 18.25, 17.25, 0.850342, 25, 8.75, 0.850342, 25, 8.75, 0.850342, 29.75, 6.5, 0.850342, 30, 6.5, 0.850342, 49.5, 49.5, 0.850342, 49.5, -9, 0.850342, 30, -9.25, 0.850342, 28.75, -7, 0.850342, 49.5, -7, 0.850342, 30)
@@ -45,6 +45,20 @@ size = Vector3(10.4004, 7.54107, 1.149)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5lwbh"]
 size = Vector3(100, 1, 100)
+
+[sub_resource type="GDScript" id="GDScript_lvf04"]
+script/source = "extends OmniLight3D
+
+
+func _on_lever_lever_down() -> void:
+	visible = true
+	print(\"on\")
+
+
+func _on_lever_lever_up() -> void:
+	visible = false
+	print(\"off\")
+"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jvjuw"]
 resource_name = "Worldgeometrymapsblalabceramicfloor00011Mtl"
@@ -249,11 +263,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, 15)
 [node name="interactableHouseRecorder" parent="NavigationRegion3D" instance=ExtResource("6_fby5i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 15)
 
-[node name="InteractableLever" parent="NavigationRegion3D" instance=ExtResource("7_xbvjf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 15)
-
 [node name="Keypad" parent="NavigationRegion3D" instance=ExtResource("11_pi87v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 15)
+
+[node name="Lever" parent="NavigationRegion3D" instance=ExtResource("8_lvf04")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 15)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="NavigationRegion3D/Lever"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+visible = false
+script = SubResource("GDScript_lvf04")
 
 [node name="Node" type="Node3D" parent="."]
 transform = Transform3D(0.075, 0, 0, 0, 0.075, 0, 0, 0, 0.075, 0, 0, 0)
@@ -281,6 +300,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03382, 4.19183, 0)
 
 [node name="Alpha Hills Lab v2" parent="Node" instance=ExtResource("6_lkflj")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -300, 0, -203.4)
+
+[connection signal="lever_down" from="NavigationRegion3D/Lever" to="NavigationRegion3D/Lever/OmniLight3D" method="_on_lever_lever_down"]
+[connection signal="lever_up" from="NavigationRegion3D/Lever" to="NavigationRegion3D/Lever/OmniLight3D" method="_on_lever_lever_up"]
 
 [editable path="Node/Alpha Hills Lab v1"]
 [editable path="Node/Alpha Hills Lab v2"]
