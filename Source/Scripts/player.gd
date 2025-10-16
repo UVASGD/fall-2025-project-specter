@@ -21,7 +21,7 @@ func _enter_tree():
 @onready var ray_cast: RayCast3D = $Head/Camera3D/RayCast3D
 @onready var stamina_timer = $StaminaTimer
 @onready var hud: Hud = %HUD
-@onready var noise_area = $Area3D/CollisionShape3D.shape
+#@onready var noise_area = $Area3D/CollisionShape3D.shape
 
 var movement_state
 var crouch = false
@@ -168,12 +168,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
-	###DEBUGGING ONLY
-	if event is InputEventKey and event.is_pressed() and event.keycode == KEY_ESCAPE:
-		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	if event.is_action_pressed("interact"):
 		var collider: Object = ray_cast.get_collider()
