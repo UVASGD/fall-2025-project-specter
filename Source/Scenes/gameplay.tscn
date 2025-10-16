@@ -135,7 +135,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_i1r7e")
 
-[node name="Gameplay" type="Node3D"]
+[node name="Gameplay2" type="Node3D"]
 
 [node name="HUD" type="Control" parent="."]
 unique_name_in_owner = true
@@ -189,7 +189,8 @@ navigation_mesh = SubResource("NavigationMesh_d6ru0")
 [node name="Enemies" type="Node" parent="NavigationRegion3D"]
 
 [node name="Enemy" parent="NavigationRegion3D/Enemies" groups=["Enemy"] instance=ExtResource("2_epgdy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.111, 1.795, -27)
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.913695, 1.795, -27)
 
 [node name="Walls" type="Node" parent="NavigationRegion3D"]
 

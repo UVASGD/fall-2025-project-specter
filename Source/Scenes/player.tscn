@@ -1,13 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dmdiskq1g67"]
+[gd_scene load_steps=4 format=3 uid="uid://dmdiskq1g67"]
 
 [ext_resource type="Script" uid="uid://c7cr8y15ys81h" path="res://Source/Scripts/player.gd" id="1_2prat"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_62qvu"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_2prat"]
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_2prat"]
-radius = 40.0
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_2prat")
@@ -30,11 +27,4 @@ target_position = Vector3(0, 0, -2)
 wait_time = 0.5
 one_shot = true
 
-[node name="Area3D" type="Area3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-shape = SubResource("CylinderShape3D_2prat")
-
 [connection signal="timeout" from="StaminaTimer" to="." method="_on_stamina_timer_timeout"]
-[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
-[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

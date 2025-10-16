@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://caqnb7xdpxfer"]
+
+[sub_resource type="GDScript" id="GDScript_0xpna"]
+script/source = "extends InteractableLever
+
+
+@onready var mesh: MeshInstance3D = $MeshInstance3D
+#@onready var noise: Area3D = $Noise
+
+var up_color: Color = Color.RED
+var down_color: Color = Color.GREEN
+
+
+func _ready() -> void:
+	self.lever_down.connect(_on_lever_down)
+	self.lever_up.connect(_on_lever_up)
+
+
+func _on_lever_down() -> void:
+	mesh.get_surface_override_material(0).albedo_color = down_color
+	#noise.update_noise_level(20)
+
+func _on_lever_up() -> void:
+	mesh.get_surface_override_material(0).albedo_color = up_color
+	#noise.update_noise_level(20)
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tffth"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_f4l4l"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7v68x"]
+albedo_color = Color(1, 0, 0, 1)
+
+[node name="InteractableHouseLever" type="StaticBody3D"]
+script = SubResource("GDScript_0xpna")
+metadata/_custom_type_script = "uid://djkiinnfp55sd"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_tffth")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_f4l4l")
+surface_material_override/0 = SubResource("StandardMaterial3D_7v68x")
