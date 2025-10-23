@@ -73,10 +73,10 @@ func _physics_process(delta: float) -> void:
 				look_at(global_position + velocity.normalized())
 			
 			move_and_slide()
-			
-			# sometimes echolocate when roamig
-			if echolocation_timer <= 0 and randf() < 0.1:
-				echolocate()
+			#
+			## sometimes echolocate when roamig
+			#if echolocation_timer <= 0 and randf() < 0.1:
+				#echolocate()
 
 		SEARCHING:
 			if global_position.distance_to(target_pos) < 1.5:

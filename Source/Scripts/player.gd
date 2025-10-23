@@ -30,6 +30,8 @@ var holding_breath = false
 var stamina = 100.0
 var noise_level : float
 
+var sound_levels = [0, 0.5, 2, 3, 4, 5]
+
 func _ready():
 	if not debug_topdown_mode:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -120,7 +122,8 @@ func _physics_process(delta: float) -> void:
 	
 	#TODO balance values
 	if not holding_breath:
-		make_noise( (movement_state + 1) )
+		
+		make_noise( (sound_levels[movement_state]) )
 	
 	#TODO balance values
 	match movement_state:
