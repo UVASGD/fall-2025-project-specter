@@ -1,0 +1,128 @@
+[gd_scene load_steps=7 format=3 uid="uid://cnvjni0ymngf0"]
+
+[ext_resource type="Script" uid="uid://dg42kivo4c634" path="res://Source/Scripts/keypad.gd" id="1_0fgas"]
+[ext_resource type="Texture2D" uid="uid://clddunnpgynaf" path="res://Assets/2d/icon.svg" id="2_0fgas"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0fgas"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_jbbp3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4kahv"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_jbbp3"]
+size = Vector2(525, 625)
+
+[node name="Keypad" type="StaticBody3D" node_paths=PackedStringArray("display")]
+script = ExtResource("1_0fgas")
+display = NodePath("KeypadDisplay")
+metadata/_custom_type_script = "uid://cop0w657yppxu"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_0fgas")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_jbbp3")
+surface_material_override/0 = SubResource("StandardMaterial3D_4kahv")
+
+[node name="KeypadDisplay" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -312.5
+offset_right = 250.0
+offset_bottom = 312.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("PlaceholderTexture2D_jbbp3")
+
+[node name="GridContainer" type="GridContainer" parent="KeypadDisplay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -208.0
+offset_top = -278.0
+offset_right = 208.0
+offset_bottom = 278.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 3
+
+[node name="ButtonOne" type="Button" parent="KeypadDisplay/GridContainer"]
+layout_mode = 2
+text = "1"
+icon = ExtResource("2_0fgas")
+
+[node name="ButtonTwo" type="Button" parent="KeypadDisplay/GridContainer"]
+layout_mode = 2
+text = "2"
+icon = ExtResource("2_0fgas")
+
+[node name="ButtonThree" type="Button" parent="KeypadDisplay/GridContainer"]
+layout_mode = 2
+text = "3"
+icon = ExtResource("2_0fgas")
+
+[node name="ButtonFour" type="Button" parent="KeypadDisplay/GridContainer"]
+layout_mode = 2
+text = "4"
+icon = ExtResource("2_0fgas")
+
+[node name="ButtonFive" type="Button" parent="KeypadDisplay/GridContainer"]
+layout_mode = 2
+text = "5"
+icon = ExtResource("2_0fgas")
+
+[node name="ButtonSix" type="Button" parent="KeypadDisplay/GridContainer"]
+layout_mode = 2
+text = "6"
+icon = ExtResource("2_0fgas")
+
+[node name="ButtonSeven" type="Button" parent="KeypadDisplay/GridContainer"]
+layout_mode = 2
+text = "7"
+icon = ExtResource("2_0fgas")
+
+[node name="ButtonEight" type="Button" parent="KeypadDisplay/GridContainer"]
+layout_mode = 2
+text = "8"
+icon = ExtResource("2_0fgas")
+
+[node name="ButtonNine" type="Button" parent="KeypadDisplay/GridContainer"]
+layout_mode = 2
+text = "9"
+icon = ExtResource("2_0fgas")
+
+[node name="ButtonAsterik" type="Button" parent="KeypadDisplay/GridContainer"]
+layout_mode = 2
+text = "Enter"
+icon = ExtResource("2_0fgas")
+
+[node name="ButtonZero" type="Button" parent="KeypadDisplay/GridContainer"]
+layout_mode = 2
+text = "0"
+icon = ExtResource("2_0fgas")
+
+[node name="ButtonPound" type="Button" parent="KeypadDisplay/GridContainer"]
+layout_mode = 2
+text = "Clear"
+icon = ExtResource("2_0fgas")
+
+[connection signal="pressed" from="KeypadDisplay/GridContainer/ButtonOne" to="." method="_on_button_one_pressed"]
+[connection signal="pressed" from="KeypadDisplay/GridContainer/ButtonTwo" to="." method="_on_button_two_pressed"]
+[connection signal="pressed" from="KeypadDisplay/GridContainer/ButtonThree" to="." method="_on_button_three_pressed"]
+[connection signal="pressed" from="KeypadDisplay/GridContainer/ButtonFour" to="." method="_on_button_four_pressed"]
+[connection signal="pressed" from="KeypadDisplay/GridContainer/ButtonFive" to="." method="_on_button_five_pressed"]
+[connection signal="pressed" from="KeypadDisplay/GridContainer/ButtonSix" to="." method="_on_button_six_pressed"]
+[connection signal="pressed" from="KeypadDisplay/GridContainer/ButtonSeven" to="." method="_on_button_seven_pressed"]
+[connection signal="pressed" from="KeypadDisplay/GridContainer/ButtonEight" to="." method="_on_button_eight_pressed"]
+[connection signal="pressed" from="KeypadDisplay/GridContainer/ButtonNine" to="." method="_on_button_nine_pressed"]
+[connection signal="pressed" from="KeypadDisplay/GridContainer/ButtonAsterik" to="." method="_on_button_asterik_pressed"]
+[connection signal="pressed" from="KeypadDisplay/GridContainer/ButtonZero" to="." method="_on_button_zero_pressed"]
+[connection signal="pressed" from="KeypadDisplay/GridContainer/ButtonPound" to="." method="_on_button_pound_pressed"]

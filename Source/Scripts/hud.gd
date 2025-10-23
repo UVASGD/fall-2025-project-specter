@@ -1,3 +1,4 @@
+class_name Hud
 extends Control
 
 @onready var stamina_bar = $Oxygen

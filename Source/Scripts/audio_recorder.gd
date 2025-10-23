@@ -1,4 +1,3 @@
-class_name InteractableAudioRecorder
 extends Interactable
 
 

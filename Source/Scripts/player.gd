@@ -2,12 +2,11 @@ class_name Player
 extends CharacterBody3D
 
 
-enum {IDLE, CROUCH, CROUCH_SPRINT, WALK, SPRINT, READING}
+enum {IDLE, CROUCH, CROUCH_SPRINT, WALK, SPRINT, LOOKING_AT_DISPLAY}
 
 # for debug
 func _enter_tree():
 	add_to_group("Player")
-
 
 @export var SPEED = 5.0
 @export var SPRINT_SPEED = 1.5
@@ -21,7 +20,8 @@ func _enter_tree():
 @onready var camera = $Head/Camera3D
 @onready var ray_cast: RayCast3D = $Head/Camera3D/RayCast3D
 @onready var stamina_timer = $StaminaTimer
-@onready var hud = %HUD
+@onready var hud: Hud = %HUD
+#@onready var noise_area = $Area3D/CollisionShape3D.shape
 
 var movement_state
 var crouch = false
@@ -30,14 +30,13 @@ var holding_breath = false
 var stamina = 100.0
 var noise_level : float
 
-var sound_levels = [0, 0.5, 2, 3, 4, 5]
 
 func _ready():
 	if not debug_topdown_mode:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _physics_process(delta: float) -> void:
-	if movement_state == READING:
+	if movement_state == LOOKING_AT_DISPLAY:
 		return
 	
 	movement_state = IDLE
@@ -166,16 +165,10 @@ func make_noise(noise_val):
 	SoundManager.emit_sound(global_position, noise_val, self)
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion and not movement_state == READING and not debug_topdown_mode:
+	if event is InputEventMouseMotion and not movement_state == LOOKING_AT_DISPLAY:
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
-	###DEBUGGING ONLY
-	if event is InputEventKey and event.is_pressed() and event.keycode == KEY_ESCAPE:
-		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	if event.is_action_pressed("interact"):
 		var collider: Object = ray_cast.get_collider()
@@ -183,17 +176,28 @@ func _unhandled_input(event: InputEvent) -> void:
 		if collider is Interactable:
 			collider.interact(self)
 	
-	if event.is_action_pressed("ui_cancel") and movement_state == READING:
-		stop_reading()
+	if event.is_action_pressed("ui_cancel") and movement_state == LOOKING_AT_DISPLAY:
+		stop_looking_at_display()
+	###DEBUGGING ONLY
+	elif event is InputEventKey and event.is_pressed() and event.keycode == KEY_ESCAPE:
+		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-func start_reading(reading: CompressedTexture2D) -> void:
-	hud.interactable_display.texture = reading
-	movement_state = READING
+
+func start_looking_at_display(display: TextureRect) -> void:
+	if not display:
+		return
+	
+	hud.interactable_display = display
+	hud.interactable_display.visible = true
+	movement_state = LOOKING_AT_DISPLAY
 	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 
 
-func stop_reading() -> void:
-	hud.interactable_display.texture = null
+func stop_looking_at_display() -> void:
+	hud.interactable_display.visible = false
 	movement_state = IDLE
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
