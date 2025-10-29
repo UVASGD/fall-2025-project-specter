@@ -23,24 +23,44 @@ func _enter_tree():
 @onready var stamina_timer = $StaminaTimer
 @onready var hud = %HUD
 
+@onready var bflyscene:PackedScene = preload("res://Source/Scenes/bfly.tscn")
 var movement_state
 var crouch = false
 var recovering = false
 var holding_breath = false
 var stamina = 100.0
 var noise_level : float
-
+var eggstack = []
+var eggtimer = 0
 func _ready():
 	if not debug_topdown_mode:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 
 func _physics_process(delta: float) -> void:
+	eggtimer += delta
 	if movement_state == READING:
 		return
 	
 	movement_state = IDLE
 	
+	if Input.is_action_just_released("pee"):
+		eggstack.push_front(0)
+	elif Input.is_action_just_released("bee"):
+		eggstack.push_front(1)
+	if eggstack == [1,0,1,0,1,0] or eggtimer >= 10:
+		eggtimer = 0
+		if eggstack == [1,0,1,0,1,0]:
+			var bfly = bflyscene.instantiate()
+			get_tree().root.add_child(bfly)
+			var player_transform = get_global_transform()
+			var forward_vector = -player_transform.basis.z
+			bfly.rotation.z = self.rotation.z
+			
+			bfly.position = self.position + forward_vector * 3
+			
+		eggstack = []
+
 	var used_stamina = false
 	noise_level = 0.0
 	
@@ -212,3 +232,16 @@ func stop_looking_at_display() -> void:
 
 func _on_stamina_timer_timeout() -> void:
 	recovering = true
+
+func contains_subarray(main_array: Array, sub_array: Array) -> bool:
+	if sub_array.is_empty():
+		return true  # An empty subarray is considered to be contained in any array.
+	if main_array.size() < sub_array.size():
+		return false # The main array cannot contain a larger subarray.
+
+	var sub_array_size = sub_array.size()
+	for i in range(main_array.size() - sub_array_size + 1):
+		var slice = main_array.slice(i, i + sub_array_size - 1)
+		if slice == sub_array:
+			return true
+	return false
