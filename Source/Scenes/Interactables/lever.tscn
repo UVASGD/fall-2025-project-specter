@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://vm114svtrag8"]
 
-[ext_resource type="Script" uid="uid://djkiinnfp55sd" path="res://Source/Scripts/lever.gd" id="1_wut74"]
+[ext_resource type="Script" path="res://Source/Scripts/lever.gd" id="1_wut74"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xfejg"]
 

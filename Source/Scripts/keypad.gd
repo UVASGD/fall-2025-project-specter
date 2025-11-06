@@ -9,7 +9,7 @@ signal incorrect_code
 var input: String = ""
 
 @onready var keypad_display: TextureRect = $KeypadDisplay
-
+#@onready var keypad_display: TextureRect = $"."
 
 func _input_char(character: String) -> void:
 	input += character

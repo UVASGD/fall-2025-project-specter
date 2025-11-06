@@ -39,7 +39,7 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
 	eggtimer += delta
-	if movement_state == READING:
+	if movement_state == LOOKING_AT_DISPLAY:
 		return
 	
 	movement_state = IDLE
@@ -201,8 +201,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		if collider is Interactable:
 			collider.interact(self)
 	
-	if event.is_action_pressed("ui_cancel") and movement_state == READING:
-		stop_reading()
+	if event.is_action_pressed("ui_cancel") and movement_state == LOOKING_AT_DISPLAY:
+		stop_looking_at_display()
 
 func start_reading(reading: CompressedTexture2D) -> void:
 	hud.interactable_display.texture = reading
