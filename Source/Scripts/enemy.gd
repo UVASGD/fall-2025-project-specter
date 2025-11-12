@@ -13,6 +13,7 @@ func _enter_tree():
 @onready var sfx_echo = $sfx_echo
 @onready var timer = $Timer
 @onready var rc = $RayCast3D
+@onready var confidence : ConfidenceWrapper
 
 var target_pos : Vector3
 var search_pos : Vector3
@@ -40,6 +41,9 @@ const PLAYER_BIAS = 0.3
 var roam_wait_time : float = 0.0
 
 func _ready():
+	confidence = ConfidenceWrapper.new()
+	confidence.enemy = self
+	
 	SoundManager.register_enemy(self) #give bro ears
 	roam_target = global_position
 	set_new_roam_target()
