@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cnvjni0ymngf0"]
 
-[ext_resource type="Script" path="res://Source/Scripts/keypad.gd" id="1_0fgas"]
+[ext_resource type="Script" uid="uid://dg42kivo4c634" path="res://Source/Scripts/keypad.gd" id="1_0fgas"]
 [ext_resource type="Texture2D" uid="uid://clddunnpgynaf" path="res://Assets/2d/icon.svg" id="2_0fgas"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0fgas"]

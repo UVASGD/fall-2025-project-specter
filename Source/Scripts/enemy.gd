@@ -211,7 +211,7 @@ func on_sound_heard(sound_pos: Vector3, strength: float, wall_count: int):
 	ls_strength = strength
 	ls_time = 0.0
 	
-	print("heard - strength: %.2f, walls: %d, dist: %.1fm" % [strength, wall_count, global_position.distance_to(sound_pos)])
+	#print("heard - strength: %.2f, walls: %d, dist: %.1fm" % [strength, wall_count, global_position.distance_to(sound_pos)])
 	
 	if strength >= 2.5:
 		#print("Loud")
