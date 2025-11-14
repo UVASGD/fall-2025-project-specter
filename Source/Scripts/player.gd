@@ -32,14 +32,17 @@ var stamina = 100.0
 var noise_level : float
 var eggstack = []
 var eggtimer = 0
+
+
 func _ready():
 	if not debug_topdown_mode:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 
+
 func _physics_process(delta: float) -> void:
 	eggtimer += delta
-	if movement_state == READING:
+	if movement_state == LOOKING_AT_DISPLAY:
 		return
 	
 	movement_state = IDLE
@@ -184,16 +187,16 @@ func make_noise(noise_val):
 	SoundManager.emit_sound(global_position, noise_val, self)
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion and not movement_state == READING and not debug_topdown_mode:
+	if event is InputEventMouseMotion and not movement_state == LOOKING_AT_DISPLAY and not debug_topdown_mode:
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
 	###DEBUGGING ONLY
-	if event is InputEventKey and event.is_pressed() and event.keycode == KEY_ESCAPE:
-		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	#if event is InputEventKey and event.is_pressed() and event.keycode == KEY_ESCAPE:
+		#if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+			#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		#else:
+			#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	if event.is_action_pressed("interact"):
 		var collider: Object = ray_cast.get_collider()
@@ -201,19 +204,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		if collider is Interactable:
 			collider.interact(self)
 	
-	if event.is_action_pressed("ui_cancel") and movement_state == READING:
-		stop_reading()
+	if event.is_action_pressed("ui_cancel") and movement_state == LOOKING_AT_DISPLAY:
+		stop_looking_at_display()
 
-func start_reading(reading: CompressedTexture2D) -> void:
-	hud.interactable_display.texture = reading
-	movement_state = READING
-	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
-
-
-func stop_reading() -> void:
-	hud.interactable_display.texture = null
-	movement_state = IDLE
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func start_looking_at_display(display: TextureRect) -> void:
 	if not display:
@@ -230,8 +223,10 @@ func stop_looking_at_display() -> void:
 	movement_state = IDLE
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
+
 func _on_stamina_timer_timeout() -> void:
 	recovering = true
+
 
 func contains_subarray(main_array: Array, sub_array: Array) -> bool:
 	if sub_array.is_empty():

@@ -52,7 +52,7 @@ func _on_button_nine_pressed() -> void:
 	_input_char("9")
 
 
-func _on_button_asterik_pressed() -> void:
+func _on_button_enter_pressed() -> void:
 	if input == code:
 		correct_code.emit()
 		print("The code is correct!")
@@ -66,5 +66,5 @@ func _on_button_zero_pressed() -> void:
 	_input_char("0")
 
 
-func _on_button_pound_pressed() -> void:
+func _on_button_clear_pressed() -> void:
 	input = ""

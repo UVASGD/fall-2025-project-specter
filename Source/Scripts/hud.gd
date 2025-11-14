@@ -5,7 +5,8 @@ extends Control
 @onready var stamina_text = $Oxygen/RichTextLabel
 @onready var noise_bar = $Noise
 @onready var vars = []
-@onready var interactable_display: TextureRect = $InteractableDisplay
+
+var interactable_display: TextureRect
 
 
 #TODO make dynamic

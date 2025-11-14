@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cnvjni0ymngf0"]
 
-[ext_resource type="Script" path="res://Source/Scripts/keypad.gd" id="1_0fgas"]
+[ext_resource type="Script" uid="uid://dg42kivo4c634" path="res://Source/Scripts/interactables/keypad.gd" id="1_0fgas"]
 [ext_resource type="Texture2D" uid="uid://clddunnpgynaf" path="res://Assets/2d/icon.svg" id="2_0fgas"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0fgas"]
@@ -13,9 +13,9 @@ albedo_color = Color(1, 1, 0, 1)
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_jbbp3"]
 size = Vector2(525, 625)
 
-[node name="Keypad" type="StaticBody3D"]
+[node name="Keypad" type="StaticBody3D" node_paths=PackedStringArray("display")]
 script = ExtResource("1_0fgas")
-metadata/_custom_type_script = "uid://cop0w657yppxu"
+display = NodePath("KeypadDisplay")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_0fgas")
@@ -98,7 +98,7 @@ layout_mode = 2
 text = "9"
 icon = ExtResource("2_0fgas")
 
-[node name="ButtonAsterik" type="Button" parent="KeypadDisplay/GridContainer"]
+[node name="ButtonEnter" type="Button" parent="KeypadDisplay/GridContainer"]
 layout_mode = 2
 text = "Enter"
 icon = ExtResource("2_0fgas")
@@ -108,7 +108,7 @@ layout_mode = 2
 text = "0"
 icon = ExtResource("2_0fgas")
 
-[node name="ButtonPound" type="Button" parent="KeypadDisplay/GridContainer"]
+[node name="ButtonClear" type="Button" parent="KeypadDisplay/GridContainer"]
 layout_mode = 2
 text = "Clear"
 icon = ExtResource("2_0fgas")
@@ -122,6 +122,6 @@ icon = ExtResource("2_0fgas")
 [connection signal="pressed" from="KeypadDisplay/GridContainer/ButtonSeven" to="." method="_on_button_seven_pressed"]
 [connection signal="pressed" from="KeypadDisplay/GridContainer/ButtonEight" to="." method="_on_button_eight_pressed"]
 [connection signal="pressed" from="KeypadDisplay/GridContainer/ButtonNine" to="." method="_on_button_nine_pressed"]
-[connection signal="pressed" from="KeypadDisplay/GridContainer/ButtonAsterik" to="." method="_on_button_asterik_pressed"]
+[connection signal="pressed" from="KeypadDisplay/GridContainer/ButtonEnter" to="." method="_on_button_asterik_pressed"]
 [connection signal="pressed" from="KeypadDisplay/GridContainer/ButtonZero" to="." method="_on_button_zero_pressed"]
-[connection signal="pressed" from="KeypadDisplay/GridContainer/ButtonPound" to="." method="_on_button_pound_pressed"]
+[connection signal="pressed" from="KeypadDisplay/GridContainer/ButtonClear" to="." method="_on_button_pound_pressed"]

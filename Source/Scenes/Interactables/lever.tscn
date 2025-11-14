@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://vm114svtrag8"]
 
-[ext_resource type="Script" uid="uid://djkiinnfp55sd" path="res://Source/Scripts/lever.gd" id="1_wut74"]
+[ext_resource type="Script" uid="uid://djkiinnfp55sd" path="res://Source/Scripts/interactables/lever.gd" id="1_wut74"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xfejg"]
 
@@ -11,10 +11,12 @@ albedo_color = Color(1, 0, 0, 1)
 
 [node name="Lever" type="StaticBody3D"]
 script = ExtResource("1_wut74")
+metadata/_custom_type_script = "uid://fybpyf567q5j"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_xfejg")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_vdtui")
+skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_6ukd6")
