@@ -6,6 +6,7 @@ signal lever_up
 
 var is_down: bool = false
 
+
 func interact(_player: Player) -> void:
 	if is_down:
 		lever_up.emit()

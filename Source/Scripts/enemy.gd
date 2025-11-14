@@ -233,7 +233,5 @@ func kill_player():
 	if get_tree():
 		get_tree().reload_current_scene()
 
-func handle_noise(noise_level, noise_pos):
-
+func handle_noise(_noise_level, _noise_pos):
 	pass
-	
