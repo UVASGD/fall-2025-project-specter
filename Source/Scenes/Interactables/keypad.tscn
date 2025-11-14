@@ -122,6 +122,6 @@ icon = ExtResource("2_0fgas")
 [connection signal="pressed" from="KeypadDisplay/GridContainer/ButtonSeven" to="." method="_on_button_seven_pressed"]
 [connection signal="pressed" from="KeypadDisplay/GridContainer/ButtonEight" to="." method="_on_button_eight_pressed"]
 [connection signal="pressed" from="KeypadDisplay/GridContainer/ButtonNine" to="." method="_on_button_nine_pressed"]
-[connection signal="pressed" from="KeypadDisplay/GridContainer/ButtonEnter" to="." method="_on_button_asterik_pressed"]
+[connection signal="pressed" from="KeypadDisplay/GridContainer/ButtonEnter" to="." method="_on_button_enter_pressed"]
 [connection signal="pressed" from="KeypadDisplay/GridContainer/ButtonZero" to="." method="_on_button_zero_pressed"]
-[connection signal="pressed" from="KeypadDisplay/GridContainer/ButtonClear" to="." method="_on_button_pound_pressed"]
+[connection signal="pressed" from="KeypadDisplay/GridContainer/ButtonClear" to="." method="_on_button_clear_pressed"]
