@@ -34,12 +34,11 @@ func update_interval(index: int, sound_pos: Vector3, strength: float):
 func interval_check():
 	var conf = intervals[0].confidence
 	if conf >= 0.9:
-		pass
-		
+		enemy.change_state(enemy.HUNTING)
 	elif conf >= 0.3:
-		pass
+		enemy.change_state(enemy.SEARCHING)
 	else:
-		pass
+		enemy.change_state(enemy.ROAMING)
 
 func on_sound_heard(sound_pos: Vector3, strength: float, wall_count: int):
 	for i in intervals.size():

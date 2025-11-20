@@ -24,10 +24,10 @@ const SEARCH_SPEED = 2.5
 const HUNT_SPEED = 5.0
 
 #ls = last sound
-var ls_pos : Vector3
-var ls_strength : float = 0.0
-var memory : float = 5.0
-var ls_time : float = 999.0
+#var ls_pos : Vector3
+#var ls_strength : float = 0.0
+#var memory : float = 5.0
+#var ls_time : float = 999.0
 
 const ECHOLOCATION_RANGE = 15.0
 const ECHOLOCATION_ANGLE = PI / 4
@@ -53,7 +53,6 @@ func _exit_tree():
 	SoundManager.unregister_enemy(self)
 
 func _physics_process(delta: float) -> void:
-	ls_time += delta
 	echolocation_timer -= delta
 	roam_wait_time -= delta
 	if global_position.distance_to(player.global_position) < 2:
@@ -94,10 +93,8 @@ func _physics_process(delta: float) -> void:
 			
 			if echolocation_timer <= 0:
 				echolocate()
-			if ls_time > memory:
-				change_state(ROAMING)
 		HUNTING:
-			target_pos = ls_pos
+			target_pos = confidence.intervals[0].position
 			nav_agent.target_position = target_pos
 			var next_nav_point = nav_agent.get_next_path_position()
 			velocity = (next_nav_point - global_position).normalized() * SPEED	
@@ -108,8 +105,6 @@ func _physics_process(delta: float) -> void:
 			
 			if echolocation_timer <= 0:
 				echolocate()
-			if global_position.distance_to(target_pos) < 2.0 or ls_time > 3.0:
-				change_state(SEARCHING)
 
 
 func change_state(state):
@@ -125,7 +120,7 @@ func change_state(state):
 			set_new_roam_target()
 		SEARCHING:
 			SPEED = SEARCH_SPEED
-			search_pos = ls_pos
+			search_pos = confidence.intervals[0].position
 			set_search_point()
 		HUNTING:
 			SPEED = HUNT_SPEED
@@ -157,77 +152,62 @@ func _on_timer_timeout() -> void:
 		change_state(ROAMING)
 
 func echolocate():
-	if echolocation_timer > 0:
-		return
-	sfx_echo.play()
-	match current_state:
-		HUNTING:
-			echolocation_timer = ECHOLOCATION_COOLDOWN_HUNTING
-		SEARCHING:
-			echolocation_timer = ECHOLOCATION_COOLDOWN_SEARCHING
-		_:
-			echolocation_timer = ECHOLOCATION_COOLDOWN
-	var to_player = player.global_position - global_position
-	var distance = to_player.length()
-	var direction = to_player.normalized()
-	
-	if distance > ECHOLOCATION_RANGE:
-		#print("echo too far (%.1fm)" % distance)
-		return
-	var in_zone = false
-	
-	if current_state == SEARCHING:
-		in_zone = true
-	else:
-		var forward = -transform.basis.z
-		var plangle = forward.angle_to(direction)
-		in_zone = plangle <= ECHOLOCATION_ANGLE
-	
-	if in_zone:
-		var space_state = get_world_3d().direct_space_state
-		var query = PhysicsRayQueryParameters3D.create(
-			global_position + Vector3(0, 1, 0),
-			player.global_position + Vector3(0, 1, 0)
-		)
-		query.collision_mask = 1
-		query.exclude = [self]
-		
-		var result = space_state.intersect_ray(query)
-		
-		if result.is_empty():
-			ls_pos = player.global_position
-			ls_strength = 100.0
-			ls_time = 0.0
-			if current_state != HUNTING:
-				change_state(HUNTING)
-		elif result.collider == player:
-			ls_pos = player.global_position
-			ls_strength = 100.0
-			ls_time = 0.0
-			if current_state != HUNTING:
-				change_state(HUNTING)
-		else:
-			#print(" blocked - %s" % result.collider.name)
-			return
+	return
+	#if echolocation_timer > 0:
+		#return
+	#sfx_echo.play()
+	#match current_state:
+		#HUNTING:
+			#echolocation_timer = ECHOLOCATION_COOLDOWN_HUNTING
+		#SEARCHING:
+			#echolocation_timer = ECHOLOCATION_COOLDOWN_SEARCHING
+		#_:
+			#echolocation_timer = ECHOLOCATION_COOLDOWN
+	#var to_player = player.global_position - global_position
+	#var distance = to_player.length()
+	#var direction = to_player.normalized()
+	#
+	#if distance > ECHOLOCATION_RANGE:
+		##print("echo too far (%.1fm)" % distance)
+		#return
+	#var in_zone = false
+	#
+	#if current_state == SEARCHING:
+		#in_zone = true
+	#else:
+		#var forward = -transform.basis.z
+		#var plangle = forward.angle_to(direction)
+		#in_zone = plangle <= ECHOLOCATION_ANGLE
+	#
+	#if in_zone:
+		#var space_state = get_world_3d().direct_space_state
+		#var query = PhysicsRayQueryParameters3D.create(
+			#global_position + Vector3(0, 1, 0),
+			#player.global_position + Vector3(0, 1, 0)
+		#)
+		#query.collision_mask = 1
+		#query.exclude = [self]
+		#
+		#var result = space_state.intersect_ray(query)
+		#
+		#if result.is_empty():
+			#ls_pos = player.global_position
+			#ls_strength = 100.0
+			#ls_time = 0.0
+			#if current_state != HUNTING:
+				#change_state(HUNTING)
+		#elif result.collider == player:
+			#ls_pos = player.global_position
+			#ls_strength = 100.0
+			#ls_time = 0.0
+			#if current_state != HUNTING:
+				#change_state(HUNTING)
+		#else:
+			##print(" blocked - %s" % result.collider.name)
+			#return
 
 func on_sound_heard(sound_pos: Vector3, strength: float, wall_count: int):
-	ls_pos = sound_pos
-	ls_strength = strength
-	ls_time = 0.0
-	
-	print("heard - strength: %.2f, walls: %d, dist: %.1fm" % [strength, wall_count, global_position.distance_to(sound_pos)])
-	
-	if strength >= 2.5:
-		#print("Loud")
-		change_state(HUNTING)
-	elif strength >= 1.0:
-		if current_state == ROAMING or current_state == IDLE:
-			#print("medium sound")
-			change_state(SEARCHING)
-	elif strength >= 0.5:
-		if current_state == ROAMING or current_state == IDLE:
-			#print("quiet sound")
-			search_pos = sound_pos
+	confidence.on_sound_heard(sound_pos, strength, wall_count)
 
 func kill_player():
 	sfx_kill.play()
