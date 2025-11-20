@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://1hrmiiy2c70y"]
+
+[ext_resource type="Script" uid="uid://cop0w657yppxu" path="res://Source/Scripts/interactables/interactable_display.gd" id="1_t7oup"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r1gns"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_htw2y"]
+
+[node name="Note" type="StaticBody3D"]
+script = ExtResource("1_t7oup")
+metadata/_custom_type_script = "uid://cop0w657yppxu"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_r1gns")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_htw2y")
+skeleton = NodePath("")

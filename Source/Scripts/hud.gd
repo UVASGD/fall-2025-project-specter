@@ -1,9 +1,13 @@
+class_name Hud
 extends Control
 
 @onready var stamina_bar = $Oxygen
 @onready var stamina_text = $Oxygen/RichTextLabel
 @onready var noise_bar = $Noise
-@onready var vars = [100.0, 0.0]
+@onready var vars = []
+
+var interactable_display: TextureRect
+
 
 #TODO make dynamic
 func _process(_delta: float) -> void:

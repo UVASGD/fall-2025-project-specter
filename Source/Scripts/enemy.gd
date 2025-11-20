@@ -1,8 +1,11 @@
-# https://www.youtube.com/watch?v=egedSO9vWH4
 extends CharacterBody3D
 
 enum {IDLE, ROAMING, SEARCHING, HUNTING}
-@onready var current_state = IDLE
+@onready var current_state = ROAMING
+
+# for debug
+func _enter_tree():
+	add_to_group("Enemy")
 
 @onready var player = %Player
 @onready var nav_agent = $NavigationAgent3D
@@ -10,168 +13,225 @@ enum {IDLE, ROAMING, SEARCHING, HUNTING}
 @onready var sfx_echo = $sfx_echo
 @onready var timer = $Timer
 @onready var rc = $RayCast3D
+
 var target_pos : Vector3
 var search_pos : Vector3
-var menace_gauges = []
-var SPEED = 5
+var roam_target : Vector3
+var SPEED = 3.0
+const ROAM_SPEED = 2.0
+const SEARCH_SPEED = 2.5
+const HUNT_SPEED = 5.0
 
-class menace_gauge:
-	var value : float
-	var pos : Vector3
-	
-	func _init(noise_level, noise_position) -> void:
-		value = (noise_level * 10)
-		pos = noise_position
-	
-	func increase(num, new_pos = null):
-		value += num
-		if value > 100: value = 100
-		if new_pos: pos = new_pos
-	
-	func reduce(num) -> bool:
-		value -= num
-		return value > 0
+#ls = last sound
+var ls_pos : Vector3
+var ls_strength : float = 0.0
+var memory : float = 5.0
+var ls_time : float = 999.0
 
-func _physics_process(_delta: float) -> void:
-	get_room_points(AABB(Vector3(0,0,0), Vector3(150, 1, 150)), 10, 1.0)
+const ECHOLOCATION_RANGE = 15.0
+const ECHOLOCATION_ANGLE = PI / 4
+const ECHOLOCATION_COOLDOWN = 3.0
+const ECHOLOCATION_COOLDOWN_SEARCHING = 1.5
+const ECHOLOCATION_COOLDOWN_HUNTING = 1.0
+var echolocation_timer : float = 0.0
+
+const ROAM_RADIUS = 10.0
+const PLAYER_BIAS = 0.3
+var roam_wait_time : float = 0.0
+
+func _ready():
+	SoundManager.register_enemy(self) #give bro ears
+	roam_target = global_position
+	set_new_roam_target()
+	sfx_kill.volume_db = -14
+
+func _exit_tree():
+	SoundManager.unregister_enemy(self)
+
+func _physics_process(delta: float) -> void:
+	ls_time += delta
+	echolocation_timer -= delta
+	roam_wait_time -= delta
+	if global_position.distance_to(player.global_position) < 2:
+		kill_player()
+		return
+	
 	match current_state:
 		IDLE:
 			velocity = Vector3.ZERO
+			if roam_wait_time <= 0:
+				change_state(ROAMING)
+		
 		ROAMING:
-			# avoid obstacles
-			nav_agent.target_position = target_pos
+			if global_position.distance_to(roam_target) < 2.0 or roam_wait_time <= 0:
+				set_new_roam_target()
+				roam_wait_time = randf_range(3.0, 6.0)
+			nav_agent.target_position = roam_target
 			var next_nav_point = nav_agent.get_next_path_position()
-			velocity = (next_nav_point-global_position).normalized() * SPEED
-		
-			#look at player
-			look_at(target_pos)
-		
+			velocity = (next_nav_point - global_position).normalized() * SPEED
+			if velocity.length() > 0.1:
+				look_at(global_position + velocity.normalized())
+			
 			move_and_slide()
-		
-			if global_position.distance_to(player.global_position) < 1.05:
-				sfx_kill.play()
-				await get_tree().create_timer(0.98).timeout
-				get_tree().reload_current_scene()
-				
-			if global_position.distance_to(target_pos) < 1.05 or velocity.length() < 2:
-				change_state(IDLE)
-		SEARCHING: 
-			# avoid obstacles
-			nav_agent.target_position = target_pos
-			var next_nav_point = nav_agent.get_next_path_position()
-			velocity = (next_nav_point-global_position).normalized() * SPEED
-		
-			#look at player
-			look_at(target_pos)
-		
-			move_and_slide()
-		
-			if global_position.distance_to(player.global_position) < 1.05:
-				current_state = IDLE
-				sfx_kill.play()
-				await get_tree().create_timer(0.98).timeout
-				get_tree().reload_current_scene()
-				
-			if global_position.distance_to(target_pos) < 1.05 or velocity.length() < 2:
-				if not sfx_echo.playing and RandomNumberGenerator.new().randf() < 0.33:
-					echolocate()
+			#
+			## sometimes echolocate when roamig
+			#if echolocation_timer <= 0 and randf() < 0.1:
+				#echolocate()
+
+		SEARCHING:
+			if global_position.distance_to(target_pos) < 1.5:
 				set_search_point()
-		HUNTING: 
-			target_pos = player.global_position
-		
-			# avoid obstacles
 			nav_agent.target_position = target_pos
 			var next_nav_point = nav_agent.get_next_path_position()
-			velocity = (next_nav_point-global_position).normalized() * SPEED
-		
-			#look at player
-			look_at(target_pos)
-		
+			velocity = (next_nav_point - global_position).normalized() * SPEED
+			if velocity.length() > 0.1:
+				look_at(global_position + velocity.normalized())
 			move_and_slide()
-		
-			if global_position.distance_to(target_pos) < 1.05:
-				current_state = IDLE
-				sfx_kill.play()
-				await get_tree().create_timer(0.98).timeout
-				get_tree().reload_current_scene()
+			
+			if echolocation_timer <= 0:
+				echolocate()
+			if ls_time > memory:
+				change_state(ROAMING)
+		HUNTING:
+			target_pos = ls_pos
+			nav_agent.target_position = target_pos
+			var next_nav_point = nav_agent.get_next_path_position()
+			velocity = (next_nav_point - global_position).normalized() * SPEED	
+			if velocity.length() > 0.1:
+				look_at(global_position + velocity.normalized())
+			
+			move_and_slide()
+			
+			if echolocation_timer <= 0:
+				echolocate()
+			if global_position.distance_to(target_pos) < 2.0 or ls_time > 3.0:
+				change_state(SEARCHING)
+
 
 func change_state(state):
+	if current_state == state:
+		return
 	current_state = state
 	match state:
 		IDLE:
-			timer.stop()
+			SPEED = 0.5
+			roam_wait_time = randf_range(2.0, 4.0)
 		ROAMING:
-			timer.stop()
+			SPEED = ROAM_SPEED
+			set_new_roam_target()
 		SEARCHING:
-			SPEED = 2.5
-			var timer_len = ((25 - global_position.distance_to(player.global_position)) * player.noise_level) #TODO balance values
-			timer.start(timer_len)
-			search_pos = target_pos
+			SPEED = SEARCH_SPEED
+			search_pos = ls_pos
 			set_search_point()
 		HUNTING:
-			SPEED = 5
-			timer.stop()
+			SPEED = HUNT_SPEED
 
 func set_search_point():
-	var rng = RandomNumberGenerator.new()
-	var alpha = 2 * PI * rng.randf()
-	var r = rng.randf_range(1, 5)
-	var rand_pnt = Vector3(r * cos(alpha), 0, r * sin(alpha))
-	
-	target_pos = search_pos + rand_pnt
+	var angle = randf() * 2 * PI
+	var radius = randf_range(2.0, 5.0)
+	var offset = Vector3(cos(angle) * radius, 0, sin(angle) * radius)
+	target_pos = search_pos + offset
+
+func set_new_roam_target():
+	var bias = randf()
+	if bias < PLAYER_BIAS:
+		var to_player = (player.global_position - global_position).normalized()
+		var angle_offset = randf_range(-PI/3, PI/3)  # +/- 60 degrees
+		var rotated = to_player.rotated(Vector3.UP, angle_offset)
+		var distance = randf_range(5.0, ROAM_RADIUS)
+		roam_target = global_position + rotated * distance
+	else:
+		var angle = randf() * 2 * PI
+		var radius = randf_range(5.0, ROAM_RADIUS)
+		var offset = Vector3(cos(angle) * radius, 0, sin(angle) * radius)
+		roam_target = global_position + offset
+
+	roam_target.y = global_position.y
 
 func _on_timer_timeout() -> void:
-	change_state(ROAMING)
-	
+	if current_state == SEARCHING:
+		change_state(ROAMING)
+
 func echolocate():
+	if echolocation_timer > 0:
+		return
 	sfx_echo.play()
+	match current_state:
+		HUNTING:
+			echolocation_timer = ECHOLOCATION_COOLDOWN_HUNTING
+		SEARCHING:
+			echolocation_timer = ECHOLOCATION_COOLDOWN_SEARCHING
+		_:
+			echolocation_timer = ECHOLOCATION_COOLDOWN
+	var to_player = player.global_position - global_position
+	var distance = to_player.length()
+	var direction = to_player.normalized()
 	
-	var angle = global_position.signed_angle_to(player.global_position, Vector3.UP)
-	if abs(global_position.signed_angle_to(player.global_position, Vector3.UP)) <= PI / 6  and global_position.distance_to(player.global_position) <= 10:
-		rc.set_enabled(true)
-		rc.target_position = player.global_position
-		rc.force_raycast_update()
-		if rc.get_collider() == player:
-			target_pos = player.global_position
-			set_search_point()
-			target_pos = player.global_position
-		rc.set_enabled(false)
+	if distance > ECHOLOCATION_RANGE:
+		#print("echo too far (%.1fm)" % distance)
+		return
+	var in_zone = false
+	
+	if current_state == SEARCHING:
+		in_zone = true
+	else:
+		var forward = -transform.basis.z
+		var plangle = forward.angle_to(direction)
+		in_zone = plangle <= ECHOLOCATION_ANGLE
+	
+	if in_zone:
+		var space_state = get_world_3d().direct_space_state
+		var query = PhysicsRayQueryParameters3D.create(
+			global_position + Vector3(0, 1, 0),
+			player.global_position + Vector3(0, 1, 0)
+		)
+		query.collision_mask = 1
+		query.exclude = [self]
+		
+		var result = space_state.intersect_ray(query)
+		
+		if result.is_empty():
+			ls_pos = player.global_position
+			ls_strength = 100.0
+			ls_time = 0.0
+			if current_state != HUNTING:
+				change_state(HUNTING)
+		elif result.collider == player:
+			ls_pos = player.global_position
+			ls_strength = 100.0
+			ls_time = 0.0
+			if current_state != HUNTING:
+				change_state(HUNTING)
+		else:
+			#print(" blocked - %s" % result.collider.name)
+			return
 
-func hear_sound(noise_level : float, pos : Vector3):
-	var to_delete = []
-	for i in range(menace_gauges.size()):
-		if !menace_gauges[i].reduce(10): to_delete.append(i)
-	for i in to_delete:
-		menace_gauges.erase(i)
+func on_sound_heard(sound_pos: Vector3, strength: float, wall_count: int):
+	ls_pos = sound_pos
+	ls_strength = strength
+	ls_time = 0.0
 	
-	menace_gauges.append(menace_gauge.new(noise_level, pos))
+	print("heard - strength: %.2f, walls: %d, dist: %.1fm" % [strength, wall_count, global_position.distance_to(sound_pos)])
+	
+	if strength >= 2.5:
+		#print("Loud")
+		change_state(HUNTING)
+	elif strength >= 1.0:
+		if current_state == ROAMING or current_state == IDLE:
+			#print("medium sound")
+			change_state(SEARCHING)
+	elif strength >= 0.5:
+		if current_state == ROAMING or current_state == IDLE:
+			#print("quiet sound")
+			search_pos = sound_pos
 
-func get_room_points(area_aabb: AABB, max_attempts = 10, tolerance = 1.0):
-	var RADIUS = 15
-	var output = []
-	var t = Time.get_ticks_usec()
-	
-	var nav_map = nav_agent.get_navigation_map()
-	var num_cycles = ceil((area_aabb.size.x * area_aabb.size.z) / ((2*RADIUS) ** 2))
-	for i in range(num_cycles):
-		for j in range(max_attempts):
-			var rand_x = randf_range(area_aabb.position.x, area_aabb.position.x + area_aabb.size.x)
-			var rand_z = randf_range(area_aabb.position.z, area_aabb.position.z + area_aabb.size.z)
-			
-			var test_point = Vector3(rand_x, area_aabb.position.y, rand_z)
-			var nav_point = NavigationServer3D.map_get_closest_point(nav_map, test_point)
-			
-			var too_close = false
-			if output.size() > 0:
-				too_close = true
-				for p in output:
-					if nav_point.distance_to(p) > tolerance:
-						too_close = false
-						break
-				
-			if !too_close and Vector2(nav_point.x, nav_point.z).distance_to(Vector2(rand_x, rand_z)) < tolerance:
-				output.append(nav_point)
-				break;
-	
-	print(num_cycles, " ", output.size(), " ", (Time.get_ticks_usec() - t))
-	return output
+func kill_player():
+	sfx_kill.play()
+	current_state = IDLE
+	velocity = Vector3.ZERO
+	await get_tree().create_timer(0.98).timeout
+	if get_tree():
+		get_tree().reload_current_scene()
+
+func handle_noise(_noise_level, _noise_pos):
+	pass
