@@ -69,8 +69,10 @@ func _physics_process(delta: float) -> void:
 			nav_agent.target_position = roam_target
 			var next_nav_point = nav_agent.get_next_path_position()
 			velocity = (next_nav_point - global_position).normalized() * SPEED
+			
 			if velocity.length() > 0.1:
-				look_at(global_position + velocity.normalized())
+				look_at(Vector3(next_nav_point.x, global_position.y, next_nav_point.z))
+			
 			
 			move_and_slide()
 			#
@@ -84,8 +86,10 @@ func _physics_process(delta: float) -> void:
 			nav_agent.target_position = target_pos
 			var next_nav_point = nav_agent.get_next_path_position()
 			velocity = (next_nav_point - global_position).normalized() * SPEED
+			
 			if velocity.length() > 0.1:
-				look_at(global_position + velocity.normalized())
+				look_at(Vector3(next_nav_point.x, global_position.y, next_nav_point.z))
+			
 			move_and_slide()
 			
 			if echolocation_timer <= 0:
@@ -96,9 +100,10 @@ func _physics_process(delta: float) -> void:
 			target_pos = ls_pos
 			nav_agent.target_position = target_pos
 			var next_nav_point = nav_agent.get_next_path_position()
-			velocity = (next_nav_point - global_position).normalized() * SPEED	
+			velocity = (next_nav_point - global_position).normalized() * SPEED
+			
 			if velocity.length() > 0.1:
-				look_at(global_position + velocity.normalized())
+				look_at(Vector3(next_nav_point.x, global_position.y, next_nav_point.z))
 			
 			move_and_slide()
 			
@@ -211,7 +216,7 @@ func on_sound_heard(sound_pos: Vector3, strength: float, wall_count: int):
 	ls_strength = strength
 	ls_time = 0.0
 	
-	print("heard - strength: %.2f, walls: %d, dist: %.1fm" % [strength, wall_count, global_position.distance_to(sound_pos)])
+	#print("heard - strength: %.2f, walls: %d, dist: %.1fm" % [strength, wall_count, global_position.distance_to(sound_pos)])
 	
 	if strength >= 2.5:
 		#print("Loud")
