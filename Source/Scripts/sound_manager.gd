@@ -30,4 +30,3 @@ func emit_sound(source_pos: Vector3, sound_level: float, source_node: Node3D = n
 		if result.can_hear:
 			if enemy.has_method("on_sound_heard"):
 				enemy.on_sound_heard(source_pos, result.strength, result.wall_count)
-
