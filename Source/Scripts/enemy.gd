@@ -72,9 +72,10 @@ func _physics_process(delta: float) -> void:
 			nav_agent.target_position = roam_target
 			var next_nav_point = nav_agent.get_next_path_position()
 			velocity = (next_nav_point - global_position).normalized() * SPEED
+			var target_rot = Vector3(next_nav_point.x, global_position.y, next_nav_point.z)
 			
-			if velocity.length() > 0.1:
-				look_at(Vector3(next_nav_point.x, global_position.y, next_nav_point.z))
+			if velocity.length() > 0.1 and global_position != target_rot:
+				look_at(target_rot)
 			
 			
 			move_and_slide()
@@ -90,8 +91,10 @@ func _physics_process(delta: float) -> void:
 			var next_nav_point = nav_agent.get_next_path_position()
 			velocity = (next_nav_point - global_position).normalized() * SPEED
 			
-			if velocity.length() > 0.1:
-				look_at(Vector3(next_nav_point.x, global_position.y, next_nav_point.z))
+			var target_rot = Vector3(next_nav_point.x, global_position.y, next_nav_point.z)
+			
+			if velocity.length() > 0.1 and global_position != target_rot:
+				look_at(target_rot)
 			
 			move_and_slide()
 			
@@ -103,8 +106,10 @@ func _physics_process(delta: float) -> void:
 			var next_nav_point = nav_agent.get_next_path_position()
 			velocity = (next_nav_point - global_position).normalized() * SPEED
 			
-			if velocity.length() > 0.1:
-				look_at(Vector3(next_nav_point.x, global_position.y, next_nav_point.z))
+			var target_rot = Vector3(next_nav_point.x, global_position.y, next_nav_point.z)
+			
+			if velocity.length() > 0.1 and global_position != target_rot:
+				look_at(target_rot)
 			
 			move_and_slide()
 			
