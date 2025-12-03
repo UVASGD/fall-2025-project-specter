@@ -66,10 +66,11 @@ func _physics_process(delta: float) -> void:
 			nav_agent.target_position = roam_target
 			var next_nav_point = nav_agent.get_next_path_position()
 			velocity = (next_nav_point - global_position).normalized() * SPEED
-			#looks at player, but makes house fall over
-			#TODO: Fix once we have a final monster asset
-			#if velocity.length() > 0.1:
-				#look_at(global_position + velocity.normalized())
+			var target_rot = Vector3(next_nav_point.x, global_position.y, next_nav_point.z)
+			
+			if velocity.length() > 0.1 and global_position != target_rot:
+				look_at(target_rot)
+			
 			
 			move_and_slide()
 
@@ -79,10 +80,12 @@ func _physics_process(delta: float) -> void:
 			nav_agent.target_position = target_pos
 			var next_nav_point = nav_agent.get_next_path_position()
 			velocity = (next_nav_point - global_position).normalized() * SPEED
-			#looks at player, but makes house fall over
-			#TODO: Fix once we have a final monster asset
-			#if velocity.length() > 0.1:
-				#look_at(global_position + velocity.normalized())
+			
+			var target_rot = Vector3(next_nav_point.x, global_position.y, next_nav_point.z)
+			
+			if velocity.length() > 0.1 and global_position != target_rot:
+				look_at(target_rot)
+			
 			move_and_slide()
 			
 			if echolocation_timer.is_stopped() and randf() < 0.01:
@@ -91,11 +94,12 @@ func _physics_process(delta: float) -> void:
 			target_pos = confidence.intervals[0].position
 			nav_agent.target_position = target_pos
 			var next_nav_point = nav_agent.get_next_path_position()
-			velocity = (next_nav_point - global_position).normalized() * SPEED	
-			#looks at player,dw but makes house fall over
-			#TODO: Fix once we have a final monster asset
-			#if velocity.length() > 0.1:
-				#look_at(global_position + velocity.normalized())
+			velocity = (next_nav_point - global_position).normalized() * SPEED
+			
+			var target_rot = Vector3(next_nav_point.x, global_position.y, next_nav_point.z)
+			
+			if velocity.length() > 0.1 and global_position != target_rot:
+				look_at(target_rot)
 			
 			move_and_slide()
 			
