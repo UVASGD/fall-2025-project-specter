@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Project Specter"
-run/main_scene="uid://ccfenqa3suyht"
+run/main_scene="uid://dh4wda1bjkdub"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://Assets/2d/icon.svg"
 

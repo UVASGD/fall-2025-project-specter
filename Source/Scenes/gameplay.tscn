@@ -1,6 +1,8 @@
-[gd_scene load_steps=31 format=4 uid="uid://ccfenqa3suyht"]
+[gd_scene load_steps=33 format=4 uid="uid://ccfenqa3suyht"]
 
 [ext_resource type="PackedScene" uid="uid://dmdiskq1g67" path="res://Source/Scenes/player.tscn" id="1_5lwbh"]
+[ext_resource type="FontFile" uid="uid://dwg8g5jol18m1" path="res://Assets/2d/Night Fears.ttf" id="1_pi87v"]
+[ext_resource type="Script" uid="uid://co1keff16j780" path="res://Source/Scripts/pause_menu.gd" id="1_sjed4"]
 [ext_resource type="Script" uid="uid://qg2u4m1spvd1" path="res://Source/Scripts/hud.gd" id="1_sss6l"]
 [ext_resource type="PackedScene" uid="uid://bx1wsswr0kbbn" path="res://Source/Scenes/enemy.tscn" id="2_epgdy"]
 [ext_resource type="FontFile" uid="uid://calxibu6hi8wt" path="res://Assets/2d/OpenSans-Regular.ttf" id="2_yatk6"]
@@ -136,6 +138,42 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_i1r7e")
 
 [node name="Gameplay2" type="Node3D"]
+
+[node name="PauseMenu" type="ColorRect" parent="."]
+process_mode = 3
+visible = false
+z_index = 50
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 200.0
+offset_top = -200.0
+offset_right = -200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.262745, 0.262745, 0.262745, 0.85098)
+script = ExtResource("1_sjed4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu"]
+layout_mode = 0
+offset_left = 200.0
+offset_right = 552.0
+offset_bottom = 400.0
+alignment = 1
+
+[node name="Resume" type="Button" parent="PauseMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_pi87v")
+theme_override_font_sizes/font_size = 75
+text = "Resume"
+
+[node name="Quit" type="Button" parent="PauseMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_pi87v")
+theme_override_font_sizes/font_size = 75
+text = "Quit"
 
 [node name="HUD" type="Control" parent="."]
 unique_name_in_owner = true
@@ -321,6 +359,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03382, 4.19183, 0)
 [node name="Alpha Hills Lab v2" parent="Node" instance=ExtResource("6_lkflj")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -300, 0, -203.4)
 
+[connection signal="pressed" from="PauseMenu/VBoxContainer/Resume" to="PauseMenu" method="_on_resume_pressed"]
+[connection signal="pressed" from="PauseMenu/VBoxContainer/Quit" to="PauseMenu" method="_on_quit_pressed"]
 [connection signal="lever_down" from="NavigationRegion3D/Lever" to="NavigationRegion3D/Lever/OmniLight3D" method="_on_lever_lever_down"]
 [connection signal="lever_up" from="NavigationRegion3D/Lever" to="NavigationRegion3D/Lever/OmniLight3D" method="_on_lever_lever_up"]
 
