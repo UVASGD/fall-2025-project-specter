@@ -12,17 +12,30 @@ class ConfidenceInterval:
 		confidence = strength / 3 #make calulation more robust
 	
 	func in_range(pos : Vector3) -> bool:
-		return position.distance_to(pos) <= 0.1
+		return position.distance_to(pos) <= 0.25
+		
+	func decay(delta: float):
+		confidence -= 0.025 * delta
 		
 	func update(sound_pos: Vector3, strength: float) -> void:
 		position = sound_pos
-		confidence += strength / 50 #make calulation more robust
+		confidence += strength / 500 #make calulation more robust
 
 func _init() -> void:
 	intervals = []
 
-func _physics_process(delta: float) -> void:
-	pass
+func interval_decay(delta: float) -> void:
+	#var to_print = ""
+	#for val in intervals:
+		#to_print += str(val.confidence) + " "
+	#print(to_print)
+	
+	for val in intervals:
+		val.decay(delta)
+	interval_check()
+	
+	while intervals.size() > 0 and intervals.back().confidence < 0.1:
+		intervals.pop_back()
 
 func update_interval(index: int, sound_pos: Vector3, strength: float):
 	intervals[index].update(sound_pos, strength)
@@ -32,6 +45,8 @@ func update_interval(index: int, sound_pos: Vector3, strength: float):
 		intervals[index-1] = temp
 
 func interval_check():
+	if intervals.is_empty(): return
+
 	var conf = intervals[0].confidence
 	if conf >= 0.9:
 		enemy.change_state(enemy.HUNTING)
@@ -53,41 +68,3 @@ func on_sound_heard(sound_pos: Vector3, strength: float, wall_count: int):
 		i -= 1
 	intervals.insert(i, new_interval)
 	interval_check()
-	
-	"""
-	ls_pos = sound_pos
-	ls_strength = strength
-	ls_time = 0.0
-	
-	print("heard - strength: %.2f, walls: %d, dist: %.1fm" % [strength, wall_count, global_position.distance_to(sound_pos)])
-	
-	if strength >= 2.5:
-		#print("Loud")
-		change_state(HUNTING)
-	elif strength >= 1.0:
-		if current_state == ROAMING or current_state == IDLE:
-			#print("medium sound")
-			change_state(SEARCHING)
-	elif strength >= 0.5:
-		if current_state == ROAMING or current_state == IDLE:
-			#print("quiet sound")
-			search_pos = sound_pos
-
-func change_state(state):
-	if current_state == state:
-		return
-	current_state = state
-	match state:
-		IDLE:
-			SPEED = 0.5
-			roam_wait_time = randf_range(2.0, 4.0)
-		ROAMING:
-			SPEED = ROAM_SPEED
-			set_new_roam_target()
-		SEARCHING:
-			SPEED = SEARCH_SPEED
-			search_pos = ls_pos
-			set_search_point()
-		HUNTING:
-			SPEED = HUNT_SPEED
-	"""

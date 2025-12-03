@@ -11,8 +11,8 @@ func _enter_tree():
 @onready var nav_agent = $NavigationAgent3D
 @onready var sfx_kill = $sfx_kill
 @onready var sfx_echo = $sfx_echo
-@onready var timer = $Timer
 @onready var rc = $RayCast3D
+@onready var echolocation_timer = $EchoTimer
 @onready var confidence : ConfidenceWrapper
 
 var target_pos : Vector3
@@ -23,18 +23,11 @@ const ROAM_SPEED = 2.0
 const SEARCH_SPEED = 2.5
 const HUNT_SPEED = 5.0
 
-#ls = last sound
-#var ls_pos : Vector3
-#var ls_strength : float = 0.0
-#var memory : float = 5.0
-#var ls_time : float = 999.0
-
 const ECHOLOCATION_RANGE = 15.0
 const ECHOLOCATION_ANGLE = PI / 4
 const ECHOLOCATION_COOLDOWN = 3.0
 const ECHOLOCATION_COOLDOWN_SEARCHING = 1.5
 const ECHOLOCATION_COOLDOWN_HUNTING = 1.0
-var echolocation_timer : float = 0.0
 
 const ROAM_RADIUS = 10.0
 const PLAYER_BIAS = 0.3
@@ -53,7 +46,8 @@ func _exit_tree():
 	SoundManager.unregister_enemy(self)
 
 func _physics_process(delta: float) -> void:
-	echolocation_timer -= delta
+	confidence.interval_decay(delta)
+	
 	roam_wait_time -= delta
 	if global_position.distance_to(player.global_position) < 2:
 		kill_player()
@@ -72,14 +66,12 @@ func _physics_process(delta: float) -> void:
 			nav_agent.target_position = roam_target
 			var next_nav_point = nav_agent.get_next_path_position()
 			velocity = (next_nav_point - global_position).normalized() * SPEED
-			if velocity.length() > 0.1:
-				look_at(global_position + velocity.normalized())
+			#looks at player, but makes house fall over
+			#TODO: Fix once we have a final monster asset
+			#if velocity.length() > 0.1:
+				#look_at(global_position + velocity.normalized())
 			
 			move_and_slide()
-			#
-			## sometimes echolocate when roamig
-			#if echolocation_timer <= 0 and randf() < 0.1:
-				#echolocate()
 
 		SEARCHING:
 			if global_position.distance_to(target_pos) < 1.5:
@@ -87,23 +79,27 @@ func _physics_process(delta: float) -> void:
 			nav_agent.target_position = target_pos
 			var next_nav_point = nav_agent.get_next_path_position()
 			velocity = (next_nav_point - global_position).normalized() * SPEED
-			if velocity.length() > 0.1:
-				look_at(global_position + velocity.normalized())
+			#looks at player, but makes house fall over
+			#TODO: Fix once we have a final monster asset
+			#if velocity.length() > 0.1:
+				#look_at(global_position + velocity.normalized())
 			move_and_slide()
 			
-			if echolocation_timer <= 0:
+			if echolocation_timer.is_stopped() and randf() < 0.01:
 				echolocate()
 		HUNTING:
 			target_pos = confidence.intervals[0].position
 			nav_agent.target_position = target_pos
 			var next_nav_point = nav_agent.get_next_path_position()
 			velocity = (next_nav_point - global_position).normalized() * SPEED	
-			if velocity.length() > 0.1:
-				look_at(global_position + velocity.normalized())
+			#looks at player,dw but makes house fall over
+			#TODO: Fix once we have a final monster asset
+			#if velocity.length() > 0.1:
+				#look_at(global_position + velocity.normalized())
 			
 			move_and_slide()
 			
-			if echolocation_timer <= 0:
+			if echolocation_timer.is_stopped() and randf() < 0.025:
 				echolocate()
 
 
@@ -113,16 +109,20 @@ func change_state(state):
 	current_state = state
 	match state:
 		IDLE:
+			print("State changed to: IDLE")
 			SPEED = 0.5
 			roam_wait_time = randf_range(2.0, 4.0)
 		ROAMING:
+			print("State changed to: ROAMING")
 			SPEED = ROAM_SPEED
 			set_new_roam_target()
 		SEARCHING:
+			print("State changed to: SEARCHING")
 			SPEED = SEARCH_SPEED
 			search_pos = confidence.intervals[0].position
 			set_search_point()
 		HUNTING:
+			print("State changed to: HUNTING")
 			SPEED = HUNT_SPEED
 
 func set_search_point():
@@ -147,64 +147,47 @@ func set_new_roam_target():
 
 	roam_target.y = global_position.y
 
-func _on_timer_timeout() -> void:
-	if current_state == SEARCHING:
-		change_state(ROAMING)
-
 func echolocate():
-	return
-	#if echolocation_timer > 0:
-		#return
-	#sfx_echo.play()
-	#match current_state:
-		#HUNTING:
-			#echolocation_timer = ECHOLOCATION_COOLDOWN_HUNTING
-		#SEARCHING:
-			#echolocation_timer = ECHOLOCATION_COOLDOWN_SEARCHING
-		#_:
-			#echolocation_timer = ECHOLOCATION_COOLDOWN
-	#var to_player = player.global_position - global_position
-	#var distance = to_player.length()
-	#var direction = to_player.normalized()
-	#
-	#if distance > ECHOLOCATION_RANGE:
-		##print("echo too far (%.1fm)" % distance)
-		#return
-	#var in_zone = false
-	#
-	#if current_state == SEARCHING:
-		#in_zone = true
-	#else:
-		#var forward = -transform.basis.z
-		#var plangle = forward.angle_to(direction)
-		#in_zone = plangle <= ECHOLOCATION_ANGLE
-	#
-	#if in_zone:
-		#var space_state = get_world_3d().direct_space_state
-		#var query = PhysicsRayQueryParameters3D.create(
-			#global_position + Vector3(0, 1, 0),
-			#player.global_position + Vector3(0, 1, 0)
-		#)
-		#query.collision_mask = 1
-		#query.exclude = [self]
-		#
-		#var result = space_state.intersect_ray(query)
-		#
-		#if result.is_empty():
-			#ls_pos = player.global_position
-			#ls_strength = 100.0
-			#ls_time = 0.0
-			#if current_state != HUNTING:
-				#change_state(HUNTING)
-		#elif result.collider == player:
-			#ls_pos = player.global_position
-			#ls_strength = 100.0
-			#ls_time = 0.0
-			#if current_state != HUNTING:
-				#change_state(HUNTING)
-		#else:
-			##print(" blocked - %s" % result.collider.name)
-			#return
+	print("Echolocate!")
+	sfx_echo.play()
+	match current_state:
+		HUNTING:
+			echolocation_timer.start(ECHOLOCATION_COOLDOWN_HUNTING)
+		SEARCHING:
+			echolocation_timer.start(ECHOLOCATION_COOLDOWN_SEARCHING)
+		_:
+			echolocation_timer.start(ECHOLOCATION_COOLDOWN)
+	var to_player = player.global_position - global_position
+	var distance = to_player.length()
+	var direction = to_player.normalized()
+
+	if distance > ECHOLOCATION_RANGE:
+		#print("echo too far (%.1fm)" % distance)
+		return
+		
+	var forward = -transform.basis.z
+	var plangle = forward.angle_to(direction)
+	var in_zone = plangle <= ECHOLOCATION_ANGLE
+		
+	if in_zone:
+		var space_state = get_world_3d().direct_space_state
+		var query = PhysicsRayQueryParameters3D.create(
+			global_position + Vector3(0, 1, 0),
+			player.global_position + Vector3(0, 1, 0)
+		)
+		query.collision_mask = 1
+		query.exclude = [self]
+		
+		var result = space_state.intersect_ray(query)
+		
+		if result.is_empty():
+			#print("no raycast collision")
+			return
+		elif result.collider == player:
+			SoundManager.emit_sound(player.global_postition, 10, player)
+		else:
+			#print(" blocked - %s" % result.collider.name)
+			return
 
 func on_sound_heard(sound_pos: Vector3, strength: float, wall_count: int):
 	confidence.on_sound_heard(sound_pos, strength, wall_count)
