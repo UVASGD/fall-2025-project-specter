@@ -193,13 +193,14 @@ func _unhandled_input(event: InputEvent) -> void:
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
 	
 	if event.is_action_pressed("interact"):
+		if movement_state == LOOKING_AT_DISPLAY:
+			stop_looking_at_display()
+			return
+		
 		var collider: Object = ray_cast.get_collider()
 		
 		if collider is Interactable:
 			collider.interact(self)
-	
-	if event.is_action_pressed("ui_cancel") and movement_state == LOOKING_AT_DISPLAY:
-		stop_looking_at_display()
 
 
 func start_looking_at_display(display: TextureRect) -> void:
