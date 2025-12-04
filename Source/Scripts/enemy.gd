@@ -188,7 +188,7 @@ func echolocate():
 			#print("no raycast collision")
 			return
 		elif result.collider == player:
-			SoundManager.emit_sound(player.global_postition, 10, player)
+			SoundManager.emit_sound(player.global_position, 10, player)
 		else:
 			#print(" blocked - %s" % result.collider.name)
 			return

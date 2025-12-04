@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://qg2u4m1spvd1" path="res://Source/Scripts/hud.gd" id="1_sss6l"]
 [ext_resource type="PackedScene" uid="uid://bx1wsswr0kbbn" path="res://Source/Scenes/enemy.tscn" id="2_epgdy"]
 [ext_resource type="FontFile" uid="uid://calxibu6hi8wt" path="res://Assets/2d/OpenSans-Regular.ttf" id="2_yatk6"]
+[ext_resource type="Texture2D" uid="uid://c37qhibwbdijv" path="res://Assets/2d/reticle.png" id="5_50w6k"]
 [ext_resource type="PackedScene" uid="uid://cnvjni0ymngf0" path="res://Source/Scenes/Interactables/keypad.tscn" id="5_80drl"]
 [ext_resource type="PackedScene" uid="uid://b8hwk4r2cd0bn" path="res://Source/Scenes/Interactables/audio_recorder.tscn" id="5_xbvjf"]
 [ext_resource type="PackedScene" uid="uid://dkyyu2ypnygdd" path="res://Assets/3d/alpha-hills-lab-v1/source/Alpha Hills Lab v1.glb" id="6_lkflj"]
@@ -214,6 +215,17 @@ max_value = 7.0
 step = 0.0
 fill_mode = 3
 show_percentage = false
+
+[node name="Reticle" type="TextureRect" parent="HUD"]
+modulate = Color(1, 1, 1, 0.588235)
+z_index = -1
+layout_mode = 0
+offset_left = 568.5
+offset_top = 316.5
+offset_right = 668.5
+offset_bottom = 416.5
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("5_50w6k")
 
 [node name="Player" parent="." instance=ExtResource("1_5lwbh")]
 unique_name_in_owner = true
