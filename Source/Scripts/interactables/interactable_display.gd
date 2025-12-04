@@ -6,6 +6,7 @@ extends Interactable
 
 
 func _ready() -> void:
+	super()
 	if display:
 		display.visible = false
 

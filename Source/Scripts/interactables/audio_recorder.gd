@@ -8,6 +8,7 @@ var _audio_stream_player: AudioStreamPlayer3D
 
 
 func _ready() -> void:
+	super()
 	_audio_stream_player = AudioStreamPlayer3D.new()
 	_audio_stream_player.stream = stream
 	add_child(_audio_stream_player)

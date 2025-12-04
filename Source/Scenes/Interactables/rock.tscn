@@ -13,6 +13,7 @@ albedo_color = Color(1, 0.282353, 0.203922, 1)
 radius = 0.1
 
 [node name="Rock" type="StaticBody3D"]
+collision_layer = 0
 script = ExtResource("1_isnmr")
 metadata/_custom_type_script = "uid://fybpyf567q5j"
 

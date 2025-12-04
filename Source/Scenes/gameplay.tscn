@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://ccfenqa3suyht"]
+[gd_scene load_steps=35 format=4 uid="uid://ccfenqa3suyht"]
 
 [ext_resource type="PackedScene" uid="uid://dmdiskq1g67" path="res://Source/Scenes/player.tscn" id="1_5lwbh"]
 [ext_resource type="FontFile" uid="uid://dwg8g5jol18m1" path="res://Assets/2d/Night Fears.ttf" id="1_pi87v"]
