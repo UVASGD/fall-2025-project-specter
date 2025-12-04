@@ -1,0 +1,128 @@
+[gd_scene load_steps=12 format=3 uid="uid://1icvjpj28xm"]
+
+[ext_resource type="Script" uid="uid://co1keff16j780" path="res://Source/Scripts/pause_menu.gd" id="1_eoby2"]
+[ext_resource type="FontFile" uid="uid://dwg8g5jol18m1" path="res://Assets/2d/Night Fears.ttf" id="2_fq1p6"]
+[ext_resource type="Script" uid="uid://qg2u4m1spvd1" path="res://Source/Scripts/hud.gd" id="3_xaggo"]
+[ext_resource type="FontFile" uid="uid://calxibu6hi8wt" path="res://Assets/2d/OpenSans-Regular.ttf" id="4_2bsna"]
+[ext_resource type="PackedScene" uid="uid://dmdiskq1g67" path="res://Source/Scenes/player.tscn" id="5_7y43o"]
+[ext_resource type="PackedScene" uid="uid://bhv62chrnevg7" path="res://Source/Scenes/Interactables/rock.tscn" id="6_34rqp"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sorqg"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_jx7ex"]
+sky_material = SubResource("ProceduralSkyMaterial_sorqg")
+
+[sub_resource type="Environment" id="Environment_6vnmf"]
+background_mode = 2
+sky = SubResource("Sky_jx7ex")
+tonemap_mode = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g7ed7"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="BoxMesh" id="BoxMesh_832gt"]
+size = Vector3(50, 1, 50)
+
+[node name="TestRange" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6vnmf")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="PauseMenu" type="ColorRect" parent="."]
+process_mode = 3
+visible = false
+z_index = 50
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 200.0
+offset_top = -200.0
+offset_right = -200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.262745, 0.262745, 0.262745, 0.85098)
+script = ExtResource("1_eoby2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu"]
+layout_mode = 0
+offset_left = 200.0
+offset_right = 552.0
+offset_bottom = 400.0
+alignment = 1
+
+[node name="Resume" type="Button" parent="PauseMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fq1p6")
+theme_override_font_sizes/font_size = 75
+text = "Resume"
+
+[node name="Quit" type="Button" parent="PauseMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fq1p6")
+theme_override_font_sizes/font_size = 75
+text = "Quit"
+
+[node name="HUD" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+script = ExtResource("3_xaggo")
+
+[node name="Oxygen" type="ProgressBar" parent="HUD"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 275.0
+offset_bottom = 50.0
+step = 0.0
+value = 100.0
+show_percentage = false
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HUD/Oxygen"]
+layout_mode = 0
+offset_right = 250.0
+offset_bottom = 25.0
+theme_override_fonts/normal_font = ExtResource("4_2bsna")
+text = "Oxygen: 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Noise" type="ProgressBar" parent="HUD"]
+layout_mode = 0
+offset_left = 1092.0
+offset_top = 523.0
+offset_right = 1127.0
+offset_bottom = 623.0
+max_value = 7.0
+step = 0.0
+fill_mode = 3
+show_percentage = false
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_g7ed7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_832gt")
+skeleton = NodePath("../..")
+
+[node name="Player" parent="." instance=ExtResource("5_7y43o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="Rock" parent="." instance=ExtResource("6_34rqp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -3)
+
+[connection signal="pressed" from="PauseMenu/VBoxContainer/Resume" to="PauseMenu" method="_on_resume_pressed"]
+[connection signal="pressed" from="PauseMenu/VBoxContainer/Quit" to="PauseMenu" method="_on_quit_pressed"]

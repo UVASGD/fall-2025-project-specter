@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bhv62chrnevg7"]
+
+[ext_resource type="Script" uid="uid://ch0vhi1qipeo1" path="res://Source/Scripts/interactables/rock.gd" id="1_isnmr"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_7rjd2"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_isnmr"]
+albedo_color = Color(1, 0.282353, 0.203922, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xl3i4"]
+radius = 0.1
+
+[node name="Rock" type="StaticBody3D"]
+script = ExtResource("1_isnmr")
+metadata/_custom_type_script = "uid://fybpyf567q5j"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_7rjd2")
+surface_material_override/0 = SubResource("StandardMaterial3D_isnmr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_xl3i4")

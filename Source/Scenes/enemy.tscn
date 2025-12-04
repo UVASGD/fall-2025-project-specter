@@ -14,6 +14,7 @@ albedo_color = Color(1, 0, 0, 1)
 albedo_texture = ExtResource("2_27rp6")
 
 [node name="Enemy" type="CharacterBody3D"]
+collision_layer = 0
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 script = ExtResource("1_ldp51")

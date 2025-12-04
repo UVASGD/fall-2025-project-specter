@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://b87c5fgv0ap5l"]
+
+[ext_resource type="Script" uid="uid://1wiacqeqmoh0" path="res://Source/Scripts/thrown_rock.gd" id="1_j86jv"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_j86jv"]
+rough = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_30a0b"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_j86jv"]
+radius = 0.1
+
+[node name="ThrownRock" type="RigidBody3D"]
+collision_layer = 0
+physics_material_override = SubResource("PhysicsMaterial_j86jv")
+contact_monitor = true
+max_contacts_reported = 6
+angular_damp = 10.0
+script = ExtResource("1_j86jv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_30a0b")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_j86jv")

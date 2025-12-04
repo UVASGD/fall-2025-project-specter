@@ -20,10 +20,13 @@ func _enter_tree():
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
 @onready var ray_cast: RayCast3D = $Head/Camera3D/RayCast3D
+@onready var hand: Node3D = $Head/Camera3D/Hand
 @onready var stamina_timer = $StaminaTimer
 @onready var hud = %HUD
 
 @onready var bflyscene:PackedScene = preload("res://Source/Scenes/bfly.tscn")
+@onready var throwable_scene: PackedScene = preload("res://Source/Scenes/thrown_rock.tscn")
+
 var movement_state
 var crouch = false
 var recovering = false
@@ -32,6 +35,8 @@ var stamina = 100.0
 var noise_level : float
 var eggstack = []
 var eggtimer = 0
+
+var has_throwable: bool = false
 
 
 func _ready():
@@ -201,6 +206,14 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 		if collider is Interactable:
 			collider.interact(self)
+	
+	if event.is_action_pressed("throw_item") and has_throwable:
+		has_throwable = false
+		hand.visible = false
+		var throwable: RigidBody3D = throwable_scene.instantiate()
+		get_tree().root.add_child(throwable)
+		throwable.global_position = camera.global_position
+		throwable.apply_central_impulse(-camera.global_basis.z * 10)
 
 
 func start_looking_at_display(display: TextureRect) -> void:
