@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://ccfenqa3suyht"]
+[gd_scene load_steps=34 format=4 uid="uid://ccfenqa3suyht"]
 
 [ext_resource type="PackedScene" uid="uid://dmdiskq1g67" path="res://Source/Scenes/player.tscn" id="1_5lwbh"]
 [ext_resource type="FontFile" uid="uid://dwg8g5jol18m1" path="res://Assets/2d/Night Fears.ttf" id="1_pi87v"]
@@ -16,8 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://cy3okwnxxgboo" path="res://Assets/3d/alpha-hills-lab-v1/source/Alpha Hills Lab v1_Image_7.png" id="8_xbvjf"]
 [ext_resource type="PackedScene" uid="uid://1hrmiiy2c70y" path="res://Source/Scenes/Interactables/note.tscn" id="9_sgx0y"]
 [ext_resource type="Texture2D" uid="uid://bpkbislh3nqo8" path="res://Assets/2d/house.png" id="10_80drl"]
-[ext_resource type="PackedScene" uid="uid://bhv62chrnevg7" path="res://Source/Scenes/Interactables/rock.tscn" id="13_50w6k"]
-[ext_resource type="PackedScene" uid="uid://ddr3c0lq7df6d" path="res://Source/Scenes/locker/locker.tscn" id="15_mw1yu"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_d6ru0"]
 vertices = PackedVector3Array(-40, 0.763891, -40, -38.25, 0.763891, -40.25, -38.5, 0.763891, -49.5, -49.5, 0.763891, -38, -40, 0.763891, -38, -49.5, 0.763891, -49.5, -31.25, 0.763891, -44.5, -30.25, 0.763891, -44.75, -30.25, 0.763891, -49.5, -31.25, 0.763891, -40.25, -29.5, 0.763891, -44.5, -15.25, 0.763891, -32.75, -8.75, 0.763891, -32.75, -8.5, 0.763891, -33.5, -6.5, 0.763891, -49.5, -23.75, 0.763891, -40, -29.5, 0.763891, -40.25, -23.75, 0.763891, -30.5, -15.5, 0.763891, -30.5, -6.5, 0.763891, -33.5, 12, 0.763891, -33.5, 12, 0.763891, -49.5, 14, 0.763891, -33.5, 14.25, 0.763891, -32.75, 15, 0.763891, -32.5, 15, 0.763891, -25.25, 17.5, 0.763891, -25.25, 17.75, 0.763891, -23.5, 49.5, 0.763891, -23.75, 49.5, 0.763891, -49.5, -36.5, 7.51389, 9.25, -36.5, 7.51389, 16.5, -36, 7.51389, 9, -39, 7.26389, 9, -24.75, 7.26389, -28.75, -24.75, 7.26389, -29.75, -39, 7.26389, -39.25, -19.75, 7.26389, -29, -19.75, 7.26389, -29.5, -24.75, 7.26389, 9, -24.75, 7.26389, -39.25, -25, 0.763891, -39, -29.5, 0.763891, -39, -29.75, 0.763891, -38, -25.5, 0.763891, -30.25, -25, 0.763891, -30.5, -31, 0.763891, -38, -31.25, 0.763891, -39, -38.75, 0.763891, -39, -25, 0.763891, 8.75, -25, 0.763891, -28, -25.5, 0.763891, -28.25, -38.75, 0.763891, 8.75, -49.5, 0.763891, 7.75, -40, 0.763891, 7.75, -14.75, 7.26389, -29.5, -14.5, 7.26389, -28.75, -14.5, 7.26389, -12, -8.25, 7.26389, -12, -8.25, 7.26389, -31.75, -14.5, 7.26389, -31.75, 14, 7.51389, -24.5, 14, 7.51389, -31.75, 13.5, 7.51389, -24.25, 16.75, 7.26389, -24.25, 16.75, 7.26389, 24, 2.25, 7.26389, 24, 2.25, 7.26389, -24.25, -14.25, 0.763891, -31.5, -14.25, 0.763891, -30.5, -13.75, 0.763891, -30.25, -8.5, 0.763891, -31.5, -13.75, 0.763891, -28.25, -14.25, 0.763891, -12.25, -8.5, 0.763891, -12.25, -14.25, 0.763891, -28, -7.25, 3.76389, -31.25, -7.25, 3.76389, -29.25, -1, 3.76389, -29.25, -1, 3.76389, -31.25, -7, 0.763891, -31.25, -7, 0.763891, -29.5, -1.25, 0.763891, -29.5, -1.25, 0.763891, -31.25, 9.25, 0.763891, -25.25, 9.25, 0.763891, -25.75, 8, 0.763891, -26.25, 1.5, 0.763891, -25.25, -0.5, 0.763891, -28.25, 1.25, 0.763891, -24.75, 0, 0.763891, -28.5, 8, 0.763891, -27.5, 0, 0.763891, -31.25, 8, 0.763891, -31.25, 10.25, 0.763891, -26.25, 12.75, 0.763891, -25.25, 10.25, 0.763891, -27.75, 12.75, 0.763891, -31.25, 8.5, 0.763891, -28, -7.25, 0.763891, -28.25, -7.25, 0.763891, -13.25, 1.25, 0.763891, -13.25, -15.5, 0.763891, -12.75, -15.5, 0.763891, -28, -23.75, 0.763891, -28, -23.75, 0.763891, -12.5, 2.5, 0.763891, 23.75, 7, 0.763891, 23.75, 7.25, 0.763891, 22.75, 2.5, 0.763891, -24, 8.5, 0.763891, 22.75, 8.75, 0.763891, 23.75, 16.5, 0.763891, 23.75, 16.5, 0.763891, -24, 17.75, 0.763891, 23.25, 49.5, 0.763891, 23.5, -7.5, 0.763891, -11, -9.5, 0.763891, -11, -9.5, 0.763891, -4, -7.25, 0.763891, -4, -7, 0.763891, -2.25, 1.25, 0.763891, -2.5, -15.25, 0.763891, -11, -23.75, 0.763891, -1.75, -15.25, 0.763891, -1.75, -15, 0.763891, -4, -14.5, 7.26389, 17, -35.75, 7.51389, 17, -14.5, 7.26389, 17.25, -14.25, 7.26389, 27.75, -8, 7.26389, 28, -8, 7.26389, -3, -14.25, 7.26389, -3, -13.5, 0.763891, 18, -14, 0.763891, 18.25, -14, 0.763891, 27.5, -8.25, 0.763891, 27.5, -13.5, 0.763891, 16.25, -8.25, 0.763891, -2.75, -14, 0.763891, -2.75, -14, 0.763891, 16, 7, 0.763891, 27.5, 7, 0.763891, 25, 1.25, 0.763891, 24.75, -7, 0.763891, 27.5, -23.75, 0.763891, 9.5, -21.75, 0.763891, 13, -15.25, 0.763891, 13, -37.5, 0.763891, 15.25, -37.5, 0.763891, 10, -39.75, 0.763891, 10, -49.5, 0.763891, 15.25, -24, 0.763891, 10, -22.25, 0.763891, 13.25, -22.25, 0.763891, 16, -35.25, 0.763891, 10, -35.25, 0.763891, 16, -21.25, 3.76389, 14, -21.25, 3.76389, 16, -15.25, 3.76389, 16, -15.25, 3.76389, 14, -21, 0.763891, 14.25, -21, 0.763891, 16, -15.5, 0.763891, 16, -15.5, 0.763891, 14.25, -36.5, 0.763891, 18.25, -36.75, 0.763891, 17.5, -37.5, 0.763891, 17.25, -49.5, 0.763891, 49.5, -13.75, 0.763891, 49.5, -15.25, 0.763891, 28.5, -13.5, 0.763891, 28.75, -15.25, 0.763891, 18.25, 17.5, 0.763891, 25, 8.75, 0.763891, 25, 8.75, 0.763891, 29.75, 6.5, 0.763891, 30, 6.5, 0.763891, 49.5, 49.5, 0.763891, 49.5, -8, 7.26389, 29, 7.75, 7.26389, 29, 7.75, 7.26389, 28.5, -8, 7.26389, 28.25, -8.75, 0.763891, 30, -9, 0.763891, 28.75, -6.75, 0.763891, 49.5, -6.75, 0.763891, 30)
@@ -140,10 +138,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_i1r7e")
 
-[node name="Gameplay" type="Node3D"]
+[node name="Gameplay2" type="Node3D"]
 
 [node name="PauseMenu" type="ColorRect" parent="."]
-unique_name_in_owner = true
 process_mode = 3
 visible = false
 z_index = 50
@@ -314,28 +311,26 @@ shape = SubResource("BoxShape3D_pi87v")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Floor"]
 shape = SubResource("BoxShape3D_5lwbh")
 
-[node name="Interactables" type="Node" parent="NavigationRegion3D"]
+[node name="Keypad" parent="NavigationRegion3D" instance=ExtResource("5_80drl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 15)
 
-[node name="Keypad" parent="NavigationRegion3D/Interactables" instance=ExtResource("5_80drl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.07508, 0.836449, 14.9915)
-
-[node name="AudioRecorder" parent="NavigationRegion3D/Interactables" instance=ExtResource("5_xbvjf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.07508, 0.836449, 14.9915)
+[node name="AudioRecorder" parent="NavigationRegion3D" instance=ExtResource("5_xbvjf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 15)
 stream = ExtResource("6_lvf04")
 
-[node name="Lever" parent="NavigationRegion3D/Interactables" instance=ExtResource("8_lvf04")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.07508, 0.836449, 14.9915)
+[node name="Lever" parent="NavigationRegion3D" instance=ExtResource("8_lvf04")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 15)
 
-[node name="OmniLight3D" type="OmniLight3D" parent="NavigationRegion3D/Interactables/Lever"]
+[node name="OmniLight3D" type="OmniLight3D" parent="NavigationRegion3D/Lever"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 visible = false
 script = SubResource("GDScript_lvf04")
 
-[node name="Note" parent="NavigationRegion3D/Interactables" node_paths=PackedStringArray("display") instance=ExtResource("9_sgx0y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.07508, 0.836449, 14.9915)
+[node name="Note" parent="NavigationRegion3D" node_paths=PackedStringArray("display") instance=ExtResource("9_sgx0y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, 15)
 display = NodePath("HouseNote")
 
-[node name="HouseNote" type="TextureRect" parent="NavigationRegion3D/Interactables/Note"]
+[node name="HouseNote" type="TextureRect" parent="NavigationRegion3D/Note"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -348,12 +343,6 @@ offset_bottom = 289.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("10_80drl")
-
-[node name="Rock" parent="NavigationRegion3D/Interactables" instance=ExtResource("13_50w6k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 18)
-
-[node name="Locker" parent="NavigationRegion3D/Interactables" instance=ExtResource("15_mw1yu")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7, 0.413919, 19)
 
 [node name="Node" type="Node3D" parent="."]
 transform = Transform3D(0.075, 0, 0, 0, 0.075, 0, 0, 0, 0.075, 0, 0, 0)
@@ -384,8 +373,8 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -300, 
 
 [connection signal="pressed" from="PauseMenu/VBoxContainer/Resume" to="PauseMenu" method="_on_resume_pressed"]
 [connection signal="pressed" from="PauseMenu/VBoxContainer/Quit" to="PauseMenu" method="_on_quit_pressed"]
-[connection signal="lever_down" from="NavigationRegion3D/Interactables/Lever" to="NavigationRegion3D/Interactables/Lever/OmniLight3D" method="_on_lever_lever_down"]
-[connection signal="lever_up" from="NavigationRegion3D/Interactables/Lever" to="NavigationRegion3D/Interactables/Lever/OmniLight3D" method="_on_lever_lever_up"]
+[connection signal="lever_down" from="NavigationRegion3D/Lever" to="NavigationRegion3D/Lever/OmniLight3D" method="_on_lever_lever_down"]
+[connection signal="lever_up" from="NavigationRegion3D/Lever" to="NavigationRegion3D/Lever/OmniLight3D" method="_on_lever_lever_up"]
 
 [editable path="Node/Alpha Hills Lab v1"]
 [editable path="Node/Alpha Hills Lab v2"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bhv62chrnevg7"]
 
-[ext_resource type="Script" uid="uid://ch0vhi1qipeo1" path="res://Source/Scripts/interactables/rock.gd" id="1_isnmr"]
+[ext_resource type="Script" path="res://Source/Scripts/interactables/rock.gd" id="1_isnmr"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_7rjd2"]
 radius = 0.1

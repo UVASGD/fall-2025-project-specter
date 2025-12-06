@@ -8,7 +8,7 @@ enum {IDLE, CROUCH, CROUCH_SPRINT, WALK, SPRINT, READING, LOOKING_AT_DISPLAY}
 func _enter_tree():
 	add_to_group("Player")
 
-
+@export var vol_multiplier:float = 1
 @export var SPEED = 5.0
 @export var SPRINT_SPEED = 1.5
 @export var CROUCH_SPEED = 0.5
@@ -43,8 +43,6 @@ var door: RigidDoor = null
 func _ready():
 	if not debug_topdown_mode:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
-
 
 func _physics_process(delta: float) -> void:
 	if door:
@@ -153,7 +151,7 @@ func _physics_process(delta: float) -> void:
 	
 	#TODO balance values
 	if not holding_breath:
-		make_noise( (movement_state + 1) )
+		make_noise( (movement_state + 1) * vol_multiplier)
 	
 	#TODO balance values
 	match movement_state:
@@ -225,7 +223,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		has_throwable = false
 		hand.visible = false
 		var throwable: RigidBody3D = throwable_scene.instantiate()
-		get_tree().root.add_child(throwable)
+		get_parent().add_child(throwable)
 		throwable.global_position = camera.global_position
 		throwable.apply_central_impulse(-camera.global_basis.z * 10)
 
