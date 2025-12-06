@@ -177,9 +177,9 @@ func set_new_roam_target():
 		else:
 			#Ensure we have a targeter
 			if (roam_targeter == null): roam_targeter = RS_RoomRoam.new(current_room, self.global_position)
-			var next_target = self.roam_targeter.GetNextTarget().global_position
+			var next_target = self.roam_targeter.GetNextTarget()
 			if (next_target != null):
-				roam_target = next_target
+				roam_target = next_target.global_position
 			else: #This means we have searched all of the nodes in the current room. Go to next room
 				var next_room = null
 				if (current_room == players_room): #Just go to a random nearby room

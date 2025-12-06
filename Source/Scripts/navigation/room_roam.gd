@@ -6,6 +6,7 @@ var Start: Vector3
 var Waypoints: Array[Node]
 
 func _init(room: RS_Room, start: Vector3):
+	print("New room roam for: ", room.name)
 	self.Room = room
 	self.Start = start
 	self.Waypoints = room.WaypointsParent.get_children()

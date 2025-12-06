@@ -67,9 +67,9 @@ func CheckOverlap(Parent:Node, Point:Vector3):
 	return false
 
 func GetRoom(Point:Vector3):
-	print("Get Room at point: ", Point)
+	#print("Get Room at point: ", Point)
 	for Room in AllRooms:
-		print("\tRoom: ", Room.name)
+		#print("\tRoom: ", Room.name)
 		if (CheckOverlap(Room.CollidersParent, Point)): return Room
 	return null
 	
