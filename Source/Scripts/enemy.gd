@@ -49,7 +49,8 @@ func _physics_process(delta: float) -> void:
 	confidence.interval_decay(delta)
 	
 	roam_wait_time -= delta
-	if global_position.distance_to(player.global_position) < 2:
+	
+	if rc.is_colliding() and rc.get_collider() == player:
 		kill_player()
 		return
 	

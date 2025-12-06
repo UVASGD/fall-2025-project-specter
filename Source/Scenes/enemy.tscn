@@ -38,7 +38,10 @@ stream = ExtResource("4_sf4d7")
 volume_db = 5.0
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
-enabled = false
+target_position = Vector3(0, 0, -1.5)
+collision_mask = 7
+debug_shape_custom_color = Color(0.454902, 0, 0.454902, 1)
+debug_shape_thickness = 5
 
 [node name="EchoTimer" type="Timer" parent="."]
 one_shot = true

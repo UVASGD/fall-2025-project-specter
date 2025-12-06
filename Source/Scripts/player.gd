@@ -219,6 +219,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if event.is_action_released("grab_and_drag") and door:
 		door = null
+		grab_hand.position = Vector3.ZERO
 	
 	if event.is_action_pressed("throw_item") and has_throwable:
 		has_throwable = false
