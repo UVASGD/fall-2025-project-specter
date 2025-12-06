@@ -139,9 +139,10 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_i1r7e")
 
-[node name="Gameplay2" type="Node3D"]
+[node name="Gameplay" type="Node3D"]
 
 [node name="PauseMenu" type="ColorRect" parent="."]
+unique_name_in_owner = true
 process_mode = 3
 visible = false
 z_index = 50

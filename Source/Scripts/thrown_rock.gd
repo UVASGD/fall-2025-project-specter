@@ -13,6 +13,6 @@ func _physics_process(_delta: float) -> void:
 	
 	if sleeping:
 		var rock: Interactable = rock_scene.instantiate()
-		get_tree().root.add_child(rock)
+		get_parent().add_child(rock)
 		rock.global_position = global_position
 		queue_free()

@@ -42,8 +42,6 @@ var has_throwable: bool = false
 func _ready():
 	if not debug_topdown_mode:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
-
 
 func _physics_process(delta: float) -> void:
 	eggtimer += delta

@@ -8,6 +8,7 @@ func _enter_tree():
 	add_to_group("Enemy")
 
 @onready var player = %Player
+@onready var pause_menu = %PauseMenu
 @onready var nav_agent = $NavigationAgent3D
 @onready var sfx_kill = $sfx_kill
 @onready var sfx_echo = $sfx_echo
@@ -213,5 +214,4 @@ func kill_player():
 	current_state = IDLE
 	velocity = Vector3.ZERO
 	await get_tree().create_timer(0.98).timeout
-	if get_tree():
-		get_tree().reload_current_scene()
+	pause_menu.end_game()
