@@ -8,7 +8,7 @@ enum {IDLE, CROUCH, CROUCH_SPRINT, WALK, SPRINT, READING, LOOKING_AT_DISPLAY}
 func _enter_tree():
 	add_to_group("Player")
 
-
+@export var vol_multiplier:float = 1
 @export var SPEED = 5.0
 @export var SPRINT_SPEED = 1.5
 @export var CROUCH_SPEED = 0.5
@@ -147,7 +147,7 @@ func _physics_process(delta: float) -> void:
 	
 	#TODO balance values
 	if not holding_breath:
-		make_noise( (movement_state + 1) )
+		make_noise( (movement_state + 1) * vol_multiplier)
 	
 	#TODO balance values
 	match movement_state:
