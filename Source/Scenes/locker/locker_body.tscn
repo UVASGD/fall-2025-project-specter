@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://blmecgmlsiofh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tcuxh"]
+size = Vector3(1, 0.05, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hchs0"]
+size = Vector3(1, 0.05, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wbn4r"]
+size = Vector3(0.1, 2.5, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_h5mnd"]
+size = Vector3(0.1, 2.5, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2p3he"]
+size = Vector3(1.2, 2.5, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ip7br"]
+size = Vector3(1.2, 2.5, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xvy2e"]
+size = Vector3(1, 0.1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jqn52"]
+size = Vector3(1, 0.1, 1)
+
+[node name="LockerBody" type="StaticBody3D"]
+
+[node name="LockerFloor" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, 0)
+shape = SubResource("BoxShape3D_tcuxh")
+
+[node name="LockerFloorMesh" type="MeshInstance3D" parent="LockerFloor"]
+mesh = SubResource("BoxMesh_hchs0")
+skeleton = NodePath("../..")
+
+[node name="LockerWall" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55, 1.25, 0)
+shape = SubResource("BoxShape3D_wbn4r")
+
+[node name="LockerWallMesh" type="MeshInstance3D" parent="LockerWall"]
+mesh = SubResource("BoxMesh_h5mnd")
+skeleton = NodePath("../..")
+
+[node name="LockerWall2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.55, 1.25, 0)
+shape = SubResource("BoxShape3D_wbn4r")
+
+[node name="LockerWallMesh" type="MeshInstance3D" parent="LockerWall2"]
+mesh = SubResource("BoxMesh_h5mnd")
+skeleton = NodePath("../..")
+
+[node name="LockerWall3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, -0.55)
+shape = SubResource("BoxShape3D_2p3he")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LockerWall3"]
+mesh = SubResource("BoxMesh_ip7br")
+
+[node name="LockerCeiling" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.45, 0)
+shape = SubResource("BoxShape3D_xvy2e")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LockerCeiling"]
+mesh = SubResource("BoxMesh_jqn52")

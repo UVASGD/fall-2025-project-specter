@@ -16,11 +16,11 @@ func _enter_tree():
 @export var SENSITIVITY = 0.005
 @export var debug_topdown_mode = false
 
-
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
 @onready var ray_cast: RayCast3D = $Head/Camera3D/RayCast3D
 @onready var hand: Node3D = $Head/Camera3D/Hand
+@onready var grab_hand: Marker3D = $Head/Camera3D/GrabHand
 @onready var stamina_timer = $StaminaTimer
 @onready var hud = %HUD
 
@@ -206,6 +206,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 		if collider is Interactable:
 			collider.interact(self)
+	
+	if event.is_action_pressed("grab_and_drag"):
+		var collider: Object = ray_cast.get_collider()
+		if collider is RigidDoor:
+			var door: RigidDoor = collider
+			grab_hand.global_position = door.get_center()
 	
 	if event.is_action_pressed("throw_item") and has_throwable:
 		has_throwable = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://1icvjpj28xm"]
+[gd_scene load_steps=13 format=3 uid="uid://1icvjpj28xm"]
 
 [ext_resource type="Script" uid="uid://co1keff16j780" path="res://Source/Scripts/pause_menu.gd" id="1_eoby2"]
 [ext_resource type="FontFile" uid="uid://dwg8g5jol18m1" path="res://Assets/2d/Night Fears.ttf" id="2_fq1p6"]
@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://calxibu6hi8wt" path="res://Assets/2d/OpenSans-Regular.ttf" id="4_2bsna"]
 [ext_resource type="PackedScene" uid="uid://dmdiskq1g67" path="res://Source/Scenes/player.tscn" id="5_7y43o"]
 [ext_resource type="PackedScene" uid="uid://bhv62chrnevg7" path="res://Source/Scenes/Interactables/rock.tscn" id="6_34rqp"]
+[ext_resource type="PackedScene" uid="uid://ddr3c0lq7df6d" path="res://Source/Scenes/locker/locker.tscn" id="7_fq1p6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sorqg"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -123,6 +124,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
 [node name="Rock" parent="." instance=ExtResource("6_34rqp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -3)
+
+[node name="Locker" parent="." instance=ExtResource("7_fq1p6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -6)
 
 [connection signal="pressed" from="PauseMenu/VBoxContainer/Resume" to="PauseMenu" method="_on_resume_pressed"]
 [connection signal="pressed" from="PauseMenu/VBoxContainer/Quit" to="PauseMenu" method="_on_quit_pressed"]
