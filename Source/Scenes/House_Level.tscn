@@ -1,7 +1,8 @@
-[gd_scene load_steps=91 format=4 uid="uid://cd02mm4ktaqrk"]
+[gd_scene load_steps=92 format=4 uid="uid://cd02mm4ktaqrk"]
 
 [ext_resource type="PackedScene" uid="uid://dmdiskq1g67" path="res://Source/Scenes/player.tscn" id="1_wi4o1"]
 [ext_resource type="PackedScene" uid="uid://bx1wsswr0kbbn" path="res://Source/Scenes/enemy.tscn" id="2_ob452"]
+[ext_resource type="PackedScene" uid="uid://vm114svtrag8" path="res://Source/Scenes/Interactables/lever.tscn" id="3_00wy1"]
 [ext_resource type="Script" uid="uid://co1keff16j780" path="res://Source/Scripts/pause_menu.gd" id="3_pn516"]
 [ext_resource type="FontFile" uid="uid://dwg8g5jol18m1" path="res://Assets/2d/Night Fears.ttf" id="4_00wy1"]
 [ext_resource type="Script" uid="uid://qg2u4m1spvd1" path="res://Source/Scripts/hud.gd" id="5_axh8m"]
@@ -1855,6 +1856,9 @@ vol_multiplier = 0.8
 
 [node name="Enemy" parent="NavigationRegion3D/lab_level/otherstuff" instance=ExtResource("2_ob452")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.72663, 96.8856)
+
+[node name="WinCon" parent="NavigationRegion3D/lab_level/otherstuff" instance=ExtResource("3_00wy1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5661, 1.5431, 54.8218)
 
 [node name="PauseMenu" type="ColorRect" parent="."]
 unique_name_in_owner = true
