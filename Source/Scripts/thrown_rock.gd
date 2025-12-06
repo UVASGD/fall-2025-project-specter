@@ -8,7 +8,7 @@ var _is_on_floor: bool = false
 
 func _physics_process(_delta: float) -> void:
 	if get_contact_count() and not sleeping:
-		SoundManager.emit_sound(global_position, 7.0, self)
+		SoundManager.emit_sound(global_position, 1.0, self)
 		return
 	
 	if sleeping:

@@ -31,7 +31,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.445774, -0.261017, -0.60766
 visible = false
 
 [node name="Rock" parent="Head/Camera3D/Hand" instance=ExtResource("2_3fero")]
-collision_layer = 0
 collision_mask = 0
 
 [node name="StaminaTimer" type="Timer" parent="."]
