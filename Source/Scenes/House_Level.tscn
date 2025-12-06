@@ -1852,7 +1852,9 @@ shape = SubResource("ConcavePolygonShape3D_bl35f")
 [node name="Player" parent="NavigationRegion3D/lab_level/otherstuff" instance=ExtResource("1_wi4o1")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.94347, -9.01643)
+collision_layer = 0
 vol_multiplier = 0.8
+JUMP_VELOCITY = 4.6
 
 [node name="Enemy" parent="NavigationRegion3D/lab_level/otherstuff" instance=ExtResource("2_ob452")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.72663, 96.8856)
