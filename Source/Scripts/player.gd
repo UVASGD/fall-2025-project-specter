@@ -103,7 +103,7 @@ func _physics_process(delta: float) -> void:
 		used_stamina = true
 		#TODO balance values
 		if holding_breath:
-			stamina -= 5
+			stamina -= 10
 		else:
 			make_noise(2)
 			stamina -= 3
@@ -161,16 +161,16 @@ func _physics_process(delta: float) -> void:
 	#TODO balance values
 	match movement_state:
 		IDLE:
-			if holding_breath: stamina -= 1 * delta
-		CROUCH:
 			if holding_breath: stamina -= 2 * delta
+		CROUCH:
+			if holding_breath: stamina -= 4 * delta
 		CROUCH_SPRINT:
-			if holding_breath: stamina -= 5 * delta
+			if holding_breath: stamina -= 10 * delta
 			else: stamina -= 1 * delta
 		WALK:
-			if holding_breath: stamina -= 3 * delta
+			if holding_breath: stamina -= 7 * delta
 		SPRINT: 
-			if holding_breath: stamina -= 10 * delta
+			if holding_breath: stamina -= 25 * delta
 			else: stamina -= 5 * delta
 	
 	if holding_breath:
