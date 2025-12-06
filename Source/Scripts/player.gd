@@ -37,6 +37,7 @@ var eggstack = []
 var eggtimer = 0
 
 var has_throwable: bool = false
+var door: RigidDoor = null
 
 
 func _ready():
@@ -46,6 +47,9 @@ func _ready():
 
 
 func _physics_process(delta: float) -> void:
+	if door:
+		door.move_to_handd(grab_hand.global_position)
+	
 	eggtimer += delta
 	if movement_state == LOOKING_AT_DISPLAY:
 		return
@@ -210,8 +214,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("grab_and_drag"):
 		var collider: Object = ray_cast.get_collider()
 		if collider is RigidDoor:
-			var door: RigidDoor = collider
+			door = collider
 			grab_hand.global_position = door.get_center()
+	
+	if event.is_action_released("grab_and_drag") and door:
+		door = null
 	
 	if event.is_action_pressed("throw_item") and has_throwable:
 		has_throwable = false

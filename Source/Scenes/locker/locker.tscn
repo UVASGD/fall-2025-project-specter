@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://ddr3c0lq7df6d"]
 
 [ext_resource type="PackedScene" uid="uid://blmecgmlsiofh" path="res://Source/Scenes/locker/locker_body.tscn" id="1_6h1l3"]
-[ext_resource type="Script" path="res://Source/Scripts/rigid_door.gd" id="2_d7kgv"]
+[ext_resource type="Script" uid="uid://bs70gq3bpdk0a" path="res://Source/Scripts/rigid_door.gd" id="2_d7kgv"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_d7kgv"]
 size = Vector3(1.2, 2.5, 0.1)
