@@ -19,6 +19,7 @@ var target_pos : Vector3
 var search_pos : Vector3
 var roam_target : Vector3
 var SPEED = 3.0
+var search_counter = 0
 const ROAM_SPEED = 2.0
 const SEARCH_SPEED = 2.5
 const HUNT_SPEED = 5.0
@@ -75,8 +76,14 @@ func _physics_process(delta: float) -> void:
 			move_and_slide()
 
 		SEARCHING:
+			if randf() < 0.05 * search_counter:
+				confidence.new_interval()
+				search_counter = 0
+			
 			if global_position.distance_to(target_pos) < 1.5:
 				set_search_point()
+				search_counter += 1
+			
 			nav_agent.target_position = target_pos
 			var next_nav_point = nav_agent.get_next_path_position()
 			velocity = (next_nav_point - global_position).normalized() * SPEED
@@ -91,7 +98,10 @@ func _physics_process(delta: float) -> void:
 			if echolocation_timer.is_stopped() and randf() < 0.01:
 				echolocate()
 		HUNTING:
-			target_pos = confidence.intervals[0].position
+			target_pos = confidence.get_cur_interval_pos()
+			if global_position.distance_to(target_pos) < 0.5:
+				confidence.new_interval()
+			
 			nav_agent.target_position = target_pos
 			var next_nav_point = nav_agent.get_next_path_position()
 			velocity = (next_nav_point - global_position).normalized() * SPEED
@@ -123,11 +133,13 @@ func change_state(state):
 		SEARCHING:
 			print("State changed to: SEARCHING")
 			SPEED = SEARCH_SPEED
-			search_pos = confidence.intervals[0].position
+			search_pos = confidence.get_interval(SEARCHING)
+			search_counter = 0
 			set_search_point()
 		HUNTING:
 			print("State changed to: HUNTING")
 			SPEED = HUNT_SPEED
+			target_pos = confidence.get_interval(HUNTING)
 
 func set_search_point():
 	var angle = randf() * 2 * PI
@@ -203,6 +215,3 @@ func kill_player():
 	await get_tree().create_timer(0.98).timeout
 	if get_tree():
 		get_tree().reload_current_scene()
-
-func handle_noise(_noise_level, _noise_pos):
-	pass
