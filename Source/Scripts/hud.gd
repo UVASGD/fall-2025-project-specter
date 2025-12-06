@@ -5,6 +5,8 @@ extends Control
 @onready var stamina_text = $Oxygen/RichTextLabel
 @onready var noise_bar = $Noise
 @onready var vars = []
+@onready var dialogue_box: TextureRect = $DialogueBox
+@onready var dialogue_text: RichTextLabel = $DialogueBox/DialogueText
 
 var interactable_display: TextureRect
 

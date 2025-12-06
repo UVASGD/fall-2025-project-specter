@@ -2,7 +2,7 @@ class_name Player
 extends CharacterBody3D
 
 
-enum {IDLE, CROUCH, CROUCH_SPRINT, WALK, SPRINT, READING, LOOKING_AT_DISPLAY}
+enum {IDLE, CROUCH, CROUCH_SPRINT, WALK, SPRINT, READING, LOOKING_AT_DISPLAY, DIALOGUE}
 
 # for debug
 func _enter_tree():
@@ -49,7 +49,7 @@ func _physics_process(delta: float) -> void:
 		door.move_to_handd(grab_hand.global_position)
 	
 	eggtimer += delta
-	if movement_state == LOOKING_AT_DISPLAY:
+	if movement_state == LOOKING_AT_DISPLAY or movement_state == DIALOGUE:
 		return
 	
 	movement_state = IDLE
@@ -194,6 +194,12 @@ func make_noise(noise_val):
 	SoundManager.emit_sound(global_position, noise_val, self)
 
 func _unhandled_input(event: InputEvent) -> void:
+	if movement_state == DIALOGUE:
+		#TODO: iterate through dialogue
+		if event.is_action_pressed("interact"):
+			pass
+		return
+	
 	if event is InputEventMouseMotion and not movement_state == LOOKING_AT_DISPLAY and not debug_topdown_mode:
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
