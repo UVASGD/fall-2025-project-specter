@@ -1,10 +1,8 @@
 extends RigidBody3D
 
-
 var rock_scene: PackedScene = preload("res://Source/Scenes/Interactables/rock.tscn")
 
 var _is_on_floor: bool = false
-
 
 func _physics_process(_delta: float) -> void:
 	if get_contact_count() and not sleeping:

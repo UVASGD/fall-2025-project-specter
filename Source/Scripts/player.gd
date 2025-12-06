@@ -209,7 +209,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		has_throwable = false
 		hand.visible = false
 		var throwable: RigidBody3D = throwable_scene.instantiate()
-		get_tree().root.add_child(throwable)
+		get_parent().add_child(throwable)
 		throwable.global_position = camera.global_position
 		throwable.apply_central_impulse(-camera.global_basis.z * 10)
 
