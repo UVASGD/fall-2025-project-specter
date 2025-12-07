@@ -65,13 +65,13 @@ func _physics_process(delta: float) -> void:
 		ROAMING:
 			if global_position.distance_to(roam_target) < 2.0 or roam_wait_time <= 0:
 				set_new_roam_target()
-				roam_wait_time = randf_range(3.0, 6.0)
+				roam_wait_time = randf_range(10.0, 20.0)
 			nav_agent.target_position = roam_target
 			var next_nav_point = nav_agent.get_next_path_position()
 			velocity = (next_nav_point - global_position).normalized() * SPEED
 			var target_rot = Vector3(next_nav_point.x, global_position.y, next_nav_point.z)
 			
-			if velocity.length() > 0.1 and global_position != target_rot:
+			if velocity.length() > 0.1 and !global_position.is_equal_approx(target_rot):
 				look_at(target_rot)
 			
 			
@@ -92,7 +92,7 @@ func _physics_process(delta: float) -> void:
 			
 			var target_rot = Vector3(next_nav_point.x, global_position.y, next_nav_point.z)
 			
-			if velocity.length() > 0.1 and global_position != target_rot:
+			if velocity.length() > 0.1 and !global_position.is_equal_approx(target_rot):
 				look_at(target_rot)
 			
 			move_and_slide()
@@ -158,10 +158,28 @@ func set_new_roam_target():
 		var distance = randf_range(5.0, ROAM_RADIUS)
 		roam_target = global_position + rotated * distance
 	else:
-		var angle = randf() * 2 * PI
-		var radius = randf_range(5.0, ROAM_RADIUS)
-		var offset = Vector3(cos(angle) * radius, 0, sin(angle) * radius)
-		roam_target = global_position + offset
+		var current_room = building_manager.GetRoom(self.global_position)
+		var players_room = building_manager.GetRoom(player.global_position)
+		if (current_room == null or players_room == null): #In a doorway or something, bias towards player
+			roam_target = get_biased_roam_target()
+		#Only allow point biasing if in the same room
+		elif (current_room == players_room and randf() < PLAYER_BIAS*PLAYER_BIAS): 
+			roam_target = get_biased_roam_target()
+		else:
+			#Ensure we have a targeter
+			if (roam_targeter == null): roam_targeter = RS_RoomRoam.new(current_room, self.global_position)
+			var next_target = self.roam_targeter.GetNextTarget()
+			if (next_target != null):
+				roam_target = next_target.global_position
+			else: #This means we have searched all of the nodes in the current room. Go to next room
+				var next_room = null
+				if (current_room == players_room): #Just go to a random nearby room
+					next_room = building_manager.ConnectionMap[current_room].pick_random()
+				else: #Else we want to go to a room that will make us closer to the player
+					next_room = building_manager.GetPathToRoom(current_room, players_room)[1] #path[0] is the current, path[-1] is the players, path[1] is the next room
+				#Set up the targeter and go to first point
+				roam_targeter = RS_RoomRoam.new(next_room, self.global_position)
+				roam_target = self.roam_targeter.GetNextTarget().global_position
 
 	roam_target.y = global_position.y
 

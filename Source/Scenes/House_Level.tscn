@@ -1,4 +1,4 @@
-[gd_scene load_steps=93 format=4 uid="uid://cd02mm4ktaqrk"]
+[gd_scene load_steps=103 format=4 uid="uid://cd02mm4ktaqrk"]
 
 [ext_resource type="PackedScene" uid="uid://dmdiskq1g67" path="res://Source/Scenes/player.tscn" id="1_wi4o1"]
 [ext_resource type="PackedScene" uid="uid://bx1wsswr0kbbn" path="res://Source/Scenes/enemy.tscn" id="2_ob452"]
@@ -559,6 +559,32 @@ _surfaces = [{
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_bl35f"]
 data = PackedVector3Array(-20.5, -3, 0.5, -20.5, -3, -0.5, -20.5, 3, -0.5, 20.5, -3, -0.5, -20.5, -3, -0.5, -20.5, -3, 0.5, -20.5, 3, -0.5, -20.5, -3, -0.5, 20.5, -3, -0.5, -20.5, 3, -0.5, -20.5, 3, 0.5, -20.5, -3, 0.5, -20.5, -3, 0.5, -20.5, 3, 0.5, 20.5, 3, 0.5, 20.5, 3, 0.5, -20.5, 3, 0.5, -20.5, 3, -0.5, -20.5, -3, 0.5, 20.5, -3, 0.5, 20.5, -3, -0.5, 20.5, 3, 0.5, 20.5, -3, 0.5, -20.5, -3, 0.5, 20.5, -3, -0.5, 20.5, -3, 0.5, 20.5, 3, 0.5, 20.5, -3, -0.5, 20.5, 3, -0.5, -20.5, 3, -0.5, -20.5, 3, -0.5, 20.5, 3, -0.5, 20.5, 3, 0.5, 20.5, 3, 0.5, 20.5, 3, -0.5, 20.5, -3, -0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oddle"]
+resource_name = "Worldgeometrymapsblalabceramicfloor00011Mtl"
+transparency = 4
+cull_mode = 2
+albedo_texture = ExtResource("4_mlxii")
+roughness = 0.495025
+normal_enabled = true
+normal_texture = ExtResource("5_foqo1")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ood2t"]
+resource_name = "Alpha Hills Lab v1_Object_4_008"
+_surfaces = [{
+"aabb": AABB(-43.2671, -165.025, -135.755, 117.956406, 309.72498, 0.0010070801),
+"attribute_data": PackedByteArray("818TQjSA08HzXxNCNIDTwfNfE0I0gMLB818TQjSAwsEN4ANCNIDTwQ3gA0I0gNPBDeADQjSAwsEN4ANCNIDCwfNfE0IAgLDB818TQgCAsMEN4ANCAICwwQ3gA0IAgLDB818TQgCAnsHzXxNCAICewQ3gA0IAgJ7BDeADQgCAnsHzXxNCaAB/wfNfE0JoAH/BDeADQmgAf8EN4ANCaAB/wfNfE0IAAHXB818TQgAAdcEN4ANCAAB1wQ3gA0IAAHXB818TQgAAT8HzXxNCAABPwQ3gA0IAAE/BDeADQgAAT8HzXxNCaQArwfNfE0JpACvB818EQgAAT8HzXwRCAABPwfNfBEJpACvB818EQmkAK8HzXxNCAIDnwfNfE0IAgOfB818EQgCA58HzXwRCAIDnwfNfBEI0gNPB818EQjSA08HzXxNCNIDTwfNfE0I0gNPB818TQjSAwsHzXxNCNIDCwQ3gA0I0gNPBDeADQjSA08EN4ANCNIDCwQ3gA0I0gMLB818TQgCAsMHzXxNCAICwwQ3gA0IAgLDBDeADQgCAsMHzXxNCAICewfNfE0IAgJ7BDeADQgCAnsEN4ANCAICewfNfE0JoAH/B818TQmgAf8EN4ANCaAB/wQ3gA0JoAH/B818TQgAAdcHzXxNCAAB1wQ3gA0IAAHXBDeADQgAAdcHzXxNCAABPwfNfE0IAAE/BDeADQgAAT8EN4ANCAABPwfNfE0JpACvB818TQmkAK8HzXwRCAABPwfNfBEIAAE/B818EQmkAK8HzXwRCaQArwfNfE0IAgOfB818TQgCA58HzXwRCAIDnwfNfBEIAgOfB818EQjSA08HzXwRCNIDTwQ=="),
+"format": 34359742519,
+"index_count": 96,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAQAEAAMAAwAEAAUABAAGAAUABQAGAAcABgAIAAcABwAIAAkACAAKAAkACQAKAAsACgAMAAsACwAMAA0ADAAOAA8ADwAOABAAEQAAABIAEgAAABMAFAAVABYAFgAVABcAFQAYABcAFwAYABkAGAAaABkAGQAaABsAGgAcABsAGwAcAB0AHAAeAB0AHQAeAB8AHgAgAB8AHwAgACEAIAAiACMAIwAiACQAJQAUACYAJgAUACcA"),
+"material": SubResource("StandardMaterial3D_oddle"),
+"name": "Worldgeometrymapsblalabceramicfloor00011Mtl",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 40,
+"vertex_data": PackedByteArray("gxEtwkSLzEJIwQfDgxEtwn9qhEJIwQfDJuR+QUSLzEJIwQfDJuR+QX9qhEJIwQfDgxEtwrIu4EFIwQfDJuR+QbIu4EFIwQfDgxEtwpqZIsFIwQfDJuR+QZqZIsFIwQfDgxEtwhDal8JIwQfDJuR+QRDal8JIwQfDgxEtwtgQrcJIwQfDJuR+QdgQrcJIwQfDgxEtwhSu/cJIwQfDJuR+QRSu/cJIwQfDgxEtwmYGJcNIwQfDRIt5QRSu/cJIwQfDdLV1QWYGJcNIwQfDgxEtwjOzEENIwQfDi2x5QTOzEENIwQfDkQ99QUSLzEIGwQfDL913QUSLzEJIwQfDL913QX9qhEJIwQfD7GCVQkSLzEJIwQfD7GCVQn9qhEJIwQfDL913QbIu4EFIwQfD7GCVQrIu4EFIwQfDL913QZqZIsFIwQfD7GCVQpqZIsFIwQfDL913QRDal8JIwQfD7GCVQhDal8JIwQfDL913QdgQrcJIwQfD7GCVQtgQrcJIwQfDL913QRSu/cJIwQfD7GCVQhSu/cJIwQfDL913QWYGJcNIwQfD0LWUQhSu/cJIwQfDFjuUQmYGJcNIwQfDL913QTOzEENIwQfD+bGUQjOzEENIwQfDZiaVQkSLzEIGwQfD//////9/AID//////38AgP//////fwCA//////9/AID//////38AgP//////fwCA//////9/AID//////38AgP//////fwCA//////9/AID//////38AgP//////fwCA//////9/AID//////38AgP//////fwCA//////9/AID//////38AgP//////fwCA//////9/AID//////38AgP//////fwCA//////9/AID//////38AgP//////fwCA//////9/AID//////38AgP//////fwCA//////9/AID//////38AgP//////fwCA//////9/AID//////38AgP//////fwCA//////9/AID//////38AgP//////fwCA//////9/AID//////38AgP//////fwCA//////9/AIA=")
+}]
+blend_shape_mode = 0
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_00wy1"]
 size = Vector2(500, 200)
