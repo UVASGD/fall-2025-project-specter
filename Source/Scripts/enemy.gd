@@ -72,13 +72,13 @@ func _physics_process(delta: float) -> void:
 		ROAMING:
 			if global_position.distance_to(roam_target) < 2.0 or roam_wait_time <= 0:
 				set_new_roam_target()
-				roam_wait_time = randf_range(3.0, 6.0)
+				roam_wait_time = randf_range(10.0, 20.0)
 			nav_agent.target_position = roam_target
 			var next_nav_point = nav_agent.get_next_path_position()
 			velocity = (next_nav_point - global_position).normalized() * SPEED
 			var target_rot = Vector3(next_nav_point.x, global_position.y, next_nav_point.z)
 			
-			if velocity.length() > 0.1 and global_position != target_rot:
+			if velocity.length() > 0.1 and !global_position.is_equal_approx(target_rot):
 				look_at(target_rot)
 			
 			
@@ -172,7 +172,7 @@ func set_new_roam_target():
 		if (current_room == null or players_room == null): #In a doorway or something, bias towards player
 			roam_target = get_biased_roam_target()
 		#Only allow point biasing if in the same room
-		elif (current_room == players_room and randf() < PLAYER_BIAS): 
+		elif (current_room == players_room and randf() < PLAYER_BIAS*PLAYER_BIAS): 
 			roam_target = get_biased_roam_target()
 		else:
 			#Ensure we have a targeter
