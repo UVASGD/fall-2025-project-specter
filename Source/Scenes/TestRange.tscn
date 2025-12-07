@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://1icvjpj28xm"]
+[gd_scene load_steps=21 format=3 uid="uid://1icvjpj28xm"]
 
 [ext_resource type="Script" uid="uid://co1keff16j780" path="res://Source/Scripts/pause_menu.gd" id="1_eoby2"]
 [ext_resource type="FontFile" uid="uid://dwg8g5jol18m1" path="res://Assets/2d/Night Fears.ttf" id="2_fq1p6"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://dmdiskq1g67" path="res://Source/Scenes/player.tscn" id="5_7y43o"]
 [ext_resource type="PackedScene" uid="uid://bhv62chrnevg7" path="res://Source/Scenes/Interactables/rock.tscn" id="6_34rqp"]
 [ext_resource type="PackedScene" uid="uid://ddr3c0lq7df6d" path="res://Source/Scenes/locker/locker.tscn" id="7_fq1p6"]
+[ext_resource type="PackedScene" uid="uid://1hrmiiy2c70y" path="res://Source/Scenes/Interactables/note.tscn" id="8_2bsna"]
+[ext_resource type="Texture2D" uid="uid://bpkbislh3nqo8" path="res://Assets/2d/house.png" id="9_7y43o"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sorqg"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -20,11 +22,45 @@ background_mode = 2
 sky = SubResource("Sky_jx7ex")
 tonemap_mode = 2
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_fq1p6"]
+size = Vector2(500, 200)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_g7ed7"]
 size = Vector3(50, 1, 50)
 
 [sub_resource type="BoxMesh" id="BoxMesh_832gt"]
 size = Vector3(50, 1, 50)
+
+[sub_resource type="GDScript" id="GDScript_fq1p6"]
+script/source = "extends Area3D
+
+
+var dialogue_text: Array[String] = [\"wow\", \"okay\", \"hmm\"]
+
+
+func _on_body_entered(body: Node3D) -> void:
+	if body is Player:
+		%Player.start_dialogue.emit(dialogue_text)
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xaggo"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_fq1p6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xaggo"]
+albedo_color = Color(0, 1, 1, 0.25098)
+
+[sub_resource type="GDScript" id="GDScript_34rqp"]
+script/source = "extends InteractableDisplay
+
+
+var text_array: Array[String] = [\"yep\", \"i believe it\", \"i need my vicodin\"]
+
+
+func interact(player: Player) -> void:
+	super(player)
+	player.start_dialogue.emit(text_array)
+"
 
 [node name="TestRange" type="Node3D"]
 
@@ -110,6 +146,34 @@ step = 0.0
 fill_mode = 3
 show_percentage = false
 
+[node name="CanvasLayer" type="CanvasLayer" parent="HUD"]
+
+[node name="DialogueBox" type="TextureRect" parent="HUD/CanvasLayer"]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -228.0
+offset_right = 250.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = SubResource("PlaceholderTexture2D_fq1p6")
+
+[node name="DialogueText" type="RichTextLabel" parent="HUD/CanvasLayer/DialogueBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "hello world"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
@@ -120,6 +184,7 @@ mesh = SubResource("BoxMesh_832gt")
 skeleton = NodePath("../..")
 
 [node name="Player" parent="." instance=ExtResource("5_7y43o")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
 [node name="Rock" parent="." instance=ExtResource("6_34rqp")]
@@ -128,5 +193,48 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -3)
 [node name="Locker" parent="." instance=ExtResource("7_fq1p6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -6)
 
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.35735, 1.3396, -0.274376)
+script = SubResource("GDScript_fq1p6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_xaggo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
+mesh = SubResource("BoxMesh_fq1p6")
+surface_material_override/0 = SubResource("StandardMaterial3D_xaggo")
+
+[node name="Label3D" type="Label3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.843379, 0)
+billboard = 1
+text = "start dialogue when entering Area3D"
+
+[node name="Note" parent="." node_paths=PackedStringArray("display") instance=ExtResource("8_2bsna")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.35908, 1.3466, 1.9915)
+script = SubResource("GDScript_34rqp")
+display = NodePath("HouseNote")
+
+[node name="HouseNote" type="TextureRect" parent="Note"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -217.0
+offset_top = -289.0
+offset_right = 217.0
+offset_bottom = 289.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_7y43o")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label3D" type="Label3D" parent="Note"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05059, 0)
+billboard = 1
+text = "start dialogue when interacting with Interactable"
+
 [connection signal="pressed" from="PauseMenu/VBoxContainer/Resume" to="PauseMenu" method="_on_resume_pressed"]
 [connection signal="pressed" from="PauseMenu/VBoxContainer/Quit" to="PauseMenu" method="_on_quit_pressed"]
+[connection signal="start_dialogue" from="HUD" to="HUD" method="display_dialogue_box"]
+[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]
