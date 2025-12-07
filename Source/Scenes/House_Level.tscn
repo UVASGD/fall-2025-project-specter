@@ -1,4 +1,4 @@
-[gd_scene load_steps=98 format=4 uid="uid://cd02mm4ktaqrk"]
+[gd_scene load_steps=99 format=4 uid="uid://cd02mm4ktaqrk"]
 
 [ext_resource type="PackedScene" uid="uid://dmdiskq1g67" path="res://Source/Scenes/player.tscn" id="1_wi4o1"]
 [ext_resource type="PackedScene" uid="uid://bx1wsswr0kbbn" path="res://Source/Scenes/enemy.tscn" id="2_ob452"]
@@ -567,6 +567,9 @@ data = PackedVector3Array(-20.5, -3, 0.5, -20.5, -3, -0.5, -20.5, 3, -0.5, 20.5,
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_00wy1"]
 size = Vector2(500, 200)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mlxii"]
+size = Vector3(500, 1, 500)
 
 [node name="House_Level" type="Node3D"]
 
@@ -1871,11 +1874,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5661, 0.908912, 54.8218)
 
 [node name="Note" parent="NavigationRegion3D/lab_level/otherstuff" instance=ExtResource("4_mlxii")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.153, 1.42958, 13.1601)
-text = "March 21 2011\\n\\n"
+text = "March 21 2011. Maintenance added a keypad lock to the reactor door. Kelly just turned 18 last month so I put in her birthday as the password (mdyy))"
 
 [node name="Note2" parent="NavigationRegion3D/lab_level/otherstuff" instance=ExtResource("4_mlxii")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.8597, 1.74364, -3.05658)
-text = "Test Text"
+text = "Reminder: John will be out Febuary 9th for Kelly's birthdayFww"
 
 [node name="Lever" parent="NavigationRegion3D/lab_level/otherstuff" instance=ExtResource("3_00wy1")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 52.1636, 2.14723, 92.5016)
@@ -2035,6 +2038,10 @@ dialogue = Array[String](["It's a keypad. I'll need to fiure out the code."])
 [node name="StartDialogue" parent="." instance=ExtResource("11_ginlg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.855239, -9)
 dialogue = Array[String](["[i]An old colleague of yours has asked you to help him on his most recent project, but remained cryptic on the details. However, you were strapped for cash, so you followed his directions to an underground lab.[/i]", "Huh? Where is everyone? This place looks abandoned."])
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.00205, -16.6596)
+mesh = SubResource("BoxMesh_mlxii")
 
 [connection signal="lever_down" from="NavigationRegion3D/lab_level/otherstuff/WinCon" to="PauseMenu" method="end_game" binds= [true]]
 [connection signal="lever_down" from="NavigationRegion3D/lab_level/otherstuff/Lever" to="NavigationRegion3D/lab_level/otherstuff/Door" method="open"]
