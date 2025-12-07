@@ -60,7 +60,7 @@ func _physics_process(delta: float) -> void:
 	roam_wait_time -= delta
 	
 	if rc.is_colliding() and rc.get_collider() == player:
-		kill_player()
+		kill_player() #TODO
 		return
 	
 	match current_state:

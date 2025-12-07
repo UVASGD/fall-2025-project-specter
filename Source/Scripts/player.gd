@@ -2,7 +2,9 @@ class_name Player
 extends CharacterBody3D
 
 
-enum {IDLE, CROUCH, CROUCH_SPRINT, WALK, SPRINT, READING, LOOKING_AT_DISPLAY}
+signal start_dialogue(text_array: Array[String])
+
+enum {IDLE, CROUCH, CROUCH_SPRINT, WALK, SPRINT, READING, LOOKING_AT_DISPLAY, DIALOGUE}
 
 # for debug
 func _enter_tree():
@@ -22,7 +24,7 @@ func _enter_tree():
 @onready var hand: Node3D = $Head/Camera3D/Hand
 @onready var grab_hand: Marker3D = $Head/Camera3D/GrabHand
 @onready var stamina_timer = $StaminaTimer
-@onready var hud = %HUD
+@onready var hud: Hud = %HUD
 
 @onready var bflyscene:PackedScene = preload("res://Source/Scenes/bfly.tscn")
 @onready var throwable_scene: PackedScene = preload("res://Source/Scenes/thrown_rock.tscn")
@@ -39,17 +41,22 @@ var eggtimer = 0
 var has_throwable: bool = false
 var door: RigidDoor = null
 
+var _prev_state
+
 
 func _ready():
+	hud.stop_dialogue.connect(_on_stop_dialogue)
 	if not debug_topdown_mode:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		
+	set_collision_layer_value(3, true)
 
 func _physics_process(delta: float) -> void:
 	if door:
 		door.move_to_handd(grab_hand.global_position)
 	
 	eggtimer += delta
-	if movement_state == LOOKING_AT_DISPLAY:
+	if movement_state == LOOKING_AT_DISPLAY or movement_state == DIALOGUE:
 		return
 	
 	movement_state = IDLE
@@ -98,7 +105,7 @@ func _physics_process(delta: float) -> void:
 		used_stamina = true
 		#TODO balance values
 		if holding_breath:
-			stamina -= 5
+			stamina -= 10
 		else:
 			make_noise(2)
 			stamina -= 3
@@ -156,16 +163,16 @@ func _physics_process(delta: float) -> void:
 	#TODO balance values
 	match movement_state:
 		IDLE:
-			if holding_breath: stamina -= 1 * delta
-		CROUCH:
 			if holding_breath: stamina -= 2 * delta
+		CROUCH:
+			if holding_breath: stamina -= 4 * delta
 		CROUCH_SPRINT:
-			if holding_breath: stamina -= 5 * delta
+			if holding_breath: stamina -= 10 * delta
 			else: stamina -= 1 * delta
 		WALK:
-			if holding_breath: stamina -= 3 * delta
+			if holding_breath: stamina -= 7 * delta
 		SPRINT: 
-			if holding_breath: stamina -= 10 * delta
+			if holding_breath: stamina -= 25 * delta
 			else: stamina -= 5 * delta
 	
 	if holding_breath:
@@ -194,20 +201,33 @@ func make_noise(noise_val):
 	SoundManager.emit_sound(global_position, noise_val, self)
 
 func _unhandled_input(event: InputEvent) -> void:
+	if movement_state == DIALOGUE:
+		if event.is_action_pressed("interact"):
+			hud.get_next_dialogue_text()
+		return
+	
 	if event is InputEventMouseMotion and not movement_state == LOOKING_AT_DISPLAY and not debug_topdown_mode:
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
 	
 	if event.is_action_pressed("interact"):
-		if movement_state == LOOKING_AT_DISPLAY:
-			stop_looking_at_display()
-			return
-		
-		var collider: Object = ray_cast.get_collider()
-		
-		if collider is Interactable:
-			collider.interact(self)
+		if has_throwable:
+			has_throwable = false
+			hand.visible = false
+			var throwable: RigidBody3D = throwable_scene.instantiate()
+			get_parent().add_child(throwable)
+			throwable.global_position = camera.global_position
+			throwable.apply_central_impulse(-camera.global_basis.z * 10)
+		else:
+			if movement_state == LOOKING_AT_DISPLAY:
+				stop_looking_at_display()
+				return
+			
+			var collider: Object = ray_cast.get_collider()
+			
+			if collider is Interactable:
+				collider.interact(self)
 	
 	if event.is_action_pressed("grab_and_drag"):
 		var collider: Object = ray_cast.get_collider()
@@ -219,13 +239,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		door = null
 		grab_hand.position = Vector3.ZERO
 	
-	if event.is_action_pressed("throw_item") and has_throwable:
-		has_throwable = false
-		hand.visible = false
-		var throwable: RigidBody3D = throwable_scene.instantiate()
-		get_parent().add_child(throwable)
-		throwable.global_position = camera.global_position
-		throwable.apply_central_impulse(-camera.global_basis.z * 10)
+	#if event.is_action_pressed("throw_item") and has_throwable:
+		#has_throwable = false
+		#hand.visible = false
+		#var throwable: RigidBody3D = throwable_scene.instantiate()
+		#get_parent().add_child(throwable)
+		#throwable.global_position = camera.global_position
+		#throwable.apply_central_impulse(-camera.global_basis.z * 10)
 
 
 func start_looking_at_display(display: TextureRect) -> void:
@@ -246,6 +266,16 @@ func stop_looking_at_display() -> void:
 
 func _on_stamina_timer_timeout() -> void:
 	recovering = true
+
+
+func _on_start_dialogue(text_array: Array[String]) -> void:
+	_prev_state = movement_state
+	movement_state = DIALOGUE
+	hud.start_dialogue.emit(text_array)
+
+
+func _on_stop_dialogue() -> void:
+	movement_state = _prev_state
 
 
 func contains_subarray(main_array: Array, sub_array: Array) -> bool:
