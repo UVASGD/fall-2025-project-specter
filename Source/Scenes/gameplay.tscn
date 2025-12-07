@@ -232,8 +232,10 @@ offset_bottom = 416.5
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("5_50w6k")
 
-[node name="DialogueBox" type="TextureRect" parent="HUD"]
-layout_mode = 1
+[node name="CanvasLayer" type="CanvasLayer" parent="HUD"]
+
+[node name="DialogueBox" type="TextureRect" parent="HUD/CanvasLayer"]
+visible = false
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -247,7 +249,7 @@ grow_horizontal = 2
 grow_vertical = 0
 texture = SubResource("PlaceholderTexture2D_mw1yu")
 
-[node name="DialogueText" type="RichTextLabel" parent="HUD/DialogueBox"]
+[node name="DialogueText" type="RichTextLabel" parent="HUD/CanvasLayer/DialogueBox"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -378,6 +380,7 @@ offset_bottom = 289.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("10_80drl")
+metadata/_edit_use_anchors_ = true
 
 [node name="Rock" parent="NavigationRegion3D/Interactables" instance=ExtResource("13_50w6k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 18)
@@ -414,6 +417,7 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -300, 
 
 [connection signal="pressed" from="PauseMenu/VBoxContainer/Resume" to="PauseMenu" method="_on_resume_pressed"]
 [connection signal="pressed" from="PauseMenu/VBoxContainer/Quit" to="PauseMenu" method="_on_quit_pressed"]
+[connection signal="start_dialogue" from="HUD" to="HUD" method="display_dialogue_box"]
 [connection signal="lever_down" from="NavigationRegion3D/Interactables/Lever" to="NavigationRegion3D/Interactables/Lever/OmniLight3D" method="_on_lever_lever_down"]
 [connection signal="lever_up" from="NavigationRegion3D/Interactables/Lever" to="NavigationRegion3D/Interactables/Lever/OmniLight3D" method="_on_lever_lever_up"]
 
