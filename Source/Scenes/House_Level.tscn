@@ -1878,7 +1878,7 @@ text = "March 21 2011. Maintenance added a keypad lock to the reactor door. Kell
 
 [node name="Note2" parent="NavigationRegion3D/lab_level/otherstuff" instance=ExtResource("4_mlxii")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.8597, 1.74364, -3.05658)
-text = "Reminder: John will be out Febuary 9th for Kelly's birthdayFww"
+text = "Reminder: John will be out Febuary 9th for Kelly's birthday."
 
 [node name="Lever" parent="NavigationRegion3D/lab_level/otherstuff" instance=ExtResource("3_00wy1")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 52.1636, 2.14723, 92.5016)
