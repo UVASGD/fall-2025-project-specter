@@ -18,7 +18,7 @@ var dialogue_array: Array[String]
 
 #TODO make dynamic
 func _process(_delta: float) -> void:
-	var stamina = vars[0]
+	var stamina = abs(vars[0])
 	var noise = vars[1]
 	
 	stamina_bar.value = stamina

@@ -417,7 +417,6 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -300, 
 
 [connection signal="pressed" from="PauseMenu/VBoxContainer/Resume" to="PauseMenu" method="_on_resume_pressed"]
 [connection signal="pressed" from="PauseMenu/VBoxContainer/Quit" to="PauseMenu" method="_on_quit_pressed"]
-[connection signal="start_dialogue" from="HUD" to="HUD" method="display_dialogue_box"]
 [connection signal="lever_down" from="NavigationRegion3D/Interactables/Lever" to="NavigationRegion3D/Interactables/Lever/OmniLight3D" method="_on_lever_lever_down"]
 [connection signal="lever_up" from="NavigationRegion3D/Interactables/Lever" to="NavigationRegion3D/Interactables/Lever/OmniLight3D" method="_on_lever_lever_up"]
 

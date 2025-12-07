@@ -48,6 +48,8 @@ func _ready():
 	hud.stop_dialogue.connect(_on_stop_dialogue)
 	if not debug_topdown_mode:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		
+	set_collision_layer_value(3, true)
 
 func _physics_process(delta: float) -> void:
 	if door:
@@ -210,14 +212,22 @@ func _unhandled_input(event: InputEvent) -> void:
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
 	
 	if event.is_action_pressed("interact"):
-		if movement_state == LOOKING_AT_DISPLAY:
-			stop_looking_at_display()
-			return
-		
-		var collider: Object = ray_cast.get_collider()
-		
-		if collider is Interactable:
-			collider.interact(self)
+		if has_throwable:
+			has_throwable = false
+			hand.visible = false
+			var throwable: RigidBody3D = throwable_scene.instantiate()
+			get_parent().add_child(throwable)
+			throwable.global_position = camera.global_position
+			throwable.apply_central_impulse(-camera.global_basis.z * 10)
+		else:
+			if movement_state == LOOKING_AT_DISPLAY:
+				stop_looking_at_display()
+				return
+			
+			var collider: Object = ray_cast.get_collider()
+			
+			if collider is Interactable:
+				collider.interact(self)
 	
 	if event.is_action_pressed("grab_and_drag"):
 		var collider: Object = ray_cast.get_collider()
@@ -229,13 +239,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		door = null
 		grab_hand.position = Vector3.ZERO
 	
-	if event.is_action_pressed("throw_item") and has_throwable:
-		has_throwable = false
-		hand.visible = false
-		var throwable: RigidBody3D = throwable_scene.instantiate()
-		get_parent().add_child(throwable)
-		throwable.global_position = camera.global_position
-		throwable.apply_central_impulse(-camera.global_basis.z * 10)
+	#if event.is_action_pressed("throw_item") and has_throwable:
+		#has_throwable = false
+		#hand.visible = false
+		#var throwable: RigidBody3D = throwable_scene.instantiate()
+		#get_parent().add_child(throwable)
+		#throwable.global_position = camera.global_position
+		#throwable.apply_central_impulse(-camera.global_basis.z * 10)
 
 
 func start_looking_at_display(display: TextureRect) -> void:

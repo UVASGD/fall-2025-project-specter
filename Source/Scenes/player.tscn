@@ -48,5 +48,4 @@ mesh = SubResource("SphereMesh_3fero")
 wait_time = 0.5
 one_shot = true
 
-[connection signal="start_dialogue" from="." to="." method="_on_start_dialogue"]
 [connection signal="timeout" from="StaminaTimer" to="." method="_on_stamina_timer_timeout"]

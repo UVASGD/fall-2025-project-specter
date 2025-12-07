@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=4 uid="uid://cd02mm4ktaqrk"]
+[gd_scene load_steps=93 format=4 uid="uid://cd02mm4ktaqrk"]
 
 [ext_resource type="PackedScene" uid="uid://dmdiskq1g67" path="res://Source/Scenes/player.tscn" id="1_wi4o1"]
 [ext_resource type="PackedScene" uid="uid://bx1wsswr0kbbn" path="res://Source/Scenes/enemy.tscn" id="2_ob452"]
@@ -559,6 +559,9 @@ _surfaces = [{
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_bl35f"]
 data = PackedVector3Array(-20.5, -3, 0.5, -20.5, -3, -0.5, -20.5, 3, -0.5, 20.5, -3, -0.5, -20.5, -3, -0.5, -20.5, -3, 0.5, -20.5, 3, -0.5, -20.5, -3, -0.5, 20.5, -3, -0.5, -20.5, 3, -0.5, -20.5, 3, 0.5, -20.5, -3, 0.5, -20.5, -3, 0.5, -20.5, 3, 0.5, 20.5, 3, 0.5, 20.5, 3, 0.5, -20.5, 3, 0.5, -20.5, 3, -0.5, -20.5, -3, 0.5, 20.5, -3, 0.5, 20.5, -3, -0.5, 20.5, 3, 0.5, 20.5, -3, 0.5, -20.5, -3, 0.5, 20.5, -3, -0.5, 20.5, -3, 0.5, 20.5, 3, 0.5, 20.5, -3, -0.5, 20.5, 3, -0.5, -20.5, 3, -0.5, -20.5, 3, -0.5, 20.5, 3, -0.5, 20.5, 3, 0.5, 20.5, 3, 0.5, 20.5, 3, -0.5, 20.5, -3, -0.5)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_00wy1"]
+size = Vector2(500, 200)
 
 [node name="House_Level" type="Node3D"]
 
@@ -1853,11 +1856,10 @@ shape = SubResource("ConcavePolygonShape3D_bl35f")
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.94347, -9.01643)
 collision_layer = 0
-vol_multiplier = 0.8
 JUMP_VELOCITY = 4.6
 
 [node name="Enemy" parent="NavigationRegion3D/lab_level/otherstuff" instance=ExtResource("2_ob452")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.72663, 96.8856)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.70388, 2.72663, -5.92852)
 
 [node name="WinCon" parent="NavigationRegion3D/lab_level/otherstuff" instance=ExtResource("3_00wy1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5661, 1.5431, 54.8218)
@@ -1948,6 +1950,34 @@ offset_right = 668.5
 offset_bottom = 416.5
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("7_ginlg")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="HUD"]
+
+[node name="DialogueBox" type="TextureRect" parent="HUD/CanvasLayer"]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -228.0
+offset_right = 250.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = SubResource("PlaceholderTexture2D_00wy1")
+
+[node name="DialogueText" type="RichTextLabel" parent="HUD/CanvasLayer/DialogueBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "hello world"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="PauseMenu/VBoxContainer/Resume" to="PauseMenu" method="_on_resume_pressed"]
 [connection signal="pressed" from="PauseMenu/VBoxContainer/Quit" to="PauseMenu" method="_on_quit_pressed"]
