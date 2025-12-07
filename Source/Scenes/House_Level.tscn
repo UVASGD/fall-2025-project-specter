@@ -1,4 +1,4 @@
-[gd_scene load_steps=102 format=4 uid="uid://cd02mm4ktaqrk"]
+[gd_scene load_steps=103 format=4 uid="uid://cd02mm4ktaqrk"]
 
 [ext_resource type="PackedScene" uid="uid://dmdiskq1g67" path="res://Source/Scenes/player.tscn" id="1_wi4o1"]
 [ext_resource type="PackedScene" uid="uid://bx1wsswr0kbbn" path="res://Source/Scenes/enemy.tscn" id="2_ob452"]
@@ -599,6 +599,7 @@ _surfaces = [{
 "vertex_data": PackedByteArray("gxEtwkSLzEJIwQfDgxEtwn9qhEJIwQfDJuR+QUSLzEJIwQfDJuR+QX9qhEJIwQfDgxEtwrIu4EFIwQfDJuR+QbIu4EFIwQfDgxEtwpqZIsFIwQfDJuR+QZqZIsFIwQfDgxEtwhDal8JIwQfDJuR+QRDal8JIwQfDgxEtwtgQrcJIwQfDJuR+QdgQrcJIwQfDgxEtwhSu/cJIwQfDJuR+QRSu/cJIwQfDgxEtwmYGJcNIwQfDRIt5QRSu/cJIwQfDdLV1QWYGJcNIwQfDgxEtwjOzEENIwQfDi2x5QTOzEENIwQfDkQ99QUSLzEIGwQfDL913QUSLzEJIwQfDL913QX9qhEJIwQfD7GCVQkSLzEJIwQfD7GCVQn9qhEJIwQfDL913QbIu4EFIwQfD7GCVQrIu4EFIwQfDL913QZqZIsFIwQfD7GCVQpqZIsFIwQfDL913QRDal8JIwQfD7GCVQhDal8JIwQfDL913QdgQrcJIwQfD7GCVQtgQrcJIwQfDL913QRSu/cJIwQfD7GCVQhSu/cJIwQfDL913QWYGJcNIwQfD0LWUQhSu/cJIwQfDFjuUQmYGJcNIwQfDL913QTOzEENIwQfD+bGUQjOzEENIwQfDZiaVQkSLzEIGwQfD//////9/AID//////38AgP//////fwCA//////9/AID//////38AgP//////fwCA//////9/AID//////38AgP//////fwCA//////9/AID//////38AgP//////fwCA//////9/AID//////38AgP//////fwCA//////9/AID//////38AgP//////fwCA//////9/AID//////38AgP//////fwCA//////9/AID//////38AgP//////fwCA//////9/AID//////38AgP//////fwCA//////9/AID//////38AgP//////fwCA//////9/AID//////38AgP//////fwCA//////9/AID//////38AgP//////fwCA//////9/AID//////38AgP//////fwCA//////9/AIA=")
 }]
 blend_shape_mode = 0
+
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_00wy1"]
 size = Vector2(500, 200)
 

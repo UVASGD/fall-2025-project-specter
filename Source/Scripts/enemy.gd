@@ -99,7 +99,7 @@ func _physics_process(delta: float) -> void:
 			
 			var target_rot = Vector3(next_nav_point.x, global_position.y, next_nav_point.z)
 			
-			if velocity.length() > 0.1 and global_position != target_rot:
+			if velocity.length() > 0.1 and !global_position.is_equal_approx(target_rot):
 				look_at(target_rot)
 			
 			move_and_slide()
