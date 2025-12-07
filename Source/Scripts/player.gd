@@ -1,9 +1,6 @@
 class_name Player
 extends CharacterBody3D
 
-
-signal start_dialogue(text_array: Array[String])
-
 enum {IDLE, CROUCH, CROUCH_SPRINT, WALK, SPRINT, READING, LOOKING_AT_DISPLAY, DIALOGUE}
 
 # for debug
@@ -271,7 +268,7 @@ func _on_stamina_timer_timeout() -> void:
 func _on_start_dialogue(text_array: Array[String]) -> void:
 	_prev_state = movement_state
 	movement_state = DIALOGUE
-	hud.start_dialogue.emit(text_array)
+	hud.display_dialogue_box(text_array)
 
 
 func _on_stop_dialogue() -> void:

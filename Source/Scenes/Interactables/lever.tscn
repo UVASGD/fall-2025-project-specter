@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://vm114svtrag8"]
+[gd_scene load_steps=6 format=3 uid="uid://vm114svtrag8"]
 
 [ext_resource type="Script" uid="uid://djkiinnfp55sd" path="res://Source/Scripts/interactables/lever.gd" id="1_wut74"]
+[ext_resource type="PackedScene" uid="uid://bpb0yc88o5pjv" path="res://Assets/3d/poppy_playtime_chapter_2__kissy_lever.glb" id="2_aeuyi"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xfejg"]
+size = Vector3(1, 0.7323, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_vdtui"]
 
@@ -14,9 +16,14 @@ script = ExtResource("1_wut74")
 metadata/_custom_type_script = "uid://fybpyf567q5j"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.13385, 0)
 shape = SubResource("BoxShape3D_xfejg")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("BoxMesh_vdtui")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_6ukd6")
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("2_aeuyi")]
+transform = Transform3D(-3.27835e-07, 7.5, 0, -7.5, -3.27835e-07, 0, 0, 0, 7.5, -0.524706, -0.473852, 0.0288322)

@@ -8,6 +8,7 @@ var is_down: bool = false
 
 
 func interact(_player: Player) -> void:
+	rotate_y(PI)
 	if is_down:
 		lever_up.emit()
 		is_down = false

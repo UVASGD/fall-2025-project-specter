@@ -9,6 +9,7 @@ signal incorrect_code
 var input: String = ""
 
 @onready var keypad_display: TextureRect = $KeypadDisplay
+@onready var main_player = %Player
 
 
 func _input_char(character: String) -> void:
@@ -19,6 +20,7 @@ func _input_char(character: String) -> void:
 func _on_button_enter_pressed() -> void:
 	if input == code:
 		correct_code.emit()
+		main_player.stop_looking_at_display()
 		print("The code is correct!")
 	else:
 		incorrect_code.emit()

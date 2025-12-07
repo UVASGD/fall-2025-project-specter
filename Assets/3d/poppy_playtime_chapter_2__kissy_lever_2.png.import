@@ -1,0 +1,37 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://cab7o6ua0gb6n"
+path="res://.godot/imported/poppy_playtime_chapter_2__kissy_lever_2.png-872ee27461bb35f3a803b85ef12848eb.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={
+"md5": "43e53821747f225635c6e62d59c018bf"
+}
+
+[deps]
+
+source_file="res://Assets/3d/poppy_playtime_chapter_2__kissy_lever_2.png"
+dest_files=["res://.godot/imported/poppy_playtime_chapter_2__kissy_lever_2.png-872ee27461bb35f3a803b85ef12848eb.ctex"]
+
+[params]
+
+compress/mode=0
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=1

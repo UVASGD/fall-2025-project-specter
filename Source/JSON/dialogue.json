@@ -1,9 +1,9 @@
 {
-    "intro": [  
-        "[i]An old colleague of yours has asked you to help him on his most recent project, but remained cryptic on the details. However, you were strapped for cash, so you followed his directions to an underground lab.[/i]",
-        "Huh? Where is everyone? This place looks abandoned."
-    ],
-    "main_door": "It won't open…",
-    "locked_door": "It's locked, I have to find a way to open it.",
-    "locker": "A locker, maybe I could hide in there if I need to."
+	"intro": [  
+		"[i]An old colleague of yours has asked you to help him on his most recent project, but remained cryptic on the details. However, you were strapped for cash, so you followed his directions to an underground lab.[/i]",
+		"Huh? Where is everyone? This place looks abandoned."
+	],
+	"main_door": "It won't open…",
+	"locked_door": "It's locked, I have to find a way to open it.",
+	"locker": "A locker, maybe I could hide in there if I need to."
 }

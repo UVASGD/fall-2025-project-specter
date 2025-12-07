@@ -363,9 +363,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 visible = false
 script = SubResource("GDScript_lvf04")
 
-[node name="Note" parent="NavigationRegion3D/Interactables" node_paths=PackedStringArray("display") instance=ExtResource("9_sgx0y")]
+[node name="Note" parent="NavigationRegion3D/Interactables" instance=ExtResource("9_sgx0y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.07508, 0.836449, 14.9915)
-display = NodePath("HouseNote")
 
 [node name="HouseNote" type="TextureRect" parent="NavigationRegion3D/Interactables/Note"]
 anchors_preset = 8

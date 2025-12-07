@@ -1,6 +1,7 @@
 extends ColorRect
 
 @onready var resume_button = $VBoxContainer/Resume
+@onready var win_text = $Win
 var old_mm : Input.MouseMode
 var game_over = false
 
@@ -33,8 +34,13 @@ func close_menu() -> void:
 	self.hide()
 	get_tree().paused = false
 
-func end_game():
-	resume_button.text = "Restart"
-	game_over = true
-	open_menu()
-	
+func end_game(won):
+	if won:
+		resume_button.hide()
+		win_text.show()
+		game_over = true
+		open_menu()
+	else:
+		resume_button.text = "Restart"
+		game_over = true
+		open_menu()

@@ -71,7 +71,7 @@ func _physics_process(delta: float) -> void:
 			velocity = (next_nav_point - global_position).normalized() * SPEED
 			var target_rot = Vector3(next_nav_point.x, global_position.y, next_nav_point.z)
 			
-			if velocity.length() > 0.1 and global_position != target_rot:
+			if velocity.length() > 0.1 and !global_position.is_equal_approx(target_rot):
 				look_at(target_rot)
 			
 			
@@ -215,4 +215,4 @@ func kill_player():
 	current_state = IDLE
 	velocity = Vector3.ZERO
 	await get_tree().create_timer(0.98).timeout
-	pause_menu.end_game()
+	pause_menu.end_game(false)

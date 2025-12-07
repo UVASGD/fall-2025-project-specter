@@ -27,6 +27,7 @@ func _process(_delta: float) -> void:
 
 
 func display_dialogue_box(text_array: Array[String]) -> void:
+	print("Signal Recieved")
 	dialogue_array = text_array
 	dialogue_box.visible = true
 	dialogue_text.text = dialogue_array.pop_front()
